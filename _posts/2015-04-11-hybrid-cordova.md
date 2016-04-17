@@ -98,22 +98,17 @@ Native 调用 JS 执行方式有三种实现 LoadUrlBridgeMode、 OnlineEventsBr
 ### 1、loadUrl javascript 调用方式
 
 
-```java
-
     private class LoadUrlBridgeMode extends BridgeMode
  
     if (url.startsWith("file://") || url.startsWith("javascript:") || Config.isUrlWhiteListed(url)) {
  
-    }
-    
-```　　
+    }　　
 
 
 ### 2、Navitive事件通知javascript轮询获取Navitive数据
  
-```java 
-private class OnlineEventsBridgeMode extends BridgeMode
-```　　
+    private class OnlineEventsBridgeMode extends BridgeMode
+　　
 
 ### 3、通过Java反射获取webview 的sendMessage 方法执行js， 支持 Android 3.2.4之上(包含)
 
