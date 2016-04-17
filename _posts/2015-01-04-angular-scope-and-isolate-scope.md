@@ -8,7 +8,7 @@ description: 在项目开发时，全局scope 和 directive本地scope使用范�
 ---
 
  
-## 一、scope作用域 ##
+## 一、scope作用域
 
 1、AngularJS中，子作用域一般都会通过JavaScript原型继承机制继承其父作用域的属性和方法。但有一个例外：在directive中使用scope: { ... }，这种方式创建的作用域是一个独立的"Isolate"作用域，它也有父作用域，但父作用域不在其原型链上，不会对父作用域进行原型继承。这种方式定义作用域通常用于构造可复用的directive组件.
 
