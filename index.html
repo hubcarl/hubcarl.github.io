@@ -18,7 +18,7 @@ description: "专注于技术,切不能沉迷于技术!"
             {{ post.content | strip_html | truncate:150 }}
         </div>
     </a>
-    <p class="post-meta">Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}</p>
+    <p class="post-meta">Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%y-%m-%d" }}</p>
 </div>
 
 <hr>
