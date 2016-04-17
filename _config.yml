@@ -1,16 +1,16 @@
 # Site settings
-title: 读立写生
+title: sky博客
 header-img: "img/green.jpg"
 tagline: "cn"  
-description: "陈素封|读而立·写而生"  
+description: "hubcarl|专注于技术,切不能沉迷于技术！"
 baseurl: ""
-url: "http://cnfeat"  
+url: "http://hubcarl.github.io"
 
 # About/contact
 owner: 
-  name: " CnFeat"
-  email: CnFeat@gmail.com
-  bio: "写就是写的报酬"
+  name: " hubcarl"
+  email: hubcarl@126.com
+  bio: "专注于技术,切不能沉迷于技术！"
 
 # Data
 gavatar: http://dreamofbook.qiniudn.com/Az..png

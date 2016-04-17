@@ -1,14 +1,11 @@
 ##说明
 
-2016-02-29  更新 _config.yml 可用
 
-此博客 fork 自 [Azeril](http://azeril.me/)，感谢。
+此博客 fork 自 [CnFeat](http://cnfeat.com/)，感谢。
 
-##读立写生
+##专注于技术,切不能沉迷于技术！
 
-我是陈素封，博客：[cnfeat.com](cnfeat.com)
-
-每天千字践行者，践行时间：2014年02月10日至2014年02月23日，感谢这段经历，让我成为了现在的我。
+我是hubcarl，博客：[http://hubcarl.github.io]
 
 现在研习 **认知写作学** 。
 
