@@ -97,12 +97,15 @@ Native 调用 JS 执行方式有三种实现 LoadUrlBridgeMode、 OnlineEventsBr
 
 ### 1、loadUrl javascript 调用方式
 
+
 ```java
-private class LoadUrlBridgeMode extends BridgeMode
+
+    private class LoadUrlBridgeMode extends BridgeMode
  
-if (url.startsWith("file://") || url.startsWith("javascript:") || Config.isUrlWhiteListed(url)) {
+    if (url.startsWith("file://") || url.startsWith("javascript:") || Config.isUrlWhiteListed(url)) {
  
-}
+    }
+    
 ```　　
 
 
@@ -119,7 +122,8 @@ private class OnlineEventsBridgeMode extends BridgeMode
 ---可以解决loadUrl 隐藏键盘的问题：当你的焦点在输入，如果这通过loadUrl调用js，会导致键盘隐藏
 
 ```java
-private class PrivateApiBridgeMode extends BridgeMode
+
+    private class PrivateApiBridgeMode extends BridgeMode
  
     Field f = webViewClass.getDeclaredField("mProvider");
     f.setAccessible(true);
@@ -130,7 +134,7 @@ private class PrivateApiBridgeMode extends BridgeMode
     f.setAccessible(true);
     webViewCore = f.get(webViewObject);
  
-   if (webViewCore != null) {
+    if (webViewCore != null) {
         sendMessageMethod =       webViewCore.getClass().getDeclaredMethod("sendMessage", Message.class);
        sendMessageMethod.setAccessible(true);  
     }
@@ -143,15 +147,15 @@ private class PrivateApiBridgeMode extends BridgeMode
 ### 4、Native注册javascript接口 _cordovaNative
 
 ```java 
-boolean isHoneycomb = (SDK_INT >= Build.VERSION_CODES.HONEYCOMB && SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2);
-// Bug being that Java Strings do not get converted to JS strings automatically.This isn't hard to work-around on the JS side, but it's easier to just use the prompt bridge instead.
-if (isHoneycomb || (SDK_INT < Build.VERSION_CODES.GINGERBREAD)) {
-Log.i(TAG, "Disabled addJavascriptInterface() bridge since Android version is old.");
-return;
-} else if (SDK_INT < Build.VERSION_CODES.HONEYCOMB && Build.MANUFACTURER.equals("unknown")) {
-// addJavascriptInterface crashes on the 2.3 emulator.
-Log.i(TAG, "Disabled addJavascriptInterface() bridge callback due to a bug on the 2.3 emulator");
-return;
-}
-this.addJavascriptInterface(exposedJsApi, "_cordovaNative");
+    boolean isHoneycomb = (SDK_INT >= Build.VERSION_CODES.HONEYCOMB && SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2);
+    // Bug being that Java Strings do not get converted to JS strings automatically.This isn't hard to work-around on the JS side, but it's easier to just use the prompt bridge instead.
+    if (isHoneycomb || (SDK_INT < Build.VERSION_CODES.GINGERBREAD)) {
+    Log.i(TAG, "Disabled addJavascriptInterface() bridge since Android version is old.");
+    return;
+    } else if (SDK_INT < Build.VERSION_CODES.HONEYCOMB && Build.MANUFACTURER.equals("unknown")) {
+    // addJavascriptInterface crashes on the 2.3 emulator.
+    Log.i(TAG, "Disabled addJavascriptInterface() bridge callback due to a bug on the 2.3 emulator");
+    return;
+    }
+    this.addJavascriptInterface(exposedJsApi, "_cordovaNative");
 ```
