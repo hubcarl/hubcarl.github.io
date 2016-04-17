@@ -116,7 +116,6 @@ Native 调用 JS 执行方式有三种实现 LoadUrlBridgeMode、 OnlineEventsBr
 
 ---可以解决loadUrl 隐藏键盘的问题：当你的焦点在输入，如果这通过loadUrl调用js，会导致键盘隐藏
 
-```java
 
     private class PrivateApiBridgeMode extends BridgeMode
  
@@ -136,12 +135,12 @@ Native 调用 JS 执行方式有三种实现 LoadUrlBridgeMode、 OnlineEventsBr
  
      Message execJsMessage = Message.obtain(null, EXECUTE_JS, url);
      sendMessageMethod.invoke(webViewCore, execJsMessage);
-```　　
+　　
 
 
 ### 4、Native注册javascript接口 _cordovaNative
 
-```java 
+ 
     boolean isHoneycomb = (SDK_INT >= Build.VERSION_CODES.HONEYCOMB && SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2);
     // Bug being that Java Strings do not get converted to JS strings automatically.This isn't hard to work-around on the JS side, but it's easier to just use the prompt bridge instead.
     if (isHoneycomb || (SDK_INT < Build.VERSION_CODES.GINGERBREAD)) {
@@ -153,4 +152,3 @@ Native 调用 JS 执行方式有三种实现 LoadUrlBridgeMode、 OnlineEventsBr
     return;
     }
     this.addJavascriptInterface(exposedJsApi, "_cordovaNative");
-```
