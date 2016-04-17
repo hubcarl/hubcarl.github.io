@@ -6,6 +6,9 @@ description: "专注于技术,切不能沉迷于技术!"
 {% for post in paginator.posts %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
+        <div>
+            <img src="img/logo.png" width="80px" height="80px">
+        </div>
         <h2 class="post-title">            
             {{ post.title }}
         </h2>
