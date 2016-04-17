@@ -64,11 +64,11 @@ Cordova在启动每个Activity的时候都会将配置文件中的所有plugin�
 Cordova中通过exec()函数请求android插件，数据的返回可同步也可以异步于exec()函数的请求。在开发android插件的时候可以重写public boolean isSynch(String action)方法来决定是同步还是异步。Cordova在android端使用了一个队列(NativeToJsMessageQueue)来专门管理返回给JS的数据。
 
    
-### 1）同步
+ 1）同步
 
    Cordova在执行完exec()后，android会马上返回数据，但不一定就是该次请求的数据，可能是前面某次请求的数据；因为当exec()请求的插件是允许同步返回数据的情况下，Cordova也是从NativeToJsMessageQueue队列头pop头数据并返回。然后再根据callbackID反向查找某个JS请求，并将数据返回给该请求的success函数。
    
-### 2）异步
+ 2）异步
 
    Cordova在执行完exec()后并不会同步得到一个返回数据。Cordova在执行exec()的同时启动了一个XMLHttpRequest对象方式或者prompt()函数方式的循环函数来不停的去获取NativeToJsMessageQueue队列中的数据，并根据callbackID反向查找到相对应的JS请求，并将该数据交给success函数。
    
@@ -81,14 +81,14 @@ Cordova中通过exec()函数请求android插件，数据的返回可同步也可
  
 Native 调用 JS 执行方式有三种实现 LoadUrlBridgeMode、 OnlineEventsBridgeMode、PrivateApiBridgeMode
 
-### 1、webView.sendJavascript 发送js方法到JS队列
+ 1、webView.sendJavascript 发送js方法到JS队列
 
-### 2、onJsPrompt 方法拦截，获取调用方式
+ 2、onJsPrompt 方法拦截，获取调用方式
 
-#### 》》如果是gap_bridge_mode，则执行 appView.exposedJsApi.setNativeToJsBridgeMode(Integer.parseInt(message));
-#### 》》如果是gap_poll, 则执行 appView.exposedJsApi.retrieveJsMessages("1".equals(message));
+ 》》如果是gap_bridge_mode，则执行 appView.exposedJsApi.setNativeToJsBridgeMode(Integer.parseInt(message));
+ 》》如果是gap_poll, 则执行 appView.exposedJsApi.retrieveJsMessages("1".equals(message));
 
-### 3、调用setBridgeMode 方法调用onNativeToJsMessageAvailable 执行javascript调用
+ 3、调用setBridgeMode 方法调用onNativeToJsMessageAvailable 执行javascript调用
 
  
 
