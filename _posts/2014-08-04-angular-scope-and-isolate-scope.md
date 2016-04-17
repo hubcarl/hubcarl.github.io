@@ -1,7 +1,7 @@
 ---
 layout: post
 title: AngularJS 全局scope与Isolate scope通信
-date: 2015-01-01
+date: 2014-08-04
 categories: blog
 tags: [scope,isolate scope,scope作用域]
 description: 在项目开发时，全局scope 和 directive本地scope使用范围不够清晰，全局scope与directive本地scope通信掌握的不够透彻，这里对全局scope 和 directive本地scope的使用做一个总结。
