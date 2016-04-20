@@ -21,9 +21,9 @@ description:
 
 ## Pagelet 服务器模板实现
 
-    {% pagelet id="list" tag="none" append="true" %}
-        {% widget "widget/news/index/index.tpl" p1="111" p2="222" p3="333" width model %}
-    {% endpagelet %}
+    {# pagelet id="list" tag="none" append="true" #}
+        {# widget "widget/news/index/index.tpl" p1="111" p2="222" p3="333" #}
+    {# endpagelet #}
 
 #### pagelet标签:
 
@@ -84,6 +84,7 @@ Pagelet.load实际就是通过ajax请求服务器, 然后服务器根据客户�
     
 客户端调用方式：
 
+```javascript
     Pagelet.load({
             url:'/news/index/' + pager.pageIndex + '/' + pager.pageSize,
             pagelets: ['list'],
@@ -95,7 +96,7 @@ Pagelet.load实际就是通过ajax请求服务器, 然后服务器根据客户�
                 console.log('pipe load done');
             }
     });
-
+```
 
 参数说明
 

@@ -27,7 +27,7 @@ description:
   模板类文件，可以在模板中通过 widget 标签引用。如
 
   ```tpl
-  {% widget "widget/menu/menu.tpl" %}
+  {# widget "widget/menu/menu.tpl" #}
   ```
 
 2. js 类： 主要包含 js 文件，放在此目录下的文件一般都会自动被 amd define 包裹，可选择性的添加同名 css 文件，会自动被引用。
@@ -35,11 +35,11 @@ description:
   此类组件，可以在 tpl 或者 js 中通过 require 标签引用。
 
 ```tpl
-    {% require "client/views/page/news/index/index.js" %}
-    {% script %}
+    {# require "client/views/page/news/index/index.js" #}
+    {# script #}
         console.log('>>>>test>>>>>');
         require('client/views/page/news/index/index.js');
-    {% endscript %}
+    {# endscript #}
 ```
   
   
@@ -56,13 +56,13 @@ description:
 5. 页面引入widget:
 
 ```html
-{% widget "widget/news/index/index.tpl" p1="111" p2="222" p3="333" %}
+{# widget "widget/news/index/index.tpl" p1="111" p2="222" p3="333" #}
 ```    
 
 widget/news/index/index.tpl 内容:
 
 ```html
-    {% for item in list %}
+    {# for item in list #}
     <li>
         <div class="point">+{{item.hits}}</div>
         <div class="card">
@@ -86,10 +86,10 @@ widget/news/index/index.tpl 内容:
             </div>
         </div>
     </li>
-    {% endfor %}
-    {% script %}
+    {# endfor #}
+    {# script #}
         require('./index.js');
-    {% endscript %}
+    {# endscript #}
 ```    
 
 index.tpl 页面中引入widget, 这里会自动加载index.tpl同名index.css和 index.js. 
@@ -99,7 +99,7 @@ index.tpl 页面中引入widget, 这里会自动加载index.tpl同名index.css�
  
 6. widget的高级用法
 
-{% widget "widget/header/header.html" mode="pipeline" id="header" %}
+{# widget "widget/header/header.html" mode="pipeline" id="header" #}
 
 采用 bigpipe 方案，允许你在渲染页面的时候，提前将框架输出，后续再把耗时的 pagelet 通过 chunk 方式输出到页面，以加速网页渲染。
 
