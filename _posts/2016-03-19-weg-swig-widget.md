@@ -21,7 +21,8 @@ description:
 同名的css/js会自动加载到页面中, 同时引用文件路径时可以简化写法.
 
 
-#####  一 widget目录结构:
+
+####  一 widget目录结构:
 
     - [list-item 目录]
             - [list-item.js js文件]
@@ -29,19 +30,18 @@ description:
             - [list-item.tpl htm模板]
       
 
-##### 二 模板类：包含 tpl, 可以选择性的添加 js 和 css 文件，同名的 js 和 css 会被自动加载。
+#### 二 模板类：包含 tpl, 可以选择性的添加 js 和 css 文件，同名的 js 和 css 会被自动加载。
 
   模板类文件，可以在模板中通过 widget 标签引用。如
 
-  ```tpl
-  {# widget "widget/menu/menu.tpl" #}
-  ```
+```tpl
+{# widget "widget/menu/menu.tpl" #}  
+```
 
-##### 三 js 类： 
 
-  主要包含 js 文件，放在此目录下的文件一般都会自动被 amd define 包裹，可选择性的添加同名 css 文件，会自动被引用。
+#### 三 js 类： 
 
-  此类组件，可以在 tpl 或者 js 中通过 require 标签引用。
+  主要包含 js 文件，放在此目录下的文件一般都会自动被 amd define 包裹，可选择性的添加同名 css 文件，会自动被引用。此类组件，可以在 tpl 或者 js 中通过 require 标签引用。
 
 ```tpl
     {# require "client/views/page/news/index/index.js" #}
@@ -52,13 +52,13 @@ description:
 ```
   
   
-##### 四 纯 css 类：
+#### 四 纯 css 类：
 
   只是包含 css 文件。比如 compass. 同样也是可以通过 require 标签引用。
 
 
 
-##### 五 页面引入widget:
+#### 五 页面引入widget:
 
 
 ```html
@@ -101,7 +101,8 @@ widget/news/index/index.tpl 内容:
 index.tpl 页面中引入widget, 这里会自动加载index.tpl同名index.css和 index.js. 其中 p1, p2,p3 这些键值对会自动生成swig 局部目标变量, 这样同一widget,可以传递不同的局部变量控制内容显示
 
 
-##### 六 widget的高级用法
+
+#### 六 widget的高级用法
 
 {# widget "widget/header/header.html" mode="pipeline" id="header" #}
 
