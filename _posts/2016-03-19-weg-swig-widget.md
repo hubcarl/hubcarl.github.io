@@ -50,12 +50,11 @@ description:
         require('client/views/page/news/index/index.js');
     {# endscript #}
 ```
-  
-  
+
+
 #### 四 纯 css 类：
 
   只是包含 css 文件。比如 compass. 同样也是可以通过 require 标签引用。
-
 
 
 #### 五 页面引入widget:
