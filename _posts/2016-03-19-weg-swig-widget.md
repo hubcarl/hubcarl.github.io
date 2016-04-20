@@ -37,7 +37,9 @@ description:
   {# widget "widget/menu/menu.tpl" #}
   ```
 
-##### 三 js 类： 主要包含 js 文件，放在此目录下的文件一般都会自动被 amd define 包裹，可选择性的添加同名 css 文件，会自动被引用。
+##### 三 js 类： 
+
+  主要包含 js 文件，放在此目录下的文件一般都会自动被 amd define 包裹，可选择性的添加同名 css 文件，会自动被引用。
 
   此类组件，可以在 tpl 或者 js 中通过 require 标签引用。
 
@@ -50,10 +52,14 @@ description:
 ```
   
   
-##### 四 纯 css 类：只是包含 css 文件。比如 compass. 同样也是可以通过 require 标签引用。
+##### 四 纯 css 类：
+
+  只是包含 css 文件。比如 compass. 同样也是可以通过 require 标签引用。
+
 
 
 ##### 五 页面引入widget:
+
 
 ```html
 {# widget "widget/news/index/index.tpl" p1="111" p2="222" p3="333" #}
@@ -92,18 +98,14 @@ widget/news/index/index.tpl 内容:
     {# endscript #}
 ```    
 
-index.tpl 页面中引入widget, 这里会自动加载index.tpl同名index.css和 index.js. 
+index.tpl 页面中引入widget, 这里会自动加载index.tpl同名index.css和 index.js. 其中 p1, p2,p3 这些键值对会自动生成swig 局部目标变量, 这样同一widget,可以传递不同的局部变量控制内容显示
 
-其中 p1, p2,p3 这些键值对会自动生成swig 局部目标变量, 这样同一widget,可以传递不同的局部变量控制内容显示
 
- 
 ##### 六 widget的高级用法
 
 {# widget "widget/header/header.html" mode="pipeline" id="header" #}
 
-采用 bigpipe 方案，允许你在渲染页面的时候，提前将框架输出，后续再把耗时的 pagelet 通过 chunk 方式输出到页面，以加速网页渲染。
-
-widget mode属性有以下值:
+采用 bigpipe 方案，允许你在渲染页面的时候，提前将框架输出，后续再把耗时的 pagelet 通过 chunk 方式输出到页面，以加速网页渲染。widget mode属性有以下值:
 
 - sync 默认就是此模式，直接输出。
 - quicking 此类 widget 在输出时，只会输出个壳子，内容由用户自行决定通过 js，另起请求完成填充，包括静态资源加载。
@@ -111,4 +113,4 @@ widget mode属性有以下值:
 - pipeline 与 async 基本相同，只是它会严格按顺序输出。
 
 
-- 要让 bigpipe 正常运行，需要前端引入 pagelet.js, 另外 pagelet 为 quickling 模式，是不会自动加载的，需要用户主动去调用 pagelet.load 方法，才会加载并渲染
+要让 bigpipe 正常运行，需要前端引入 pagelet.js, 另外 pagelet 为 quickling 模式，是不会自动加载的，需要用户主动去调用 pagelet.load 方法，才会加载并渲染
