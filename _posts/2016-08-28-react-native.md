@@ -8,7 +8,7 @@ description:
 
 ---
 
-### learn once write anywhere
+# learn once write anywhere
 
 
 What we really want is the user experience of the native mobile platforms, combined with the developer experience we have when building with React on the web.
@@ -17,7 +17,7 @@ What we really want is the user experience of the native mobile platforms, combi
 
 
 
-# H5/Hybrid,React Native,Native对比
+# 一. H5/Hybrid,React Native,Native对比
 
 1. UI布局：Web布局灵活度 > React Native > Native
 2. UI截面图：React Native使用的是原生组件,可以与Native持平
@@ -30,7 +30,7 @@ What we really want is the user experience of the native mobile platforms, combi
 
 
 
-# React Native优势
+# 二. React Native优势
 
 1. 原生应用的用户体验
 
@@ -44,7 +44,7 @@ What we really want is the user experience of the native mobile platforms, combi
 
 
 
-# React Native劣势
+# 三. React Native劣势
 
 1. React Native上手简单, 框架定制和扩展成本高
 
@@ -56,7 +56,7 @@ What we really want is the user experience of the native mobile platforms, combi
 
 
 
-# React-Native 做了什么
+# 四. React-Native 做了什么
 
 1. React-Native 丢弃了 Webview, 生成的视图是原生Native视图
 
@@ -68,7 +68,7 @@ What we really want is the user experience of the native mobile platforms, combi
 
 
 
-# 对应前端的开发模式的变化
+# 五. 对应前端的开发模式的变化
 
 1. JSX vs Html
 
@@ -81,7 +81,7 @@ What we really want is the user experience of the native mobile platforms, combi
 
 
 
-# React Native学习点
+# 六. React Native学习点
 
 1. React基础知识
 
@@ -96,7 +96,7 @@ What we really want is the user experience of the native mobile platforms, combi
 
 
 
-# React Native APK 大小分析
+# 七. React Native APK 大小分析
 
 
 1. so: 总大小：8.7MB  去掉x86后  5.1MB,   精简压缩后：**2.8MB**
@@ -114,32 +114,31 @@ react-native apk一个helloword的app大小在4M左右
  ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/RNjar.png)
 
 
-# Native与JS交互原理
+# 八. Native与JS交互原理
 
  ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/rn-bridge.png)
 
 在 React Native App中，在应用启动时根据 ReactPackage 会自动生成 JavaScriptModuleRegistry和NativeModuleRegistry两份模块配置表，包含系统CoreModulesPackage, 基础模块MainReactPackage以及自定义模块。Java端与JavaScript端持有相同的模块配置表，标识为可识别为Native模块或JavaScript模块都是通过实现相应接口，并将实例添加ReactPackage的CreactModules方法即可。
 
 
-## JavaScriptModuleRegistry 和 NativeModuleRegistry
 
-
-
-### Native启动React Application
+## 一. Native启动React Application
 
 ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/RN-Native-Start.png)
 
 JavaScript模块extends JavascriptModule, JavaScript模块通过java动态代理实现调用Js模块。下例 AppRegistry.java 为在加载完 Jsbundle 后，Native 去启动 React Application 的总入口，appkey 为应用的 ID。映射每个 JavascriptModule 的信息保存在 JavaScriptModuleRegistration 中，统一由 JavaScriptModuleRegistry统一管理。
 
-#### 一. ReactInstanceManagerImpl.java 中 ReactContextInitAsyncTask.setupReactContext() 方法中如下调用：
+### 1. setupReactContext
+
+ReactInstanceManagerImpl.java 中 ReactContextInitAsyncTask.setupReactContext() 方法中如下调用：
 
 ```java
 ((AppRegistry)catalystInstance.getJSModule(AppRegistry.class)).runApplication(appkey, appParams);
 ```
 
-#### 二. JavaScript模块通过java动态代理实现调用JavaScript方法
+### 2. Java动态代理
 
-##### 1.java动态代理通过实现InvocationHandler接口，然后通过Proxy.newProxyInstance()实现. 方法有三个参数：
+JS模块通过java动态代理实现调用JS方法,java动态代理通过实现InvocationHandler接口，然后通过Proxy.newProxyInstance()实现. 方法有三个参数：
 
 * 类加载器(Class Loader)
 
@@ -152,7 +151,7 @@ JavaScript模块extends JavascriptModule, JavaScript模块通过java动态代理
 new JavaScriptModuleRegistry.JavaScriptModuleInvocationHandler(executorToken, instance, registration));
 ```
 
-##### 2.JavaScript模块:继承JavascriptModule实现自定义JavaScript模块。
+### 3.JavaScript模块:继承JavascriptModule实现自定义JavaScript模块。
 
 ```java
 public interface AppRegistry extends JavaScriptModule {
@@ -161,7 +160,7 @@ public interface AppRegistry extends JavaScriptModule {
 }
 ```
 
-##### 3.实现 InvocationHandler接口，实现invoke方法，invoke 调用 callFunction实现js的调用。
+### 4.实现 InvocationHandler接口，实现invoke方法，invoke 调用 callFunction实现js的调用。
 
 ```java
 private static class JavaScriptModuleInvocationHandler implements InvocationHandler {
@@ -181,21 +180,21 @@ private static class JavaScriptModuleInvocationHandler implements InvocationHand
 }
 ```
 
-##### 4.callFunction JNI调用流程详细流程:
+### 5.callFunction JNI调用流程详细流程:
 
-1.OnLoad.cpp:
+#### 1.OnLoad.cpp:
 
 ```c++
 static void callFunction(JNIEnv* env, jobject obj, JExecutorToken::jhybridobject jExecutorToken, jstring module, jstring method,
 ```
 
-2.Bridge.cpp
+#### 2.Bridge.cpp
 
 ```c++
 void Bridge::callFunction(ExecutorToken executorToken,const std::string& moduleId,const std::string& methodId,const folly::dynamic& arguments,const std::string& tracingName)
 ```
 
-3.JSCExecutor.cpp
+#### 3.JSCExecutor.cpp
 
 ```c++
     1. void JSCExecutor::callFunction(const std::string& moduleId, const std::string& methodId, const folly::dynamic& arguments)
@@ -244,13 +243,13 @@ void Bridge::callFunction(ExecutorToken executorToken,const std::string& moduleI
 ```
 
 
-### JavaScript启动流程
+## 二. JavaScript启动流程
 
 
  ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/RN-JS-Start.png)
 
 
-#### JavaScript初始化
+### JavaScript初始化
 
 在JSBundle.js文件底部有两个require调用：
 
@@ -269,7 +268,7 @@ require(0); // require('SmartRectNativeApp/debug.android.js')
 
 下面具体梳理一下require(0)后启动流程
 
-##### 1. BatchedBridge, MessageQueue, NativeModules初始化
+#### 1. BatchedBridge, MessageQueue, NativeModules初始化
 
 通过MessageQueue定义RemoteModules对象
 
@@ -286,7 +285,7 @@ require(0); // require('SmartRectNativeApp/debug.android.js')
   }
 ```
 
-##### 2. Bridge全局配置表
+#### 2. Bridge全局配置表
 
 __fbBatchedBridgeConfig 由Native层注入的全局对象，数据格式如下,包含remoteModuleConfig节点。节点信息包括：moduleName, methodId,  methodName,  args。
 
@@ -336,7 +335,7 @@ __fbBatchedBridgeConfig 由Native层注入的全局对象，数据格式如下,�
   }
 ```
 
-NativeModules实现
+#### 3. NativeModules实现
 
 ```javascript
   define(60 /* NativeModules */, function (global, require, module, exports) {
@@ -393,7 +392,7 @@ NativeModules实现
   }, "NativeModules");
 ```
 
-##### 3. _genModules 调用 _genModule
+#### 4. _genModules 调用 _genModule
 
 	function _genModules(remoteModules) {
 	  var _this5 = this;
@@ -409,14 +408,14 @@ NativeModules实现
 	  return modules;
 	}  
 
-##### 4. _genModule 调用 _genMethod
+#### 5. _genModule 调用 _genMethod
 
 	function _genModule(config, moduleID) {
 	    module[methodName] = _this6._genMethod(moduleID, methodID, methodType);
 	    return { name: moduleName, module: module };
 	}
 
-##### 5. _genMethod 调用  __nativeCall  返回 Promise或function
+#### 6. _genMethod 调用  __nativeCall  返回 Promise或function
 
 	function _genMethod 调用 (module, method, type) {
 
@@ -472,7 +471,7 @@ NativeModules实现
 	  return fn;
 	}
 
-##### 6. __nativeCall实现
+#### 7. __nativeCall实现
 
 	function __nativeCall(module, method, params, onFail, onSucc) {
 
@@ -489,7 +488,7 @@ NativeModules实现
 	  }
 	}
 
-##### 7. JSCExecutor.cpp 通过installGlobalFunction 定义 nativeFlushQueueImmediate方法
+#### 8. JSCExecutor.cpp 通过installGlobalFunction 定义 nativeFlushQueueImmediate方法
 
 	m_context = JSGlobalContextCreateInGroup(nullptr, nullptr);
 	s_globalContextRefToJSCExecutor[m_context] = this;
@@ -500,7 +499,7 @@ NativeModules实现
 	installGlobalFunction(m_context, "nativeTerminateWorker", nativeTerminateWorker);
 	installGlobalFunction(m_context, "nativeInjectHMRUpdate", nativeInjectHMRUpdate);
 
-##### 8. nativeFlushQueueImmediate 获取 JS队列数据执行Native调用：
+#### 9. nativeFlushQueueImmediate 获取 JS队列数据执行Native调用：
 
 	JSValueRef JSCExecutor::nativeFlushQueueImmediate(
 	    JSContextRef ctx,
@@ -517,14 +516,14 @@ NativeModules实现
 	return JSValueMakeUndefined(ctx);
 
 
-##### 9. flushQueueImmediate获取JS队列执行队列数据调用Native接口：
+#### 10. flushQueueImmediate获取JS队列执行队列数据调用Native接口：
 
 	void JSCExecutor::flushQueueImmediate(std::string queueJSON) {
 	  m_bridge->callNativeModules(*this, queueJSON, false);
 	}
 
 
-##### 10. callNativeModules 调用Native java方法
+#### 11. callNativeModules 调用Native java方法
 
 
 	class BridgeCallback {
@@ -567,20 +566,22 @@ NativeModules实现
 
 OnLoad.cpp 中 makeJavaCall 定义,  c++通过CallVoidMethod调用java非静态方法：
 
-	static void makeJavaCall(JNIEnv* env, ExecutorToken executorToken, jobject callback, const MethodCall& call) {
+```c++
+static void makeJavaCall(JNIEnv* env, ExecutorToken executorToken, jobject callback, const MethodCall& call) {
 
-	  auto newArray = ReadableNativeArray::newObjectCxxArgs(std::move(call.arguments));
-	  env->CallVoidMethod(
-	      callback,
-	      gCallbackMethod,
-	      static_cast<JExecutorTokenHolder*>(executorToken.getPlatformExecutorToken().get())->getJobj(),
-	      call.moduleId,
-	      call.methodId,
-	      newArray.get());
-	}
+  auto newArray = ReadableNativeArray::newObjectCxxArgs(std::move(call.arguments));
+  env->CallVoidMethod(
+      callback,
+      gCallbackMethod,
+      static_cast<JExecutorTokenHolder*>(executorToken.getPlatformExecutorToken().get())->getJobj(),
+      call.moduleId,
+      call.methodId,
+      newArray.get());
+}
+```
 
 
-### JavaScript调用Native回调和返回值
+## 三. JavaScript调用Native回调和返回值
 
 从编写自定义插件中，我们知道了JS如何调用Native方法，但 @ReactMethod 注解的方法的返回值只能是void，现在JS端想从Native获取一些配置信息或者知道调用端是否成功的一些返回值信息，该如何实现呢？
 
@@ -588,87 +589,95 @@ JavaScript调用Native获取Native返回值是通过异步Callback实现的. 在
 
 首先，我们看一下Callback和Promise具体实现，然后根据代码来剖析实现原理。
 
-#### Callback实现
+### Callback实现
 
-1. java端实现一个需要获取执行结果的setCache和一个获取缓存接口getCache
+#### 1. java端实现一个需要获取执行结果的setCache和一个获取缓存接口getCache
 
-  @ReactMethod
-  public void setCache(String key, String value, Callback successCallback, Callback errorCallback) {
-      try {
-          sharedPreference = getCurrentActivity().getSharedPreferences("rn_cache", 0);
-          sharedPreference.edit().putString(key, value).commit();
-          successCallback.invoke("save success");
-      } catch (Exception e) {
-          e.printStackTrace();
-          errorCallback.invoke(e.getMessage());
-      }
+```java
+@ReactMethod
+public void setCache(String key, String value, Callback successCallback, Callback errorCallback) {
+  try {
+      sharedPreference = getCurrentActivity().getSharedPreferences("rn_cache", 0);
+      sharedPreference.edit().putString(key, value).commit();
+      successCallback.invoke("save success");
+  } catch (Exception e) {
+      e.printStackTrace();
+      errorCallback.invoke(e.getMessage());
   }
+}
 
-  @ReactMethod
-  public void getCache(String key, Callback callback) {
-      callback.invoke(sharedPreference.getString(key, ""));
+@ReactMethod
+public void getCache(String key, Callback callback) {
+  callback.invoke(sharedPreference.getString(key, ""));
+}
+```
+
+#### 2. JS定义两个方法，一个设置缓存，一个获取缓存。在JavaScript中，调用这个带有Callback参数的方法如下：
+
+```javascript
+_setCacheClick(){
+  NativeModules.IntentPackage.setCache('ReactNative','我是来自React Native缓存消息',(msg)=>{
+      NativeModules.ToastAndroid.show(msg, 3000);
+    },(error)=>{
+      NativeModules.ToastAndroid.show(error, 3000);
+  });
+}
+
+_getCacheClick(){
+     NativeModules.IntentPackage.getCache('ReactNative',(value)=>{
+          NativeModules.ToastAndroid.show(value, 3000)
+     });
+}
+```
+
+### Promise实现
+
+#### 1. 同样java端实现一个需要获取执行结果的setCache和一个获取缓存接口getCache，Callback参数改为Promise
+
+```java
+@ReactMethod
+public void setCachePromise(String key, String value, Promise promise) {
+  try {
+      sharedPreference = getCurrentActivity().getSharedPreferences("rn_cache", 0);
+      sharedPreference.edit().putString(key, value).commit();
+      promise.resolve("save success");
+  } catch (Exception e) {
+      e.printStackTrace();
+      promise.resolve(e.getMessage());
   }
+}
 
-2. JS定义两个方法，一个设置缓存，一个获取缓存。在JavaScript中，调用这个带有Callback参数的方法如下：
+@ReactMethod
+public void getCachePromise(String key, Promise promise) {
+  promise.resolve(sharedPreference.getString(key, ""));
+}
+```
 
- _setCacheClick(){
-      NativeModules.IntentPackage.setCache('ReactNative','我是来自React Native缓存消息',(msg)=>{
-          NativeModules.ToastAndroid.show(msg, 3000);
-        },(error)=>{
-          NativeModules.ToastAndroid.show(error, 3000);
-      });
-  }
+#### 2. 同样JS定义两个方法，一个设置缓存，一个获取缓存。在JavaScript中，调用这个带有Callback参数的方法如下：
 
-  _getCacheClick(){
-         NativeModules.IntentPackage.getCache('ReactNative',(value)=>{
-              NativeModules.ToastAndroid.show(value, 3000)
-         });
-  }
+```javascript
+_setCachePromiseClick(){
+    NativeModules.IntentPackage.setCache('ReactNative','我是来自React Native缓存消息').then(msg=>{
+        NativeModules.ToastAndroid.show(msg, 3000);
+    },error=>{
+      NativeModules.ToastAndroid.show(error, 3000);
+    }).
+}
 
-
-  #### Callback实现
-
-  1. 同样java端实现一个需要获取执行结果的setCache和一个获取缓存接口getCache，Callback参数改为Promise
-
-      @ReactMethod
-      public void setCachePromise(String key, String value, Promise promise) {
-          try {
-              sharedPreference = getCurrentActivity().getSharedPreferences("rn_cache", 0);
-              sharedPreference.edit().putString(key, value).commit();
-              promise.resolve("save success");
-          } catch (Exception e) {
-              e.printStackTrace();
-              promise.resolve(e.getMessage());
-          }
-      }
-
-      @ReactMethod
-      public void getCachePromise(String key, Promise promise) {
-          promise.resolve(sharedPreference.getString(key, ""));
-      }
-
- 2. 同样JS定义两个方法，一个设置缓存，一个获取缓存。在JavaScript中，调用这个带有Callback参数的方法如下：
-
-   _setCachePromiseClick(){
-        NativeModules.IntentPackage.setCache('ReactNative','我是来自React Native缓存消息').then(msg=>{
-            NativeModules.ToastAndroid.show(msg, 3000);
-        },error=>{
-          NativeModules.ToastAndroid.show(error, 3000);
-        }).
-    }
-
-    _getCachePromiseClick(){
-           NativeModules.IntentPackage.getCache('ReactNative').then(function(value){
-               NativeModules.ToastAndroid.show(value, 3000)
-           });
-    }
+_getCachePromiseClick(){
+   	NativeModules.IntentPackage.getCache('ReactNative').then(function(value){
+       NativeModules.ToastAndroid.show(value, 3000)
+   });
+}
+```
 
 
-#### JavaScript调用Native Callback实现原理
+### JavaScript调用Native Callback实现原理
 
 
-##### 1.NativeModulesReactCallback 初始化
+#### 1.NativeModulesReactCallback 初始化
 
+```java
 private ReactBridge initializeBridge(JavaScriptExecutor jsExecutor) {
   bridge = new ReactBridge(
           jsExecutor,
@@ -686,9 +695,11 @@ public ReactBridge(
     mNativeModulesQueueThread = nativeModulesQueueThread;
     initialize(jsExecutor, callback, mNativeModulesQueueThread);
 }
+```
 
-##### 2.ReactCallback源码实现：
+#### 2.ReactCallback源码实现：
 
+```java
 @DoNotStrip
 public interface ReactCallback {
   @DoNotStrip
@@ -704,9 +715,11 @@ private class NativeModulesReactCallback implements ReactCallback {
        }
      }
 }
+```
 
-##### 3.NativeModuleRegistry源码实现：
+#### 3.NativeModuleRegistry源码实现：
 
+```java
 public class NativeModuleRegistry {
 
   private static class MethodRegistration {
@@ -754,9 +767,11 @@ public class NativeModuleRegistry {
         }
   }
 }
+```
 
-##### 4.我们再来看一下Native自定义模块IntentModule实现
+#### 4.我们再来看一下Native自定义模块IntentModule实现
 
+```java
 public abstract class BaseJavaModule implements NativeModule {
 
   static final private ArgumentExtractor<Callback> ARGUMENT_EXTRACTOR_CALLBACK =
@@ -834,11 +849,12 @@ public abstract class ReactContextBaseJavaModule extends BaseJavaModule {
 public class IntentModule extends ReactContextBaseJavaModule {
 
 }
+```
 
 
+#### 5.Callback 实现
 
-##### 5.Callback 实现
-
+```java
 private native void initialize(
       JavaScriptExecutor jsExecutor,
       ReactCallback callback,
@@ -865,32 +881,38 @@ public final class CallbackImpl implements Callback {
     mCatalystInstance.invokeCallback(mExecutorToken, mCallbackId, Arguments.fromJavaArgs(args));
   }
 }
+```
 
-##### 6.CatalystInstanceImpl类中invokeCallback调用
+#### 6.CatalystInstanceImpl类中invokeCallback调用
 
-  @Override
-  public void invokeCallback(ExecutorToken executorToken, int callbackID, NativeArray arguments) {
-    if (mIsBeingDestroyed) {
-      FLog.w(ReactConstants.TAG, "Invoking JS callback after bridge has been destroyed.");
-      return;
-    }
-    synchronized (mJavaToJSCallsTeardownLock) {
-      if (mDestroyed) {
-        FLog.w(ReactConstants.TAG, "Invoking JS callback after bridge has been destroyed.");
-        return;
-      }
-
-      incrementPendingJSCalls();
-
-      Assertions.assertNotNull(mBridge).invokeCallback(executorToken, callbackID, arguments);
-    }
+```java
+@Override
+public void invokeCallback(ExecutorToken executorToken, int callbackID, NativeArray arguments) {
+if (mIsBeingDestroyed) {
+  FLog.w(ReactConstants.TAG, "Invoking JS callback after bridge has been destroyed.");
+  return;
+}
+synchronized (mJavaToJSCallsTeardownLock) {
+  if (mDestroyed) {
+    FLog.w(ReactConstants.TAG, "Invoking JS callback after bridge has been destroyed.");
+    return;
   }
 
-##### 7.ReactBridge.java中invokeCallback调用
+  incrementPendingJSCalls();
 
+  Assertions.assertNotNull(mBridge).invokeCallback(executorToken, callbackID, arguments);
+}
+}
+```
+
+#### 7.ReactBridge.java中invokeCallback调用
+
+```java
 public native void invokeCallback(ExecutorToken executorToken, int callbackID, NativeArray arguments);
+```
 
-##### 8.OnLoad.cpp
+```c++
+#### 8.OnLoad.cpp
 
 static void invokeCallback(JNIEnv* env, jobject obj, JExecutorToken::jhybridobject jExecutorToken, jint callbackId,
                            NativeArray::jhybridobject args) {
@@ -906,9 +928,11 @@ static void invokeCallback(JNIEnv* env, jobject obj, JExecutorToken::jhybridobje
     translatePendingCppExceptionToJavaException();
   }
 }
+```
 
-##### 9.Bridge.cpp实现
+#### 9.Bridge.cpp实现
 
+```c++
 void Bridge::invokeCallback(ExecutorToken executorToken, const double callbackId, const folly::dynamic& arguments) {
   #ifdef WITH_FBSYSTRACE
   int systraceCookie = m_systraceCookie++;
@@ -931,25 +955,17 @@ void Bridge::invokeCallback(ExecutorToken executorToken, const double callbackId
     executor->invokeCallback(callbackId, arguments);
   });
 }
+```
 
-##### 10.JSCExecutor.cpp 中invokeCallback实现
+#### 10.JSCExecutor.cpp 中invokeCallback实现
 
+```c++
 void JSCExecutor::invokeCallback(const double callbackId, const folly::dynamic& arguments) {
-#ifdef WITH_FBSYSTRACE
-  FbSystraceSection s(TRACE_TAG_REACT_CXX_BRIDGE, "JSCExecutor.invokeCallback");
-#endif
-
-  if (!ensureBatchedBridgeObject()) {
-    throwJSExecutionException(
-        "Couldn't invoke JS callback %d: bridge configuration isn't available. This shouldn't be possible. Congratulations.", (int) callbackId);
-  }
-
   String argsString = String(folly::toJson(std::move(arguments)).c_str());
   JSValueRef args[] = {
       JSValueMakeNumber(m_context, callbackId),
       Value::fromJSON(m_context, argsString)
   };
-
 
   // m_invokeCallbackObj = folly::make_unique<Object>(m_batchedBridge->getProperty("invokeCallbackAndReturnFlushedQueue").asObject());
   // 执行回调,返回待执行的队列
@@ -957,9 +973,11 @@ void JSCExecutor::invokeCallback(const double callbackId, const folly::dynamic& 
   // 调用java方法
   m_bridge->callNativeModules(*this, result.toJSONString(), true);
 }
+```
 
-##### 11.JS端invokeCallbackAndReturnFlushedQueue实现
+#### 11.JS端invokeCallbackAndReturnFlushedQueue实现
 
+```c++
 function invokeCallbackAndReturnFlushedQueue(cbID, args) {
   var _this3 = this;
   guard(function () {
@@ -970,61 +988,70 @@ function invokeCallbackAndReturnFlushedQueue(cbID, args) {
   //  返回JS调用Native的队列
   return this.flushedQueue();
 }
+```
 
 
-### 编写自定义插件
+### 四. 编写自定义插件
 
-编写自定义插件需要继承ReactContextBaseJavaModule和实现ReactPackage接口，具体实现步骤如下：
+编写自定义插件需要继承ReactContextBaseJavaModule和实现ReactPackage接口，
 
-1. 继承ReactContextBaseJavaModule接口
+具体实现步骤如下：
 
-    public class IntentModule extends ReactContextBaseJavaModule
+#### 1. 继承ReactContextBaseJavaModule接口
 
+```java
+public class IntentModule extends ReactContextBaseJavaModule
+```
 
-2. 重写 getName方法,暴露给JS端调用名
+#### 2. 重写 getName方法,暴露给JS端调用名
 
+```java
+@Override
+public String getName() {
+    return "IntentModule";
+}
+```
+
+#### 3. 给暴露给JS的方法添加 @ReactMethod 注解，且方法的返回值只能是void
+
+```java
+@ReactMethod
+public void backActivity(int count) {
+    if (count > 0) {
+        try {
+            Activity currentActivity = getCurrentActivity();
+            currentActivity.finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### 4.实现ReactPackage接口
+
+```java
+public class IntentPackage implements ReactPackage {
     @Override
-    public String getName() {
-        return "IntentModule";
+    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+        return Arrays.<NativeModule>asList(
+                new IntentModule(reactContext)
+        );
     }
-
-
-3. 给暴露给JS的方法添加 @ReactMethod 注解，且方法的返回值只能是void
-
-    @ReactMethod
-    public void backActivity(int count) {
-        if (count > 0) {
-            try {
-                Activity currentActivity = getCurrentActivity();
-                currentActivity.finish();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    @Override
+    public List<Class<? extends JavaScriptModule>> createJSModules() {
+        return Collections.emptyList();
     }
-
-
-##### 4.实现ReactPackage接口
-
-    public class IntentPackage implements ReactPackage {
-        @Override
-        public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-            return Arrays.<NativeModule>asList(
-                    new IntentModule(reactContext)
-            );
-        }
-        @Override
-        public List<Class<? extends JavaScriptModule>> createJSModules() {
-            return Collections.emptyList();
-        }
-        @Override
-        public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-            return Collections.emptyList();
-        }
+    @Override
+    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+        return Collections.emptyList();
     }
+}
+```
 
-##### 5.在Application中注册IntentPackage
+#### 5.在Application中注册IntentPackage
 
+```java
 @Override
 protected List<ReactPackage> getPackages() {
   return Arrays.<ReactPackage>asList(
@@ -1032,8 +1059,12 @@ protected List<ReactPackage> getPackages() {
           new IntentPackage()
   );
 }
+```
 
-##### 6.JavaScript调用IntentModule的backActivity方法
+#### 6.JavaScript调用IntentModule的backActivity方法
 
-	NativeModules.IntentModule.backActivity();
+```java
+NativeModules.IntentModule.backActivity();
+```	
+	
 
