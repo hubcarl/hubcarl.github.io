@@ -911,9 +911,9 @@ synchronized (mJavaToJSCallsTeardownLock) {
 public native void invokeCallback(ExecutorToken executorToken, int callbackID, NativeArray arguments);
 ```
 
-```c++
 #### 8.OnLoad.cpp
 
+```c++
 static void invokeCallback(JNIEnv* env, jobject obj, JExecutorToken::jhybridobject jExecutorToken, jint callbackId,
                            NativeArray::jhybridobject args) {
   auto bridge = extractRefPtr<CountableBridge>(env, obj);
@@ -1065,6 +1065,4 @@ protected List<ReactPackage> getPackages() {
 
 ```java
 NativeModules.IntentModule.backActivity();
-```	
-	
-
+```
