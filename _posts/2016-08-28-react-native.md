@@ -109,9 +109,9 @@ react-native apk一个helloword的app大小在4M左右
 
  ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/apk-large-file.png)
 
- ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/rn-jar-desc.png.png)
+ ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/rn-jar-desc.png)
 
- ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/RNjar.png.png)
+ ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/RNjar.png)
 
 
 # Native与JS交互原理
@@ -472,7 +472,7 @@ NativeModules实现
 	  return fn;
 	}
 
-##### __nativeCalls实现
+##### 6. __nativeCall实现
 
 	function __nativeCall(module, method, params, onFail, onSucc) {
 
@@ -578,72 +578,6 @@ OnLoad.cpp 中 makeJavaCall 定义,  c++通过CallVoidMethod调用java非静态�
 	      call.methodId,
 	      newArray.get());
 	}
-
-
-### 编写自定义插件
-
-编写自定义插件需要继承ReactContextBaseJavaModule和实现ReactPackage接口，具体实现步骤如下：
-
-1. 继承ReactContextBaseJavaModule接口
-
-    public class IntentModule extends ReactContextBaseJavaModule
-
-
-2. 重写 getName方法,暴露给JS端调用名
-
-    @Override
-    public String getName() {
-        return "IntentModule";
-    }
-
-
-3. 给暴露给JS的方法添加 @ReactMethod 注解，且方法的返回值只能是void
-
-    @ReactMethod
-    public void backActivity(int count) {
-        if (count > 0) {
-            try {
-                Activity currentActivity = getCurrentActivity();
-                currentActivity.finish();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-4. 实现ReactPackage接口
-
-    public class IntentPackage implements ReactPackage {
-        @Override
-        public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-            return Arrays.<NativeModule>asList(
-                    new IntentModule(reactContext)
-            );
-        }
-        @Override
-        public List<Class<? extends JavaScriptModule>> createJSModules() {
-            return Collections.emptyList();
-        }
-        @Override
-        public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-            return Collections.emptyList();
-        }
-    }
-
-5. 在Application中注册IntentPackage
-
-  @Override
-  protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-              new MainReactPackage(),
-              new IntentPackage()
-      );
-  }
-
-6. JavaScript调用IntentModule的backActivity方法
-
-NativeModules.IntentModule.backActivity();
 
 
 ### JavaScript调用Native回调和返回值
@@ -1036,3 +970,70 @@ function invokeCallbackAndReturnFlushedQueue(cbID, args) {
   //  返回JS调用Native的队列
   return this.flushedQueue();
 }
+
+
+### 编写自定义插件
+
+编写自定义插件需要继承ReactContextBaseJavaModule和实现ReactPackage接口，具体实现步骤如下：
+
+1. 继承ReactContextBaseJavaModule接口
+
+    public class IntentModule extends ReactContextBaseJavaModule
+
+
+2. 重写 getName方法,暴露给JS端调用名
+
+    @Override
+    public String getName() {
+        return "IntentModule";
+    }
+
+
+3. 给暴露给JS的方法添加 @ReactMethod 注解，且方法的返回值只能是void
+
+    @ReactMethod
+    public void backActivity(int count) {
+        if (count > 0) {
+            try {
+                Activity currentActivity = getCurrentActivity();
+                currentActivity.finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+##### 4.实现ReactPackage接口
+
+    public class IntentPackage implements ReactPackage {
+        @Override
+        public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+            return Arrays.<NativeModule>asList(
+                    new IntentModule(reactContext)
+            );
+        }
+        @Override
+        public List<Class<? extends JavaScriptModule>> createJSModules() {
+            return Collections.emptyList();
+        }
+        @Override
+        public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+            return Collections.emptyList();
+        }
+    }
+
+##### 5.在Application中注册IntentPackage
+
+@Override
+protected List<ReactPackage> getPackages() {
+  return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+          new IntentPackage()
+  );
+}
+
+##### 6.JavaScript调用IntentModule的backActivity方法
+
+	NativeModules.IntentModule.backActivity();
+
