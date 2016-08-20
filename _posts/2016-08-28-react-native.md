@@ -105,18 +105,18 @@ What we really want is the user experience of the native mobile platforms, combi
 
 react-native apk一个helloword的app大小在4M左右
 
- ![image](./images/react/x86.png)
+ ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/x86.png)
 
- ![image](./images/react/apk-large-file.png)
+ ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/apk-large-file.png)
 
- ![image](./images/react/rn-jar-desc.png.png)
+ ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/rn-jar-desc.png.png)
 
- ![image](./images/react/RNjar.png.png)
+ ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/RNjar.png.png)
 
 
 # Native与JS交互原理
 
- ![image](./images/react/rn-bridge.png)
+ ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/rn-bridge.png)
 
 在 React Native App中，在应用启动时根据 ReactPackage 会自动生成 JavaScriptModuleRegistry和NativeModuleRegistry两份模块配置表，包含系统CoreModulesPackage, 基础模块MainReactPackage以及自定义模块。Java端与JavaScript端持有相同的模块配置表，标识为可识别为Native模块或JavaScript模块都是通过实现相应接口，并将实例添加ReactPackage的CreactModules方法即可。
 
@@ -127,7 +127,7 @@ react-native apk一个helloword的app大小在4M左右
 
 ### Native启动React Application
 
-![image](./images/react/RN-Native-Start.png)
+![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/RN-Native-Start.png)
 
 JavaScript模块extends JavascriptModule, JavaScript模块通过java动态代理实现调用Js模块。下例 AppRegistry.java 为在加载完 Jsbundle 后，Native 去启动 React Application 的总入口，appkey 为应用的 ID。映射每个 JavascriptModule 的信息保存在 JavaScriptModuleRegistration 中，统一由 JavaScriptModuleRegistry统一管理。
 
@@ -222,6 +222,12 @@ void Bridge::callFunction(ExecutorToken executorToken,const std::string& moduleI
 
     8. OnLoad.cpp 中 makeJavaCall 定义,  c++通过CallVoidMethod调用java非静态方法：
 
+    gCallbackMethod 定义：
+
+    jclass callbackClass = env->FindClass("com/facebook/react/bridge/ReactCallback");
+    bridge::gCallbackMethod = env->GetMethodID(callbackClass, "call", "(Lcom/facebook/react/bridge/ExecutorToken;IILcom/facebook/react/bridge/ReadableNativeArray;)V");
+
+
 	static void makeJavaCall(JNIEnv* env, ExecutorToken executorToken, jobject callback, const MethodCall& call) {
 
 	  auto newArray = ReadableNativeArray::newObjectCxxArgs(std::move(call.arguments));
@@ -234,13 +240,14 @@ void Bridge::callFunction(ExecutorToken executorToken,const std::string& moduleI
 	      newArray.get());
 	}
 
+
 ```
 
 
 ### JavaScript启动流程
 
 
- ![image](./images/react/RN-JS-Start.png)
+ ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/RN-JS-Start.png)
 
 
 #### JavaScript初始化
@@ -671,7 +678,7 @@ JavaScript调用Native获取Native返回值是通过异步Callback实现的. 在
 2. JS定义两个方法，一个设置缓存，一个获取缓存。在JavaScript中，调用这个带有Callback参数的方法如下：
 
  _setCacheClick(){
-      NativeModules.RNIntentModule.setCache('ReactNative','我是来自React Native缓存消息',(msg)=>{
+      NativeModules.IntentPackage.setCache('ReactNative','我是来自React Native缓存消息',(msg)=>{
           NativeModules.ToastAndroid.show(msg, 3000);
         },(error)=>{
           NativeModules.ToastAndroid.show(error, 3000);
@@ -679,7 +686,7 @@ JavaScript调用Native获取Native返回值是通过异步Callback实现的. 在
   }
 
   _getCacheClick(){
-         NativeModules.RNIntentModule.getCache('ReactNative',(value)=>{
+         NativeModules.IntentPackage.getCache('ReactNative',(value)=>{
               NativeModules.ToastAndroid.show(value, 3000)
          });
   }
@@ -709,7 +716,7 @@ JavaScript调用Native获取Native返回值是通过异步Callback实现的. 在
  2. 同样JS定义两个方法，一个设置缓存，一个获取缓存。在JavaScript中，调用这个带有Callback参数的方法如下：
 
    _setCachePromiseClick(){
-        NativeModules.RNIntentModule.setCache('ReactNative','我是来自React Native缓存消息').then(msg=>{
+        NativeModules.IntentPackage.setCache('ReactNative','我是来自React Native缓存消息').then(msg=>{
             NativeModules.ToastAndroid.show(msg, 3000);
         },error=>{
           NativeModules.ToastAndroid.show(error, 3000);
@@ -717,9 +724,315 @@ JavaScript调用Native获取Native返回值是通过异步Callback实现的. 在
     }
 
     _getCachePromiseClick(){
-           NativeModules.RNIntentModule.getCache('ReactNative').then(function(value){
+           NativeModules.IntentPackage.getCache('ReactNative').then(function(value){
                NativeModules.ToastAndroid.show(value, 3000)
            });
     }
 
-#### Callback实现原理
+
+#### JavaScript调用Native Callback实现原理
+
+
+##### 1.NativeModulesReactCallback 初始化
+
+private ReactBridge initializeBridge(JavaScriptExecutor jsExecutor) {
+  bridge = new ReactBridge(
+          jsExecutor,
+          new NativeModulesReactCallback(),
+          mReactQueueConfiguration.getNativeModulesQueueThread());
+  return bridge;        
+}
+
+public ReactBridge(
+      JavaScriptExecutor jsExecutor,
+      ReactCallback callback,
+      MessageQueueThread nativeModulesQueueThread) {
+    mJSExecutor = jsExecutor;
+    mCallback = callback;
+    mNativeModulesQueueThread = nativeModulesQueueThread;
+    initialize(jsExecutor, callback, mNativeModulesQueueThread);
+}
+
+##### 2.ReactCallback源码实现：
+
+@DoNotStrip
+public interface ReactCallback {
+  @DoNotStrip
+  void call(ExecutorToken executorToken, int moduleId, int methodId, ReadableNativeArray parameters);
+}
+
+private class NativeModulesReactCallback implements ReactCallback {
+     @Override
+     public void call(ExecutorToken executorToken, int moduleId, int methodId, ReadableNativeArray parameters) {
+       synchronized (mJSToJavaCallsTeardownLock) {
+         // NativeModuleRegistry调用call
+         nativeModuleRegistry.call(CatalystInstanceImpl.this, executorToken, moduleId, methodId, parameters);
+       }
+     }
+}
+
+##### 3.NativeModuleRegistry源码实现：
+
+public class NativeModuleRegistry {
+
+  private static class MethodRegistration {
+      public MethodRegistration(String name, String tracingName, NativeModule.NativeMethod method) {
+        this.name = name;
+        this.tracingName = tracingName;
+        this.method = method;
+      }
+
+      public String name;
+      public String tracingName;
+      // Native 模块必须实现的接口NativeModule
+      public NativeModule.NativeMethod method;
+    }
+  }
+
+  private static class ModuleDefinition {
+
+    public final int id;
+        public final String name;
+        public final NativeModule target;
+        public final ArrayList<MethodRegistration> methods;
+
+    public ModuleDefinition(int id, String name, NativeModule target) {
+        this.id = id;
+        this.name = name;
+        this.target = target;
+        this.methods = new ArrayList<MethodRegistration>();
+        // target.getMethods() 收集 @ReactMehtod 注解的方法
+        for (Map.Entry<String, NativeModule.NativeMethod> entry : target.getMethods().entrySet()) {
+          this.methods.add(
+            new MethodRegistration(
+              entry.getKey(), "NativeCall__" + target.getName() + "_" + entry.getKey(),
+              entry.getValue()));
+        }
+    }
+
+    public void call(
+            CatalystInstance catalystInstance,
+            ExecutorToken executorToken,
+            int methodId,
+            ReadableNativeArray parameters) {
+            // this.methods.get(methodId).method == NativeModule.NativeMethod
+            this.methods.get(methodId).method.invoke(catalystInstance, executorToken, parameters);
+        }
+  }
+}
+
+##### 4.我们再来看一下Native自定义模块IntentModule实现
+
+public abstract class BaseJavaModule implements NativeModule {
+
+  static final private ArgumentExtractor<Callback> ARGUMENT_EXTRACTOR_CALLBACK =
+      new ArgumentExtractor<Callback>() {
+        @Override
+        public @Nullable Callback extractArgument(
+            CatalystInstance catalystInstance, ExecutorToken executorToken, ReadableNativeArray jsArguments, int atIndex) {
+          if (jsArguments.isNull(atIndex)) {
+            return null;
+          } else {
+            int id = (int) jsArguments.getDouble(atIndex);
+            //CallbackImpl 实现 Callback接口
+            return new CallbackImpl(catalystInstance, executorToken, id);
+          }
+        }
+      };
+
+  static final private ArgumentExtractor<Promise> ARGUMENT_EXTRACTOR_PROMISE =
+      new ArgumentExtractor<Promise>() {
+        @Override
+        public int getJSArgumentsNeeded() {
+          return 2;
+        }
+
+        @Override
+        public Promise extractArgument(
+            CatalystInstance catalystInstance, ExecutorToken executorToken, ReadableNativeArray jsArguments, int atIndex) {
+          Callback resolve = ARGUMENT_EXTRACTOR_CALLBACK
+              .extractArgument(catalystInstance, executorToken, jsArguments, atIndex);
+          Callback reject = ARGUMENT_EXTRACTOR_CALLBACK
+              .extractArgument(catalystInstance, executorToken, jsArguments, atIndex + 1);
+          return new PromiseImpl(resolve, reject);
+        }
+      };
+
+  private @Nullable Map<String, NativeMethod> mMethods;
+  private @Nullable Map<String, SyncNativeHook> mHooks;
+
+  // getMethods实现
+  @Override
+  public final Map<String, NativeMethod> getMethods() {
+    Method[] targetMethods = getClass().getDeclaredMethods();
+     for (Method targetMethod : targetMethods) {
+       if (targetMethod.getAnnotation(ReactMethod.class) != null) {
+         String methodName = targetMethod.getName();
+         mMethods.put(methodName, new JavaMethod(targetMethod));
+       }
+       if (targetMethod.getAnnotation(ReactSyncHook.class) != null) {
+         String methodName = targetMethod.getName();
+         mHooks.put(methodName, new SyncJavaHook(targetMethod));
+       }
+     }
+    return assertNotNull(mMethods);
+  }
+
+  public class JavaMethod implements NativeMethod {
+    private Method mMethod;
+
+    public JavaMethod(Method method) {
+      mMethod = method;
+    }
+
+    @Override
+    public void invoke(CatalystInstance catalystInstance, ExecutorToken executorToken, ReadableNativeArray parameters) {
+      mMethod.invoke(BaseJavaModule.this, mArguments);
+    }  
+  }
+
+}
+
+public abstract class ReactContextBaseJavaModule extends BaseJavaModule {
+
+}
+
+public class IntentModule extends ReactContextBaseJavaModule {
+
+}
+
+
+
+##### 5.Callback 实现
+
+private native void initialize(
+      JavaScriptExecutor jsExecutor,
+      ReactCallback callback,
+      MessageQueueThread nativeModulesQueueThread);
+
+
+public final class CallbackImpl implements Callback {
+
+  private final CatalystInstance mCatalystInstance;
+  private final ExecutorToken mExecutorToken;
+  private final int mCallbackId;
+
+  public CallbackImpl(CatalystInstancebridge = new ReactBridge(
+          jsExecutor,
+          new NativeModulesReactCallback(),
+          mReactQueueConfiguration.getNativeModulesQueueThread()); bridge, ExecutorToken executorToken, int callbackId) {
+    mCatalystInstance = bridge;
+    mExecutorToken = executorToken;
+    mCallbackId = callbackId;
+  }
+
+  @Override
+  public void invoke(Object... args) {
+    mCatalystInstance.invokeCallback(mExecutorToken, mCallbackId, Arguments.fromJavaArgs(args));
+  }
+}
+
+##### 6.CatalystInstanceImpl类中invokeCallback调用
+
+  @Override
+  public void invokeCallback(ExecutorToken executorToken, int callbackID, NativeArray arguments) {
+    if (mIsBeingDestroyed) {
+      FLog.w(ReactConstants.TAG, "Invoking JS callback after bridge has been destroyed.");
+      return;
+    }
+    synchronized (mJavaToJSCallsTeardownLock) {
+      if (mDestroyed) {
+        FLog.w(ReactConstants.TAG, "Invoking JS callback after bridge has been destroyed.");
+        return;
+      }
+
+      incrementPendingJSCalls();
+
+      Assertions.assertNotNull(mBridge).invokeCallback(executorToken, callbackID, arguments);
+    }
+  }
+
+##### 7.ReactBridge.java中invokeCallback调用
+
+public native void invokeCallback(ExecutorToken executorToken, int callbackID, NativeArray arguments);
+
+##### 8.OnLoad.cpp
+
+static void invokeCallback(JNIEnv* env, jobject obj, JExecutorToken::jhybridobject jExecutorToken, jint callbackId,
+                           NativeArray::jhybridobject args) {
+  auto bridge = extractRefPtr<CountableBridge>(env, obj);
+  auto arguments = cthis(wrap_alias(args));
+  try {
+    bridge->invokeCallback(
+      cthis(wrap_alias(jExecutorToken))->getExecutorToken(wrap_alias(jExecutorToken)),
+      (double) callbackId,
+      std::move(arguments->array)
+    );
+  } catch (...) {
+    translatePendingCppExceptionToJavaException();
+  }
+}
+
+##### 9.Bridge.cpp实现
+
+void Bridge::invokeCallback(ExecutorToken executorToken, const double callbackId, const folly::dynamic& arguments) {
+  #ifdef WITH_FBSYSTRACE
+  int systraceCookie = m_systraceCookie++;
+  FbSystraceAsyncFlow::begin(
+      TRACE_TAG_REACT_CXX_BRIDGE,
+      "<callback>",
+      systraceCookie);
+  #endif
+
+  #ifdef WITH_FBSYSTRACE
+  runOnExecutorQueue(executorToken, [callbackId, arguments, systraceCookie] (JSExecutor* executor) {
+    FbSystraceAsyncFlow::end(
+        TRACE_TAG_REACT_CXX_BRIDGE,
+        "<callback>",
+        systraceCookie);
+    FbSystraceSection s(TRACE_TAG_REACT_CXX_BRIDGE, "Bridge.invokeCallback");
+  #else
+  runOnExecutorQueue(executorToken, [callbackId, arguments] (JSExecutor* executor) {
+  #endif
+    executor->invokeCallback(callbackId, arguments);
+  });
+}
+
+##### 10.JSCExecutor.cpp 中invokeCallback实现
+
+void JSCExecutor::invokeCallback(const double callbackId, const folly::dynamic& arguments) {
+#ifdef WITH_FBSYSTRACE
+  FbSystraceSection s(TRACE_TAG_REACT_CXX_BRIDGE, "JSCExecutor.invokeCallback");
+#endif
+
+  if (!ensureBatchedBridgeObject()) {
+    throwJSExecutionException(
+        "Couldn't invoke JS callback %d: bridge configuration isn't available. This shouldn't be possible. Congratulations.", (int) callbackId);
+  }
+
+  String argsString = String(folly::toJson(std::move(arguments)).c_str());
+  JSValueRef args[] = {
+      JSValueMakeNumber(m_context, callbackId),
+      Value::fromJSON(m_context, argsString)
+  };
+
+
+  // m_invokeCallbackObj = folly::make_unique<Object>(m_batchedBridge->getProperty("invokeCallbackAndReturnFlushedQueue").asObject());
+  // 执行回调,返回待执行的队列
+  auto result = m_invokeCallbackObj->callAsFunction(2, args);
+  // 调用java方法
+  m_bridge->callNativeModules(*this, result.toJSONString(), true);
+}
+
+##### 11.JS端invokeCallbackAndReturnFlushedQueue实现
+
+function invokeCallbackAndReturnFlushedQueue(cbID, args) {
+  var _this3 = this;
+  guard(function () {
+    // 执行回调
+    _this3.__invokeCallback(cbID, args);
+    _this3.__callImmediates();
+  });
+  //  返回JS调用Native的队列
+  return this.flushedQueue();
+}
