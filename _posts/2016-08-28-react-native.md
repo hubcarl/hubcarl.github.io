@@ -1,7 +1,7 @@
 ---
 layout: post
 title: React Native 深入浅出
-date: 2016-08-28
+date: 2016-08-20
 categories: blog
 tags: [React,React Native,Hybrid App, React Native与JS交互原理]
 description:
@@ -591,6 +591,8 @@ JavaScript调用Native获取Native返回值是通过异步Callback实现的. 在
 
 ### Callback实现
 
+
+
 #### 1. java端实现一个需要获取执行结果的setCache和一个获取缓存接口getCache
 
 ```java
@@ -630,7 +632,9 @@ _getCacheClick(){
 }
 ```
 
+
 ### Promise实现
+
 
 #### 1. 同样java端实现一个需要获取执行结果的setCache和一个获取缓存接口getCache，Callback参数改为Promise
 
@@ -672,7 +676,9 @@ _getCachePromiseClick(){
 ```
 
 
+
 ### JavaScript调用Native Callback实现原理
+
 
 
 #### 1.NativeModulesReactCallback 初始化
@@ -911,7 +917,9 @@ synchronized (mJavaToJSCallsTeardownLock) {
 public native void invokeCallback(ExecutorToken executorToken, int callbackID, NativeArray arguments);
 ```
 
+
 #### 8.OnLoad.cpp
+
 
 ```c++
 static void invokeCallback(JNIEnv* env, jobject obj, JExecutorToken::jhybridobject jExecutorToken, jint callbackId,
@@ -930,7 +938,9 @@ static void invokeCallback(JNIEnv* env, jobject obj, JExecutorToken::jhybridobje
 }
 ```
 
+
 #### 9.Bridge.cpp实现
+
 
 ```c++
 void Bridge::invokeCallback(ExecutorToken executorToken, const double callbackId, const folly::dynamic& arguments) {
@@ -997,13 +1007,17 @@ function invokeCallbackAndReturnFlushedQueue(cbID, args) {
 
 具体实现步骤如下：
 
+
 #### 1. 继承ReactContextBaseJavaModule接口
+
 
 ```java
 public class IntentModule extends ReactContextBaseJavaModule
 ```
 
+
 #### 2. 重写 getName方法,暴露给JS端调用名
+
 
 ```java
 @Override
@@ -1012,7 +1026,9 @@ public String getName() {
 }
 ```
 
+
 #### 3. 给暴露给JS的方法添加 @ReactMethod 注解，且方法的返回值只能是void
+
 
 ```java
 @ReactMethod
@@ -1028,7 +1044,9 @@ public void backActivity(int count) {
 }
 ```
 
+
 #### 4.实现ReactPackage接口
+
 
 ```java
 public class IntentPackage implements ReactPackage {
@@ -1049,7 +1067,9 @@ public class IntentPackage implements ReactPackage {
 }
 ```
 
+
 #### 5.在Application中注册IntentPackage
+
 
 ```java
 @Override
