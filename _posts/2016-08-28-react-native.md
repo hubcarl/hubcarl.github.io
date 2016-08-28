@@ -1086,3 +1086,51 @@ protected List<ReactPackage> getPackages() {
 ```java
 NativeModules.IntentModule.backActivity();
 ```
+
+### 性能测试
+
+#### 首次启动性能测试(JSBundle加载解析)
+
+在本地开发时, React Native 是加载本地Node服务, 可以通过npm start 启动， package.json 代码如下：
+
+```bash
+"scripts": {
+	"start": "node node_modules/react-native/local-cli/cli.js start"
+}
+```
+
+加载的地址为：http://localhost:8081/debug.android.bundle?platform=android&dev=true&hot=false&minify=false
+
+首次在电脑上面打开该地址，被庞大的源代码吓一跳。一个简单的HelloWorld App 足足有5万多行JS代码(开发模式)。仔细分析和梳理调用流程后，也没有那么的恐怖。代码主要包括React源码, 所有初始化定义的Native组件定义，Bridge层调用相关的MessageQueue，NativeModules，原生JS常用方法polyfill等代码定义实现。
+
+如果是正式发布包，在应用运行时，是不存在本地nodejs服务器这个概念的，所以JS整合文件都是预先打包到asset资源文件里的，减少网络下载JS耗时。当然也可以从网络下载JSBundle，这时就需要考虑首次启动下载JSBundle的网络耗时和下载失败的情况处理。在项目开发时，其实可以在打包时内置一份JSBundle文件，然后启动后异步去下载最新JSBundle，下次启动时就可以加载新的JSBundle。
+
+针对如此庞大的JSBundle文件，首次启动加载和解析的性能如何呢？
+
+#### JSBundle首次加载性能测试
+
+首先把JSBundle打到本地assets目录下面. 项目命令自动会分析图片依赖，然后拷贝到res目录下面。
+
+```bash
+react-native bundle --entry-file ./index.android.js  --bundle-output ./app/src/main/assets/index.android.jsbundle --platform android --assets-dest ./app/src/main/res/ --dev false
+```
+
+#### 简单测试JS调用Native接口性能
+
+Native收到JS传递过来的值直接返回给JS, 经过多次测试，时间稳定在2-4ms, 偶尔会出现5s 
+
+```java
+@ReactMethod
+public void getJSNativeCost(String value, Callback callback) {
+    callback.invoke(value);
+}
+```
+
+```javascript
+const start = +new Date();
+NativeModules.RNIntentModule.getJSNativeCost('JS Native Cost Test',(value)=>{
+    const time = +new Date()-start;
+    console.log('>>>>cost[getJSNativeCost]:', time);
+    NativeModules.ToastAndroid.show(value+' cost:'+ time, 3000)
+});
+```
