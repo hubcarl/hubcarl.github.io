@@ -1087,9 +1087,9 @@ protected List<ReactPackage> getPackages() {
 NativeModules.IntentModule.backActivity();
 ```
 
-### 性能测试
+### React Native 打包发布
 
-#### 首次启动性能测试(JSBundle加载解析)
+#### 启动本地服务(JSBundle加载解析)
 
 在本地开发时, React Native 是加载本地Node服务, 可以通过npm start 启动， package.json 代码如下：
 
@@ -1107,30 +1107,10 @@ NativeModules.IntentModule.backActivity();
 
 针对如此庞大的JSBundle文件，首次启动加载和解析的性能如何呢？
 
-#### JSBundle首次加载性能测试
+#### JSBundle asset 加载打包
 
 首先把JSBundle打到本地assets目录下面. 项目命令自动会分析图片依赖，然后拷贝到res目录下面。
 
 ```bash
 react-native bundle --entry-file ./index.android.js  --bundle-output ./app/src/main/assets/index.android.jsbundle --platform android --assets-dest ./app/src/main/res/ --dev false
-```
-
-#### 简单测试JS调用Native接口性能
-
-Native收到JS传递过来的值直接返回给JS, 经过多次测试，时间稳定在2-4ms, 偶尔会出现5s 
-
-```java
-@ReactMethod
-public void getJSNativeCost(String value, Callback callback) {
-    callback.invoke(value);
-}
-```
-
-```javascript
-const start = +new Date();
-NativeModules.RNIntentModule.getJSNativeCost('JS Native Cost Test',(value)=>{
-    const time = +new Date()-start;
-    console.log('>>>>cost[getJSNativeCost]:', time);
-    NativeModules.ToastAndroid.show(value+' cost:'+ time, 3000)
-});
 ```
