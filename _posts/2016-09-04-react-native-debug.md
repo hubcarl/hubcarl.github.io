@@ -28,27 +28,19 @@ react-native bundle --entry-file ./index.android.js  --bundle-output ./app/src/m
 ### 远程加载JSBundle文件
 
 
-进行热部署的实现流程如下：
+在`ReactInstanceManager` 类里面提供了`setJSBundleFile`方法,这个就是动态更新的入口.
 
-![](https://github.com/fengjundev/React-Native-Remote-Update/raw/master/image/process.png)
-
-最新版本的React Native版本中，加入了如下支持：
 
 ```java
-	/**
-     * Path to the JS bundle file to be loaded from the file system.
-     *
-     * Example: {@code "assets://index.android.js" or "/sdcard/main.jsbundle}
-     */
     public Builder setJSBundleFile(String jsBundleFile) {
       mJSBundleFile = jsBundleFile;
       return this;
     }
 ```
 
-这是热部署的突破口，由于React Native加载的js文件都打包在bundle中，通过这个方法，可以设置app加载的bundle来源。若检测到远端存在更新的bundle文件，下载好后重新加载即可。
+由于React Native加载的js文件都打包在bundle中，通过这个方法，可以设置app加载的bundle来源。若检测到远端存在更新的bundle文件，下载好后重新加载即可。
 
-为了在运行中重新加载bundle文件，查看`ReactInstanceManager`的源码，找到如下方法：
+在`ReactInstanceManager` 类里面提供了`recreateReactContextInBackground`方法, 可以通过调用该方法重新加载JSBundle文件.
 
 ```java
   private void recreateReactContextInBackground(JavaScriptExecutor jsExecutor, JSBundleLoader jsBundleLoader) {
@@ -68,18 +60,15 @@ react-native bundle --entry-file ./index.android.js  --bundle-output ./app/src/m
   }
 ```
 
-虽然这个方法是`private`的，不过不要紧，使用反射调用就行啦：
+目前该方法访问权限上private,需要通过反射才能调用, 希望未来 React Native 能够从官方支持. 代码如下:
 
 ```java
 private void onJSBundleLoadedFromServer() {
-
     try {
             Class<?> RIManagerClazz = mReactInstanceManager.getClass();
-            Method method = RIManagerClazz.getDeclaredMethod("recreateReactContextInBackground",
-                    JavaScriptExecutor.class, JSBundleLoader.class);
+            Method method = RIManagerClazz.getDeclaredMethod("recreateReactContextInBackground", JavaScriptExecutor.class, JSBundleLoader.class);
             method.setAccessible(true);
-            method.invoke(mReactInstanceManager,
-                    new JSCJavaScriptExecutor(),
+            method.invoke(mReactInstanceManager, new JSCJavaScriptExecutor(),
                     JSBundleLoader.createFileLoader(getApplicationContext(), JS_BUNDLE_LOCAL_PATH));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
@@ -92,17 +81,6 @@ private void onJSBundleLoadedFromServer() {
         }
     }
 ```
-
-
-使用React Native进行热部署是可行的，只要远程提供打包好的bundle，app下载后重新加载即可；
-
-但是，这样的方案也具有一定的局限性：
-
-React Native在使用View的时候，这些View是要经过本地定制的，并且将相关方法通过`RCT_EXPORT_METHOD`暴露给js，js端才能正常使用。
-
-比如，我们在新版本中使用了一个`PullToRefreshListView`，这个View必须在Native中被定制过，此时，单纯的更新bundle就会报错了，需要重新发包才能解决。
-
-
 
 
 ### 开启ReactNative日志打印
