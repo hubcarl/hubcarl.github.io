@@ -1,7 +1,7 @@
 ---
 layout: post
 title: React Native 代码执行跟踪和调试
-date: 2016-09-04
+date: 2016-09-03
 categories: blog
 tags: [React,React Native,React Native代码调试, 性能测试]
 description:
@@ -119,16 +119,25 @@ ReactMarker.setMarkerListener(new ReactMarker.MarkerListener(){
 });
 ```
 
-09-04 20:33:47.637 I/ReactNativeJS: process_packages_end cost:1472387627637
-09-04 20:33:47.637 I/ReactNativeJS: build_native_module_registry_start cost:1472387627637
-09-04 20:33:47.639 I/ReactNativeJS: build_native_module_registry_end cost:1472387627639
-09-04 20:33:47.646 I/ReactNativeJS: create_catalyst_instance_start cost:1472387627646
-09-04 20:33:47.688 I/ReactNativeJS: create_catalyst_instance_end cost:1472387627688
-09-04 20:33:47.688 I/ReactNativeJS: run_js_bundle_start cost:1472387627688
-09-04 20:33:47.717 I/ReactNativeJS: loadapplicationscript_startstringconvert cost:1472387627717
-09-04 20:33:47.833 I/ReactNativeJS: loadapplicationscript_endstringconvert cost:1472387627832
-09-04 20:33:48.787 I/ReactNativeJS: create_react_context_end cost:1472387628786
-09-04 20:33:48.787 I/ReactNativeJS: run_js_bundle_end cost:1472387628787
+    09-03 20:33:47.637 I/ReactNativeJS: process_packages_end cost:1472387627637
+
+    09-03 20:33:47.637 I/ReactNativeJS: build_native_module_registry_start cost:1472387627637
+
+    09-03 20:33:47.639 I/ReactNativeJS: build_native_module_registry_end cost:1472387627639
+
+    09-03 20:33:47.646 I/ReactNativeJS: create_catalyst_instance_start cost:1472387627646
+
+    09-03 20:33:47.688 I/ReactNativeJS: create_catalyst_instance_end cost:1472387627688
+
+    09-03 20:33:47.688 I/ReactNativeJS: run_js_bundle_start cost:1472387627688
+
+    09-03 20:33:47.717 I/ReactNativeJS: loadapplicationscript_startstringconvert cost:1472387627717
+
+    09-03 20:33:47.833 I/ReactNativeJS: loadapplicationscript_endstringconvert cost:1472387627832
+
+    09-03 20:33:48.787 I/ReactNativeJS: create_react_context_end cost:1472387628786
+    
+    09-03 20:33:48.787 I/ReactNativeJS: run_js_bundle_end cost:1472387628787
 
 ### view源码
 
@@ -203,50 +212,95 @@ _react2.default.createElement(_reactNative.Text,{style:styles.instructions},'Sha
 
 #### view调用
 
-09-04 20:19:19.462  Running application "SmartDebugReactApp" with appParams: {"initialProps":{},"rootTag":1}. __DEV__ === true, development-level warning are ON, performance optimizations are OFF
-09-04 20:19:19.526  'JS->N : ', 8, 18, 'NaN.createView([2,"RCTView",1,{"flex":1}])'
-09-04 20:19:19.545  'JS->N : ', 8, 18, 'NaN.createView([3,"RCTView",1,{"collapsable":true,"flex":1}])'
-09-04 20:19:19.584  'JS->N : ', 28, 1, 'NaN.createTimer([2,1,1472386759583,false])'
-09-04 20:19:19.706  'JS->N : ', 8, 18, 'NaN.createView([4,"RCTView",1,{"flex":1,"justifyContent":"center","alignItems":"center","backgroundColor":-656129}])'
-09-04 20:19:19.721  'JS->N : ', 8, 18, 'NaN.createView([5,"RCTText",1,{"fontSize":20,"textAlign":"center","margin":10,"color":-65536,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
-09-04 20:19:19.732  'JS->N : ', 8, 18, 'NaN.createView([6,"RCTRawText",1,{"text":"Welcome to React Native!"}])'
-09-04 20:19:19.738  'JS->N : ', 8, 9, 'NaN.setChildren([5,[6]])'
-09-04 20:19:19.768  'JS->N : ', 8, 18, 'NaN.createView([7,"RCTView",1,{"accessible":true,"opacity":1}])'
-09-04 20:19:19.777  'JS->N : ', 8, 18, 'NaN.createView([8,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
-09-04 20:19:19.779  'JS->N : ', 8, 18, 'NaN.createView([9,"RCTRawText",1,{"text":"点击我，测试JS调用Native性能"}])'
-09-04 20:19:19.782  'JS->N : ', 8, 9, 'NaN.setChildren([8,[9]])'
-09-04 20:19:19.783  'JS->N : ', 8, 9, 'NaN.setChildren([7,[8]])'
-09-04 20:19:19.801  'JS->N : ', 8, 18, 'NaN.createView([10,"RCTView",1,{"accessible":true,"opacity":1}])'
-09-04 20:19:19.810  'JS->N : ', 8, 18, 'NaN.createView([12,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
-09-04 20:19:19.812  'JS->N : ', 8, 18, 'NaN.createView([13,"RCTRawText",1,{"text":"点击我，设置缓存测试"}])'
-09-04 20:19:19.813  'JS->N : ', 8, 9, 'NaN.setChildren([12,[13]])'
-09-04 20:19:19.814  'JS->N : ', 8, 9, 'NaN.setChildren([10,[12]])'
-09-04 20:19:19.834  'JS->N : ', 8, 18, 'NaN.createView([14,"RCTView",1,{"accessible":true,"opacity":1}])'
-09-04 20:19:19.849  'JS->N : ', 8, 18, 'NaN.createView([15,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
-09-04 20:19:19.851  'JS->N : ', 8, 18, 'NaN.createView([16,"RCTRawText",1,{"text":"点击我，获取缓存值"}])'
-09-04 20:19:19.851  'JS->N : ', 8, 9, 'NaN.setChildren([15,[16]])'
-09-04 20:19:19.854  'JS->N : ', 8, 9, 'NaN.setChildren([14,[15]])'
-09-04 20:19:19.881  'JS->N : ', 8, 18, 'NaN.createView([17,"RCTView",1,{"accessible":true,"opacity":1}])'
-09-04 20:19:19.890  'JS->N : ', 8, 18, 'NaN.createView([18,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
-09-04 20:19:19.894  'JS->N : ', 8, 18, 'NaN.createView([19,"RCTRawText",1,{"text":"点击我，打开Android Native Activity页面"}])'
-09-04 20:19:19.895  'JS->N : ', 8, 9, 'NaN.setChildren([18,[19]])'
-09-04 20:19:19.896  'JS->N : ', 8, 9, 'NaN.setChildren([17,[18]])'
-09-04 20:19:19.914  'JS->N : ', 8, 18, 'NaN.createView([20,"RCTView",1,{"accessible":true,"opacity":1}])'
-09-04 20:19:19.924  'JS->N : ', 8, 18, 'NaN.createView([22,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
-09-04 20:19:19.927  'JS->N : ', 8, 18, 'NaN.createView([23,"RCTRawText",1,{"text":"点击我，打开Android Second React Activity页面"}])'
-09-04 20:19:19.932  'JS->N : ', 8, 9, 'NaN.setChildren([22,[23]])'
-09-04 20:19:19.935  'JS->N : ', 8, 9, 'NaN.setChildren([20,[22]])'
-09-04 20:19:19.941  'JS->N : ', 8, 18, 'NaN.createView([24,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
-09-04 20:19:19.945  'JS->N : ', 8, 18, 'NaN.createView([25,"RCTRawText",1,{"text":"Shake or press menu button for dev menu"}])'
-09-04 20:19:19.946  'JS->N : ', 8, 9, 'NaN.setChildren([24,[25]])'
-09-04 20:19:19.950  'JS->N : ', 8, 9, 'NaN.setChildren([4,[5,7,10,14,17,20,24]])'
-09-04 20:19:19.951  'JS->N : ', 8, 9, 'NaN.setChildren([3,[4]])'
-09-04 20:19:19.962  'JS->N : ', 8, 18, 'NaN.createView([26,"RCTView",1,{"collapsable":true,"position":"absolute"}])'
-09-04 20:19:19.963  'JS->N : ', 8, 9, 'NaN.setChildren([2,[3,26]])'
-09-04 20:19:19.964  'JS->N : ', 8, 9, 'NaN.setChildren([1,[2]])'
-09-04 20:19:19.976  'JS->N : ', 24, 0, 'NaN.getDataFromIntent([0,1])'
-09-04 20:19:19.978  'JS->N : ', 1, 1, 'NaN.show(["Toast 是原生支持的!",3000])'
-09-04 20:19:20.056  'JS->N : ', 8, 12, 'NaN.updateView([6,"RCTRawText",{"text":"注意：数据为空！"}])'
+
+    09-03 20:19:19.462  Running application "SmartDebugReactApp" with appParams: {"initialProps":{},"rootTag":1}. __DEV__ === true, development-level warning are ON, performance optimizations are OFF
+
+    09-03 20:19:19.526  'JS->N : ', 8, 18, 'NaN.createView([2,"RCTView",1,{"flex":1}])'
+
+    09-03 20:19:19.545  'JS->N : ', 8, 18, 'NaN.createView([3,"RCTView",1,{"collapsable":true,"flex":1}])'
+
+    09-03 20:19:19.584  'JS->N : ', 28, 1, 'NaN.createTimer([2,1,1472386759583,false])'
+
+    09-03 20:19:19.706  'JS->N : ', 8, 18, 'NaN.createView([4,"RCTView",1,{"flex":1,"justifyContent":"center","alignItems":"center","backgroundColor":-656129}])'
+
+    09-03 20:19:19.721  'JS->N : ', 8, 18, 'NaN.createView([5,"RCTText",1,{"fontSize":20,"textAlign":"center","margin":10,"color":-65536,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
+
+    09-03 20:19:19.732  'JS->N : ', 8, 18, 'NaN.createView([6,"RCTRawText",1,{"text":"Welcome to React Native!"}])'
+
+    09-03 20:19:19.738  'JS->N : ', 8, 9, 'NaN.setChildren([5,[6]])'
+
+    09-03 20:19:19.768  'JS->N : ', 8, 18, 'NaN.createView([7,"RCTView",1,{"accessible":true,"opacity":1}])'
+
+    09-03 20:19:19.777  'JS->N : ', 8, 18, 'NaN.createView([8,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
+
+    09-03 20:19:19.779  'JS->N : ', 8, 18, 'NaN.createView([9,"RCTRawText",1,{"text":"点击我，测试JS调用Native性能"}])'
+
+    09-03 20:19:19.782  'JS->N : ', 8, 9, 'NaN.setChildren([8,[9]])'
+
+    09-03 20:19:19.783  'JS->N : ', 8, 9, 'NaN.setChildren([7,[8]])'
+
+    09-03 20:19:19.801  'JS->N : ', 8, 18, 'NaN.createView([10,"RCTView",1,{"accessible":true,"opacity":1}])'
+
+    09-03 20:19:19.810  'JS->N : ', 8, 18, 'NaN.createView([12,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
+
+    09-03 20:19:19.812  'JS->N : ', 8, 18, 'NaN.createView([13,"RCTRawText",1,{"text":"点击我，设置缓存测试"}])'
+
+    09-03 20:19:19.813  'JS->N : ', 8, 9, 'NaN.setChildren([12,[13]])'
+
+
+    09-03 20:19:19.814  'JS->N : ', 8, 9, 'NaN.setChildren([10,[12]])'
+
+    09-03 20:19:19.834  'JS->N : ', 8, 18, 'NaN.createView([14,"RCTView",1,{"accessible":true,"opacity":1}])'
+
+    09-03 20:19:19.849  'JS->N : ', 8, 18, 'NaN.createView([15,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
+
+    09-03 20:19:19.851  'JS->N : ', 8, 18, 'NaN.createView([16,"RCTRawText",1,{"text":"点击我，获取缓存值"}])'
+
+    09-03 20:19:19.851  'JS->N : ', 8, 9, 'NaN.setChildren([15,[16]])'
+
+    09-03 20:19:19.854  'JS->N : ', 8, 9, 'NaN.setChildren([14,[15]])'
+
+    09-03 20:19:19.881  'JS->N : ', 8, 18, 'NaN.createView([17,"RCTView",1,{"accessible":true,"opacity":1}])'
+
+    09-03 20:19:19.890  'JS->N : ', 8, 18, 'NaN.createView([18,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
+
+    09-03 20:19:19.894  'JS->N : ', 8, 18, 'NaN.createView([19,"RCTRawText",1,{"text":"点击我，打开Android Native Activity页面"}])'
+
+    09-03 20:19:19.895  'JS->N : ', 8, 9, 'NaN.setChildren([18,[19]])'
+
+    09-03 20:19:19.896  'JS->N : ', 8, 9, 'NaN.setChildren([17,[18]])'
+
+    09-03 20:19:19.914  'JS->N : ', 8, 18, 'NaN.createView([20,"RCTView",1,{"accessible":true,"opacity":1}])'
+
+    09-03 20:19:19.924  'JS->N : ', 8, 18, 'NaN.createView([22,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
+
+    09-03 20:19:19.927  'JS->N : ', 8, 18, 'NaN.createView([23,"RCTRawText",1,{"text":"点击我，打开Android Second React Activity页面"}])'
+
+    09-03 20:19:19.932  'JS->N : ', 8, 9, 'NaN.setChildren([22,[23]])'
+
+    09-03 20:19:19.935  'JS->N : ', 8, 9, 'NaN.setChildren([20,[22]])'
+
+    09-03 20:19:19.941  'JS->N : ', 8, 18, 'NaN.createView([24,"RCTText",1,{"textAlign":"center","color":-13421773,"marginTop":15,"marginBottom":5,"fontSize":14,"accessible":true,"allowFontScaling":true,"ellipsizeMode":"tail"}])'
+
+    09-03 20:19:19.945  'JS->N : ', 8, 18, 'NaN.createView([25,"RCTRawText",1,{"text":"Shake or press menu button for dev menu"}])'
+
+    09-03 20:19:19.946  'JS->N : ', 8, 9, 'NaN.setChildren([24,[25]])'
+
+    09-03 20:19:19.950  'JS->N : ', 8, 9, 'NaN.setChildren([4,[5,7,10,14,17,20,24]])'
+
+    09-03 20:19:19.951  'JS->N : ', 8, 9, 'NaN.setChildren([3,[4]])'
+
+    09-03 20:19:19.962  'JS->N : ', 8, 18, 'NaN.createView([26,"RCTView",1,{"collapsable":true,"position":"absolute"}])'
+
+    09-03 20:19:19.963  'JS->N : ', 8, 9, 'NaN.setChildren([2,[3,26]])'
+
+    09-03 20:19:19.964  'JS->N : ', 8, 9, 'NaN.setChildren([1,[2]])'
+
+    09-03 20:19:19.976  'JS->N : ', 24, 0, 'NaN.getDataFromIntent([0,1])'
+
+    09-03 20:19:19.978  'JS->N : ', 1, 1, 'NaN.show(["Toast 是原生支持的!",3000])'
+
+    09-03 20:19:20.056  'JS->N : ', 8, 12, 'NaN.updateView([6,"RCTRawText",{"text":"注意：数据为空！"}])'
 
 
 
