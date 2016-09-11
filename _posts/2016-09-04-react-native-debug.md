@@ -120,7 +120,9 @@ ReactMarker.setMarkerListener(new ReactMarker.MarkerListener(){
 
 ### 四.简单的React Native View创建流程
 
+
 ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/rn-simple-view.jpg)
+
 
 
 #### 1.React View源码
@@ -289,6 +291,7 @@ _react2.default.createElement(_reactNative.Text,{style:styles.instructions},'Sha
 
 ###  五.性能测试
 
+
 #### 1.简单测试JS调用Native接口性能
 
 Native收到JS传递过来的值直接返回给JS, 经过多次测试（Nexus 5 Android 5.0, MX3 5.0），时间稳定在2-4ms, 偶尔会出现5s.
@@ -313,7 +316,8 @@ NativeModules.IntentModule.getJSNativeCost('JS Native Cost Test',(value)=>{
 #### 2.React Native 首次加载性能测试
 
 
-##### Nexus5 5.0系统测试
+#### Nexus5 5.0系统测试
+
 
 **第一次测试**
 
@@ -360,6 +364,8 @@ cost:1473338499711-1473338499002=709
 cost:1473339047327-1473339046781=546
 
 从测试结果来看, Nexus5 时间稳定在500ms-700ms之间, 时间可以接受.
+
+
 
 ##### MX3 5.0系统测试
 
@@ -413,13 +419,15 @@ cost: 1473585087339-1473585085690=1649
 
 
 
-##### MX3 内存占用和cpu消耗
+#### MX3 内存占用和cpu消耗
+
 
 **内存占用曲线图**
 
 ![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/rn-memory.png)
 
 从曲线图看出内存占用非常稳定, 一个HellWord的React Native App占用内存大概在20M
+
 
 **cpu曲线图**
 
