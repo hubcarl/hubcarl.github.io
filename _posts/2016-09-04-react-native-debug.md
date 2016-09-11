@@ -7,9 +7,8 @@ tags: [React,React Native,React Native代码调试, 性能测试]
 description:
 
 ---
-# React Native 代码执行跟踪和调试
 
-### 支持远程本地调试
+### 一.远程本地调试
 
 通过创建ReactInstanceManager.builder 设置setUseDeveloperSupport(true)支持远程本地调试。
 远程调试时，如果是通过Android studio 打包时，可以先通过npm start启动启动本地服务，启动后服务地址：
@@ -25,7 +24,7 @@ react-native bundle --entry-file ./index.android.js  --bundle-output ./app/src/m
 然后setUseDeveloperSupport(false)，之后重新打包即可。
 
 
-### 远程加载JSBundle文件
+### 二.远程加载JSBundle文件
 
 
 在`ReactInstanceManager` 类里面提供了`setJSBundleFile`方法,这个就是动态更新的入口.
@@ -83,7 +82,7 @@ private void onJSBundleLoadedFromServer() {
 ```
 
 
-### 开启ReactNative日志打印
+### 三.开启ReactNative日志打印
 
 React Native 增加了关键日志自定义listener回调接口MarkerListener，只要在React Activity onCreate设置ReactMarker.setMarkerListener方法，
 实现MarkerListener接口logMarker方法，即可实现控制台日志打印。我们可以记录下每个关键路径的当前时间，即可计算出每个关键路径的执行时间。
@@ -117,7 +116,14 @@ ReactMarker.setMarkerListener(new ReactMarker.MarkerListener(){
     
     09-03 20:33:48.787 I/ReactNativeJS: run_js_bundle_end cost:1472387628787
 
-### view源码
+
+
+### 四.简单的React Native View创建流程
+
+![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/rn-simple-view.jpg)
+
+
+#### 1.React View源码
 
 ```
 render() {
@@ -159,7 +165,7 @@ render() {
 }
 ```
 
-#### react bundle.js 打包构建后
+#### 2.React bundle.js 打包构建后
 ```
 {key:'render',value:function render()
 
@@ -188,7 +194,7 @@ _react2.default.createElement(_reactNative.Text,{style:styles.instructions},'Sha
 }}
 ```
 
-#### view调用
+#### 3.Native View创建之JS调用Native
 
 
     09-03 20:19:19.462  Running application "SmartDebugReactApp" with appParams: {"initialProps":{},"rootTag":1}. __DEV__ === true, development-level warning are ON, performance optimizations are OFF
@@ -281,11 +287,11 @@ _react2.default.createElement(_reactNative.Text,{style:styles.instructions},'Sha
     09-03 20:19:20.056  'JS->N : ', 8, 12, 'NaN.updateView([6,"RCTRawText",{"text":"注意：数据为空！"}])'
 
 
+###  五.性能测试
 
+#### 1.简单测试JS调用Native接口性能
 
-#### 简单测试JS调用Native接口性能
-
-Native收到JS传递过来的值直接返回给JS, 经过多次测试（Nexus 5 Android 5.0），时间稳定在2-4ms, 偶尔会出现5s.
+Native收到JS传递过来的值直接返回给JS, 经过多次测试（Nexus 5 Android 5.0, MX3 5.0），时间稳定在2-4ms, 偶尔会出现5s.
 
 ```java
 @ReactMethod
@@ -302,3 +308,123 @@ NativeModules.IntentModule.getJSNativeCost('JS Native Cost Test',(value)=>{
     NativeModules.ToastAndroid.show(value+' cost:'+ time, 3000)
 });
 ```
+
+
+#### 2.React Native 首次加载性能测试
+
+
+##### Nexus5 5.0系统测试
+
+**第一次测试**
+
+    09-08 20:41:39.002  12023-12023/com.react.smart I/ReactNativeJS﹕ >>>react performance react start:1473338499002
+    09-08 20:41:39.081  12023-12023/com.react.smart I/ReactNativeJS﹕ >>>react performance react end:1473338499081
+    09-08 20:41:39.601  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react[runApplication]:1473338499600
+    09-08 20:41:39.618  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react#constructor, 1473338499616
+    09-08 20:41:39.618  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react#componentWillMount, 1473338499618
+    09-08 20:41:39.711  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react#componentDidMount, 1473338499711
+
+cost:1473338499711-1473338499002=709
+
+**第二次测试**
+
+    09-08 20:45:42.774  14935-14935/com.react.smart I/ReactNativeJS﹕ >>>react performance react start:1473338742774
+    09-08 20:45:42.806  14935-14935/com.react.smart I/ReactNativeJS﹕ >>>react performance react end:1473338742806
+    09-08 20:45:43.300  14935-14965/com.react.smart I/ReactNativeJS﹕ >>>react[runApplication]:1473338743299
+    09-08 20:45:43.320  14935-14965/com.react.smart I/ReactNativeJS﹕ >>>react#constructor, 1473338743319
+    09-08 20:45:43.321  14935-14965/com.react.smart I/ReactNativeJS﹕ >>>react#componentWillMount, 1473338743321
+    09-08 20:45:43.471  14935-14965/com.react.smart I/ReactNativeJS﹕ >>>react#componentDidMount, 1473338743471
+
+cost:1473338743471-1473338742774=697
+
+**第三次测试**
+
+    09-08 20:41:39.002  12023-12023/com.react.smart I/ReactNativeJS﹕ >>>react performance react start:1473338499002
+    09-08 20:41:39.081  12023-12023/com.react.smart I/ReactNativeJS﹕ >>>react performance react end:1473338499081
+    09-08 20:41:39.601  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react[runApplication]:1473338499600
+    09-08 20:41:39.618  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react#constructor, 1473338499616
+    09-08 20:41:39.618  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react#componentWillMount, 1473338499618
+    09-08 20:41:39.711  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react#componentDidMount, 1473338499711
+
+cost:1473338499711-1473338499002=709
+
+**第四次测试**
+
+    09-08 20:50:46.781  14935-14935/com.react.smart I/ReactNativeJS﹕ >>>react performance react start:1473339046781
+    09-08 20:50:46.789  14935-14935/com.react.smart I/ReactNativeJS﹕ >>>react performance react end:1473339046789
+    09-08 20:50:47.213  14935-18051/com.react.smart I/ReactNativeJS﹕ >>>react[runApplication]:1473339047213
+    09-08 20:50:47.231  14935-18051/com.react.smart I/ReactNativeJS﹕ >>>react#constructor, 1473339047229
+    09-08 20:50:47.231  14935-18051/com.react.smart I/ReactNativeJS﹕ >>>react#componentWillMount, 1473339047231
+    09-08 20:50:47.327  14935-18051/com.react.smart I/ReactNativeJS﹕ >>>react#componentDidMount, 1473339047327
+
+cost:1473339047327-1473339046781=546
+
+从测试结果来看, Nexus5 时间稳定在500ms-700ms之间, 时间可以接受.
+
+##### MX3 5.0系统测试
+
+
+**第一次测试**
+
+    09-11 16:51:36.967  10179-10179/com.react.smart I/ReactNativeJS﹕ >>>react performance react start:1473583896967
+    09-11 16:51:37.091  10179-10179/com.react.smart I/ReactNativeJS﹕ >>>react performance react end:1473583897091
+    09-11 16:51:38.349  10179-10209/com.react.smart I/ReactNativeJS﹕ '>>>react#constructor', 1473583898342
+    09-11 16:51:38.350  10179-10209/com.react.smart I/ReactNativeJS﹕ '>>>react#componentWillMount', 1473583898349
+    09-11 16:51:38.523  10179-10209/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount', 1473583898523
+    09-11 16:51:38.528  10179-10209/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount#ToastAndroid.show', 1473583898527
+
+cost:1473583898527-1473583896967=1560
+
+**第二次测试**
+
+    09-11 16:53:48.688  11260-11260/com.react.smart I/ReactNativeJS﹕ >>>react performance react start:1473584028688
+    09-11 16:53:48.887  11260-11260/com.react.smart I/ReactNativeJS﹕ >>>react performance react end:1473584028887
+    09-11 16:53:50.345  11260-11292/com.react.smart I/ReactNativeJS﹕ '>>>react#constructor', 1473584030342
+    09-11 16:53:50.346  11260-11292/com.react.smart I/ReactNativeJS﹕ '>>>react#componentWillMount', 1473584030345
+    09-11 16:53:50.500  11260-11292/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount', 1473584030500
+    09-11 16:53:50.504  11260-11292/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount#ToastAndroid.show', 1473584030503
+
+cost:1473584030503-1473584028688=1815
+
+**第三次测试**
+
+
+    09-11 17:10:20.694  18623-18623/com.react.smart I/ReactNativeJS﹕ >>>react performance react start:1473585020694
+    09-11 17:10:20.894  18623-18623/com.react.smart I/ReactNativeJS﹕ >>>react performance react end:1473585020894
+    09-11 17:10:22.225  18623-18657/com.react.smart I/ReactNativeJS﹕ '>>>react#constructor', 1473585022222
+    09-11 17:10:22.226  18623-18657/com.react.smart I/ReactNativeJS﹕ '>>>react#componentWillMount', 1473585022225
+    09-11 17:10:22.405  18623-18657/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount', 1473585022405
+    09-11 17:10:22.409  18623-18657/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount#ToastAndroid.show', 1473585022408
+
+cost:1473585022408-1473585020694=1714
+
+**第四次测试**
+
+    09-11 17:11:25.690  19167-19167/com.react.smart I/ReactNativeJS﹕ >>>react performance react start:1473585085690
+    09-11 17:11:25.865  19167-19167/com.react.smart I/ReactNativeJS﹕ >>>react performance react end:1473585085865
+    09-11 17:11:27.173  19167-19199/com.react.smart I/ReactNativeJS﹕ '>>>react#constructor', 1473585087169
+    09-11 17:11:27.173  19167-19199/com.react.smart I/ReactNativeJS﹕ '>>>react#componentWillMount', 1473585087173
+    09-11 17:11:27.336  19167-19199/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount', 1473585087335
+    09-11 17:11:27.340  19167-19199/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount#ToastAndroid.show', 1473585087339
+
+cost: 1473585087339-1473585085690=1649
+
+从测试结果来看, MX3 时间稳定在1500ms-1800ms之间, 明显比Nexus5要慢
+
+
+
+##### MX3 内存占用和cpu消耗
+
+**内存占用曲线图**
+
+![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/rn-memory.png)
+
+从曲线图看出内存占用非常稳定, 一个HellWord的React Native App占用内存大概在20M
+
+**cpu曲线图**
+
+![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/rn-cpu.png)
+
+从曲线图看出启动的时候cpu瞬间飙到40%, 原因是因为启动时涉及Android和React Native JS与Native的大量调用,这个可以从上面View的绘制的过程可以看出.
+
+第二个cpu波动是我这边频繁的点击[点击我]相关测试, 停止点击后, cpu马上就降落下来.
