@@ -1,6 +1,6 @@
 ---
 layout: post
-title: weg系列-swig自定义标签之pagelet
+title: fis系列-swig自定义标签之pagelet
 date: 2016-03-13
 categories: blog
 tags: [weg,node.js,swig,pagelet]
