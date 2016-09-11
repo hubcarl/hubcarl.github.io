@@ -1,7 +1,7 @@
 ---
 layout: post
-title: React Native 代码执行跟踪和调试
-date: 2016-09-03
+title: React Native代码执行跟踪和调试
+date: 2016-09-04
 categories: blog
 tags: [React,React Native,React Native代码调试, 性能测试]
 description:
