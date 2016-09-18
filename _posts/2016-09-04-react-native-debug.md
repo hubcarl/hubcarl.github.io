@@ -309,25 +309,108 @@ _react2.default.createElement(_reactNative.Text,{style:styles.instructions},'Sha
 ###  五.性能测试
 
 
-#### 1.简单测试JS调用Native接口性能
+#### 1.React Native 简单测试JS调用Native接口性能
 
-Native收到JS传递过来的值直接返回给JS, 经过多次测试（Nexus 5 Android 5.0, MX3 5.0），时间稳定在2-4ms, 偶尔会出现5s.
+准备三组测试数据:
+
+第一组(简单):   key: 随机生成  value: 我是来自React Native缓存消息
+
+第二组(长字符): key: 随机生成  value: 我是来自React Native缓存消息(循环50遍)
+
+第二组(JSON):  key: 随机生成  value: 下面JSON字符串,循环10遍, 内容不重复
+
+{
+   "id": 000001,
+   "title": "React Native接口性能测试",
+   "summary": "炫斗不停，精彩不断，不要怂就是干的全武将萌化翻转扮演的新式三国策略养成手游《女神三国》邀您...",
+   "category": "React Native",
+   "createTime": "2016-09-09 17:48:38",
+   "publicTime": "2016-09-09 17:48:00"
+}
+
 
 ```java
 @ReactMethod
-public void getJSNativeCost(String value, Callback callback) {
-    callback.invoke(value);
+public void setCache(String key, String value, Callback successCallback, Callback errorCallback) {
+    try {
+        sharedPreference = getCurrentActivity().getSharedPreferences("rn_cache", 0);
+        sharedPreference.edit().putString(key, value).commit();
+        successCallback.invoke("save success");
+    } catch (Exception e) {
+        e.printStackTrace();
+        errorCallback.invoke(e.getMessage());
+    }
+}
+
+//Java中的方法需要导出才能给JS使用，要导出Java方法，需要使用@ReactMethod来注解，且方法的返回值只能是void。
+@ReactMethod
+public void getCache(String key, Callback callback) {
+    callback.invoke(sharedPreference.getString(key, ""));
 }
 ```
 
 ```javascript
 const start = +new Date();
-NativeModules.IntentModule.getJSNativeCost('JS Native Cost Test',(value)=>{
+NativeModules.IntentModule.getCache('RN001',(value)=>{
     const time = +new Date()-start;
-    console.log('>>>>cost[getJSNativeCost]:', time);
+    console.log('>>>>cost[getCache]:', time);
     NativeModules.ToastAndroid.show(value+' cost:'+ time, 3000)
 });
 ```
+
+Native收到JS传递过来的值直接返回给JS, 经过多次对三组进行测试（Nexus 5 Android 5.0, MX3 5.0），时间稳定在2-4ms, 偶尔会出现5ms, 数据的大小对接口调用耗时影响不大.
+
+
+####  2.WebView addJavascriptInterface 接口测试
+
+
+```java
+@JavascriptInterface
+public void setCache(String key, String value) {
+    try {
+        sharedPreference = context.getSharedPreferences("rn_cache", 0);
+        sharedPreference.edit().putString(key, value).commit();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+@JavascriptInterface
+public String getCache(String key) {
+    return sharedPreference.getString(key, "");
+}
+```
+
+
+```javascript
+function getCache() {
+        var start = +new Date();
+        var ret = HybridApp.getCache('RN001');
+        var end = +new Date();
+        var str = '>>>cost[getCache]:' + (end - start) + '  result:' + ret;
+        console.log(str);
+}
+```
+
+JS从Native获取数据, 经过多次进行三组数据测试（Nexus 5 Android 5.0），时间稳定在0-3ms, 多次点击后,时间更短,时间稳定范围0s-1s,说明Interface有缓存机制和数据的大小对接口调用耗时影响不大.
+
+####  3.WebView prompt 接口测试
+
+```javascript
+@Override
+public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+    result.confirm(message);
+    return true;
+}
+```
+经过多次对三组进行数据进行测试（Nexus 5 Android 5.），时间稳定在1-2ms,数据的大小对接口调用耗时影响不大
+
+
+#### 4.三种方式耗时总结
+
+1. 从测试效果来看, 三种方式接口调用耗时都在1s-4s级别, 性能表现都非常不错. React Native因为进行了接口封装转换, 比addJavascriptInterface和prompt方式都是简单的数据透传返回要慢1ms-2ms是可以预期的.
+
+2. 说明: 这里只是简单的接口调用测试, 当前运行环境(Native线程切换,Native数据获取方式,数据回调方式等)都可能会影响实际的接口调用耗时.
 
 
 #### 2.React Native 首次加载性能测试
@@ -345,7 +428,7 @@ NativeModules.IntentModule.getJSNativeCost('JS Native Cost Test',(value)=>{
     09-08 20:41:39.618  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react#componentWillMount, 1473338499618
     09-08 20:41:39.711  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react#componentDidMount, 1473338499711
 
-cost:1473338499711-1473338499002=709
+cost:1473338499711-1473338499002=709ms
 
 **第二次测试**
 
@@ -356,7 +439,7 @@ cost:1473338499711-1473338499002=709
     09-08 20:45:43.321  14935-14965/com.react.smart I/ReactNativeJS﹕ >>>react#componentWillMount, 1473338743321
     09-08 20:45:43.471  14935-14965/com.react.smart I/ReactNativeJS﹕ >>>react#componentDidMount, 1473338743471
 
-cost:1473338743471-1473338742774=697
+cost:1473338743471-1473338742774=697ms
 
 **第三次测试**
 
@@ -367,7 +450,7 @@ cost:1473338743471-1473338742774=697
     09-08 20:41:39.618  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react#componentWillMount, 1473338499618
     09-08 20:41:39.711  12023-12052/com.react.smart I/ReactNativeJS﹕ >>>react#componentDidMount, 1473338499711
 
-cost:1473338499711-1473338499002=709
+cost:1473338499711-1473338499002=709ms
 
 **第四次测试**
 
@@ -378,7 +461,7 @@ cost:1473338499711-1473338499002=709
     09-08 20:50:47.231  14935-18051/com.react.smart I/ReactNativeJS﹕ >>>react#componentWillMount, 1473339047231
     09-08 20:50:47.327  14935-18051/com.react.smart I/ReactNativeJS﹕ >>>react#componentDidMount, 1473339047327
 
-cost:1473339047327-1473339046781=546
+cost:1473339047327-1473339046781=546ms
 
 从测试结果来看, Nexus5 时间稳定在500ms-700ms之间, 时间可以接受.
 
@@ -396,7 +479,7 @@ cost:1473339047327-1473339046781=546
     09-11 16:51:38.523  10179-10209/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount', 1473583898523
     09-11 16:51:38.528  10179-10209/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount#ToastAndroid.show', 1473583898527
 
-cost:1473583898527-1473583896967=1560
+cost:1473583898527-1473583896967=1560ms
 
 **第二次测试**
 
@@ -407,7 +490,7 @@ cost:1473583898527-1473583896967=1560
     09-11 16:53:50.500  11260-11292/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount', 1473584030500
     09-11 16:53:50.504  11260-11292/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount#ToastAndroid.show', 1473584030503
 
-cost:1473584030503-1473584028688=1815
+cost:1473584030503-1473584028688=1815ms
 
 **第三次测试**
 
@@ -419,7 +502,7 @@ cost:1473584030503-1473584028688=1815
     09-11 17:10:22.405  18623-18657/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount', 1473585022405
     09-11 17:10:22.409  18623-18657/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount#ToastAndroid.show', 1473585022408
 
-cost:1473585022408-1473585020694=1714
+cost:1473585022408-1473585020694=1714ms
 
 **第四次测试**
 
@@ -430,9 +513,9 @@ cost:1473585022408-1473585020694=1714
     09-11 17:11:27.336  19167-19199/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount', 1473585087335
     09-11 17:11:27.340  19167-19199/com.react.smart I/ReactNativeJS﹕ '>>>react#componentDidMount#ToastAndroid.show', 1473585087339
 
-cost: 1473585087339-1473585085690=1649
+cost: 1473585087339-1473585085690=1649ms
 
-从测试结果来看, MX3 时间稳定在1500ms-1800ms之间, 明显比Nexus5要慢
+从测试结果来看, MX3 时间稳定在1500ms-1800ms之间, 明显比Nexus5要慢.
 
 
 
