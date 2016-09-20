@@ -33,9 +33,7 @@ public ReactInstanceManager.Builder setJSBundleFile(String jsBundleFile) {
 
 sdcar的文件开业读取了,那我们就可以把文件放到远程服务器, 启动后下载远程jsbundle文件到sdcard. 大概思路如下:
 
-1. 我们打好包jsbundle文件放到远程服务器
-
-https://raw.githubusercontent.com/hubcarl/smart-react-native-app/debug/app/src/main/assets/index.android.bundle
+1. 我们打好包jsbundle文件放到[远程服务器](https://raw.githubusercontent.com/hubcarl/smart-react-native-app/debug/app/src/main/assets/index.android.bundle)
 
 2. 启动React Native, 检查sdcard是否有jsbundle文件, 如果没有调用setBundleAssetName加载asset目录的jsbundle, 同时启动线程下载远程jsbundle文件到sdcard目录.
 
