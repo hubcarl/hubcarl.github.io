@@ -395,6 +395,7 @@ public class UpdateReactActivity extends Activity implements DefaultHardwareBack
 asset资源文件拷贝到sdcard, 当然实际实现时, 资源文件和jsbundle文件可以都应该放到远程服务器.
 
 ```java
+
 package com.react.smart.utils;
 
 import android.content.Context;
@@ -443,6 +444,6 @@ public class FileAssetUtils {
         }
     }
 }
+```
 
-
-最后附上github项目地址:https://github.com/hubcarl/smart-react-native-app
+最后附上github项目地址:[https://github.com/hubcarl/smart-react-native-app](https://github.com/hubcarl/smart-react-native-app),欢迎follow!
