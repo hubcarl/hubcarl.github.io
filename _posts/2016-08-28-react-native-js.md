@@ -477,6 +477,10 @@ static void makeJavaCall(JNIEnv* env, ExecutorToken executorToken, jobject callb
 
 ## 三. JavaScript调用Native回调和返回值
 
+
+![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/rn-js-native.png)
+
+
 从编写自定义插件中，我们知道了JS如何调用Native方法，但 @ReactMethod 注解的方法的返回值只能是void，现在JS端想从Native获取一些配置信息或者知道调用端是否成功的一些返回值信息，该如何实现呢？
 
 JavaScript调用Native获取Native返回值是通过异步Callback实现的. 在JS调用Native时，会判断方法的最后两个参数，如果是function，就会把函数放到callback数值中, key为自增的callbackId，同时把callbackId传递给Native。Native执行完以后，通过调用JS方法 __invokeCallback 进行回调。在react-native中定是通过Callback和Promise的接口，用来处理JavaScript调用Java方法的回调，Callback会作为ReactMethod注解方法的一个参数，Native调用JS就是通过这个Callback实现的，具体实现会在下面讲到。

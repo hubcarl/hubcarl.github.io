@@ -8,6 +8,11 @@ description:
 
 ---
 
+React Native 动态更新实际效果如下
+
+![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/react-native-update.png)
+
+
 我们知道, React Native所有的js文件都打包在一个jsbundle文件中，发布时也是打包到app里面,一般是放到asset目录.
 如是猜想是不是可以从远程下载jsbundle文件覆盖asset的jsbundle. 查资料发现asset目录是只读的,该想法行不通.
 
