@@ -10,7 +10,11 @@ description:
 
 React Native 动态更新实际效果如下
 
-![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/react-native-update.png)
+![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/react-native-update.gif)
+
+[React Native 热更新实现APK](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/react-native-update.apk)
+
+![image](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/react/react-native-update-qrcode.png)
 
 
 我们知道, React Native所有的js文件都打包在一个jsbundle文件中，发布时也是打包到app里面,一般是放到asset目录.
