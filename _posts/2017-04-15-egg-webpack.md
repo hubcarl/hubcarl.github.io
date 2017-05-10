@@ -547,8 +547,9 @@ webpack + vue 编译插件实现 [egg-webpack-vue](https://github.com/hubcarl/eg
 
 
 
-## 基于Vue多页面和单页面服务器渲染同构工程骨架项目 [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate)
+## egg+webpack+vue工程解决方案
 
+- [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate)基于Vue多页面和单页面服务器渲染同构工程骨架项目
 - [egg-view-vue](https://github.com/hubcarl/egg-view-vue) egg view plugin for vue
 - [egg-view-vue-ssr](https://github.com/hubcarl/egg-view-vue-ssr) vue server side render solution for egg-view-vue
 - [egg-webpack](https://github.com/hubcarl/egg-webpack) webpack dev server plugin for egg, support read file in memory and hot reload
