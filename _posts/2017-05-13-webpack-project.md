@@ -713,7 +713,7 @@ app.messenger.on(app.webpack.Constant.EVENT_WEBPACK_CLIENT_BUILD_STATE, data => 
 webpack + vue 编译插件实现 [egg-webpack-vue](https://github.com/hubcarl/egg-webpack-vue)
 
 
-说明: 在最开始的实现时,一直在摸索, 未来尽快满足项目, 整个功能是在一个插件[egg-vue-webpack-dev](https://github.com/hubcarl/egg-vue-webpack-dev)中实现的. 
+说明: 在最开始的实现时,一直在摸索, 为了尽快满足项目, 整个功能是在一个插件[egg-vue-webpack-dev](https://github.com/hubcarl/egg-vue-webpack-dev)中实现的. 
 随着业务稳定下来, 就对这边个插件进行了分离和重新实现, 才有了上面的三个插件, 目地是让webpack编写更简单, 扩展更容易.
 
 
@@ -874,7 +874,7 @@ npm start
 `npm start` 会自动通过`egg-webpack` 启动编译流程, 无需单独运行`npm run build-dev` 或 `npm run build-prod`. 启动流程效果如下:
 
 
-![npm start启动](https://github.com/hubcarl/egg-vue-webpack-boilerplate/blob/master/doc/images/webpack.png)
+![npm start启动](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/webpack/webpack.png)
 
 访问: http://127.0.0.1:7001
 
@@ -883,12 +883,15 @@ npm start
 
 - 基于vue + axios 多页面服务器客户端同构入口: http://127.0.0.1:7001
 
-![多页面服务器渲染](https://github.com/hubcarl/egg-vue-webpack-boilerplate/blob/master/doc/images/vue-mutil-page.png)
+![多页面服务器渲染](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/webpack/vue-mutil-page.png)
 
 
 - 基于vue + vuex + vue-router + axios 单页面服务器客户端同构入口: http://127.0.0.1:7001/app
 
-![单页面服务器](https://github.com/hubcarl/egg-vue-webpack-boilerplate/blob/master/doc/images/vue-single-page.png)
+![单页面服务器](https://raw.githubusercontent.com/hubcarl/hubcarl.github.io/master/_posts/images/webpack/vue-single-page.png)
+
+
+## 关于性能和优化以及问题 (单独总结)
 
 
 ## egg+webpack+vue 依赖
