@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: fis系列-swig自定义标签之widget
 date: 2016-03-19
 categories: blog

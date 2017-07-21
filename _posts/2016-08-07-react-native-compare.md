@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: React Native, Hybrid App, H5 简单对比分析
 date: 2016-08-07
 categories: blog

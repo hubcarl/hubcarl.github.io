@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+{% include webpack/head.html %}
+<body>
+<div class="nav">
+    {% include webpack/nav.html %}
+</div>
+
+<div id="container" class="container">
+    <div class="page-main markdown-body">
+        {{ content }}
+    </div>
+
+</div>
+{% include webpack/footer.html %}
+</body>
+</html>

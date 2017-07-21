@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: React Native 自定义插件
 date: 2016-08-13
 categories: blog

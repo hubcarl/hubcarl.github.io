@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: React Native代码执行跟踪和调试
 date: 2016-09-04
 categories: blog

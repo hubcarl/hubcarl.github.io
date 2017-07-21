@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: React Native Android源码解读和交互原理分析
 date: 2016-08-28
 categories: blog

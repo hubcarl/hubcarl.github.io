@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: React Native Android APK包大小分析
 date: 2016-08-21
 categories: blog

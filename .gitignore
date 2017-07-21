@@ -1,0 +1,16 @@
+npm-debug.log
+package-lock.json
+.DS_Store
+*.swp
+artifacts.json
+build.tmp
+
+/public/
+node_modules/
+coverage/
+logs/
+.idea/
+run/
+private/
+zip/
+_site

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: AngularJS实战总结
 date: 2014-10-07
 categories: blog

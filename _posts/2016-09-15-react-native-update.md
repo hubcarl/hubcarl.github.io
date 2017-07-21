@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: React Native 热更新实现
 date: 2016-09-15
 categories: blog

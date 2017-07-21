@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: koa和egg项目webpack内存编译和热更新实现
 date: 2017-04-15
 categories: blog

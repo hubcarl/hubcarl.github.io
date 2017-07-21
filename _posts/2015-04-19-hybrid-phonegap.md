@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: hybrid系列-phonegap android框架详解
 date: 2015-04-19
 categories: blog

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: AngularJS 全局scope与Isolate scope通信
 date: 2014-08-04
 categories: blog

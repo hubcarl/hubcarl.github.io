@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: hybrid系列-Cordova android框架详解
 date: 2015-04-11
 categories: blog

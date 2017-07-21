@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default/post
 title: 基于webpack的前端工程解决方案和egg+vue服务端客户端渲染项目实践
 date: 2017-04-15
 categories: blog
