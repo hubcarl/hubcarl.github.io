@@ -60,6 +60,7 @@ app.use(hotMiddleware);
 
 #### 3.2.1 Egg项目启动
 
+![image](/img/webpack/npm-start.png)
 
 - 首先执行`node index.js` 或者 `npm start` 启动 Egg应用
 
@@ -83,15 +84,16 @@ app.vue.renderBundle = (name, context, options) => {
 
 - Worker 监听Webpack编译状态, 检测Webpack 编译是否完成, 如果未完成, 显示Webpack 编译Loading, 如果编译完成, 自动打开浏览器
 
-- Webpack编译完成, Agent 发送消息给Worker,  Worker坚持到编译完成, 自动打开浏览器, Egg服务正式可用
+- Webpack编译完成, Agent 发送消息给Worker,  Worker检测到编译完成, 自动打开浏览器, Egg服务正式可用
 
 
 #### 3.2.2 服务端渲染页面访问
 
+![image](/img/webpack/egg-webpack-vue-ssr.png)
 
 - 浏览器输入URL请求地址, 然后Egg接收到请求, 然后进入Controller
   
-- Node层获取数据后, 进入模板render流程
+- Node层获取数据后(Node通过http/rpc方式调用Java后端API数据接口), 进入模板render流程
   
 - 进入render流程后, 通过worker进程通过调用`app.messenger.sendToAgent` 发送文件名给Agent进程, 同时通过`app.messenger.on`启动监听监听agent发送过来的消
 

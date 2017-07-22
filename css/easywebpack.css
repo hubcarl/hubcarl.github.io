@@ -1254,6 +1254,8 @@ aside ul li a {
   color: #585858;
   height: 30px;
   line-height: 30px;
+  padding: 4px 16px;
+
 }
 aside ul li a:hover {
   color: #22ab28;
@@ -1626,4 +1628,13 @@ aside li {
   text-align: center;
   font-size: 20px;
   margin-top: 40px;
+}
+
+.menu-active{
+  background: #f8f8f8;
+  color: #22ab28 !important;
+}
+
+.mani-menu-active {
+  color: #22ab28 !important;
 }
