@@ -192,7 +192,7 @@ entry.exclude {Array|String} 排除的目录或者文件
 - Object: 生成, 同时与默认配置选项合并
 
 
-### addLoader(test, loader, option, ex) 
+### addLoader(test, loader, option, ex, replace = true) 
 
 > 添加Webpack loader, 支持覆盖
 
@@ -204,6 +204,8 @@ entry.exclude {Array|String} 排除的目录或者文件
 - option {Object OR Function} 当test为正则时, loader 扩展信息, 可以为Function, 调用create方式动态创建loader
 
 - ex 扩展信息, loader 进行merge操作, 支持 fn(Function)配置
+
+- replace 有相同的loader是否替换, 默认为替换, 替换规则为对test, loader 进行比较.
 
 > 方式一: 直接按照方法参数loader配置
 
@@ -259,6 +261,59 @@ this.addLoader({
 });
 ```
 
+### updateLoader(loader)  
+
+> loader更新, 替换规则如下:
+
+```js
+ findLoaderIndex(loader) {
+    return this.loaders.findIndex(item => {
+      if (Utils.isString(loader) && item.loader) {
+        return require.resolve(loader) === require.resolve(item.loader);
+      } else if (loader.test && loader.loader && item.loader) {
+        return item.test && loader.test.toString() === item.test.toString() && require.resolve(loader.loader) === require.resolve(item.loader);
+      } else if (loader.test && item.test) {
+        return loader.test.toString() === item.test.toString();
+      } else if (loader.loader && item.loader) {
+        return require.resolve(loader.loader) === require.resolve(item.loader);
+      }
+      return false;
+    });
+  }
+
+  updateLoader(loader) {
+    const loaderIndex = this.findLoaderIndex(loader);
+    if (loaderIndex > -1) {
+      this.loaders[loaderIndex] = merge(this.loaders[loaderIndex], loader);
+    }
+  }
+
+```
+
+> 更新举例 
+
+- this.updateLoader({loader: 'url-loader',  query: {limit: 1024})
+
+
+### deleteLoader(loader)
+
+> loader 删除, 删除规则如下:
+
+```js
+deleteLoader(loader) {
+  const loaderIndex = this.findLoaderIndex(loader);
+  if (loaderIndex > -1) {
+    return this.loaders.splice(loaderIndex, 1);
+  }
+  return null;
+}
+```
+> 删除举例 
+
+- this.deleteLoader('json-loader')
+- this.deleteLoader({loader: 'json-loader'})
+- this.deleteLoader({test: '/\.json$/', loader: 'json-loader'})
+
 
 ### addPlugin(clazz, args, enable, replace = true)
 
@@ -301,6 +356,52 @@ this.addPlugin(new webpack.optimize.UglifyJsPlugin({
  });
 ```
 
+### updatePlugin(loader)  
+
+> loader更新, 替换规则如下:
+
+```js
+
+findPluginIndex(plugin) {
+  const pluginName = Utils.isObject(plugin) ? plugin.constructor && plugin.constructor.name : plugin.name;
+  return this.plugins.findIndex(item => {
+    const configPlugin = item.clazz || item;
+    const itemPluginName = Utils.isObject(configPlugin) ? configPlugin.constructor && configPlugin.constructor.name : configPlugin.name;
+    return itemPluginName === pluginName;
+  });
+}
+
+updatePlugin(plugin, args) {
+  const pluginIndex = this.findPluginIndex(plugin);
+  if (pluginIndex > -1) {
+     this.plugins[pluginIndex] = merge(this.plugins[pluginIndex], { clazz: plugin, args });
+  }
+}
+
+```
+
+> 更新举例 
+
+- this.updatePlugin(webpack.optimize.UglifyJsPlugin, {compress: {warnings: false,dead_code: true})
+- this.updatePlugin(new webpack.optimize.UglifyJsPlugin, {compress: {warnings: false,dead_code: true})
+
+### deletePlugin(plugin)
+
+> plugin 删除, 删除规则如下:
+
+```js
+deletePlugin(plugin) {
+  const pluginIndex = this.findPluginIndex(plugin);
+  if (pluginIndex > -1) {
+    return this.plugins.splice(pluginIndex, 1);
+  }
+  return null;
+}
+```
+> 删除举例 
+
+- this.deletePlugin(webpack.HotModuleReplacementPlugin)
+- this.deletePlugin(new webpack.HotModuleReplacementPlugin())
 
 ### addPack(name = {}, value, useCommonsChunk = false)
 

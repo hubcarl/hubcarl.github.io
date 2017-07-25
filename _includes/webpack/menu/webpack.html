@@ -17,14 +17,43 @@
                 <li><a href="{{ site.baseurl }}/easywebpack/webpack/install">安装使用</a></li>
             </ul>
         </dd>
-        <dt>配置与API</dt>
+        <dt>默认配置</dt>
         <dd>
             <ul>
                 <li><a href="{{ site.baseurl }}/easywebpack/webpack/config">配置参数</a></li>
                 <li><a href="{{ site.baseurl }}/easywebpack/webpack/loader">Loader</a></li>
                 <li><a href="{{ site.baseurl }}/easywebpack/webpack/plugin">Plugin</a></li>
-                <li><a href="{{ site.baseurl }}/easywebpack/webpack/api">API</a></li>
             </ul>
+        </dd>
+        <dt>API</dt>
+        <dd>
+            <ul id="easywebpack-api">
+
+            </ul>
+            <script>
+                function createLinkElement(name){
+                    var a = document.createElement("a");
+                    a.href = '#';
+                    a.name = name;
+                    a.innerHTML = name;
+                    a.style.visibility = "hidden";
+                    return a;
+                }
+                var apiContainer = document.getElementById('markdown-body');
+                var apiShowContainer = document.getElementById('easywebpack-api');
+                if (apiContainer && apiShowContainer) {
+                    var apiH3List = apiContainer.getElementsByTagName('h3');
+                    var apiLiList = [];
+                    for (var i = 0, len = apiH3List.length; i < len; i++) {
+                        var arr = apiH3List[i].innerText.split('(');
+                        if (arr.length) {
+                            apiLiList.push('<li><a href="#' + arr[0] + '">' + arr[0] + '</a></li>');
+                            apiH3List[i>0 ? i-1: i].appendChild(createLinkElement(arr[0]));
+                        }
+                    }
+                    apiShowContainer.innerHTML = apiLiList.join('');
+                }
+            </script>
         </dd>
         <dt>解决方案</dt>
         <dd>
@@ -37,7 +66,7 @@
         <dt>编译工具</dt>
         <dd>
             <ul>
-                <li><a href="{{ site.baseurl }}/easywebpack/webpack/cli">easywebpack-cli</a></li>
+                <li><a target="_blank" href="https://github.com/hubcarl/easywebpack-cli">easywebpack-cli</a></li>
                 <li><a href="{{ site.baseurl }}/easywebpack/webpack/tool">webpack-tool</a></li>
             </ul>
         </dd>
