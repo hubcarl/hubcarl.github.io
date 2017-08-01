@@ -17,7 +17,7 @@ npm i easywebpack-vue --save-dev
 
 ![image](/img/webpack/easywebpack-build.png)
 
-看似复杂, 其实文件名里面都是空, 这里只是说明一个完整的构建. client表示浏览器运行模式,  server表示Node端运行模式(服务器渲染), 后面会支持cli生成.
+看似复杂, 其实文件名里面都是空, 这里只是说明一个完整的构建. client表示浏览器运行模式,  server表示Node端运行模式(服务器渲染).
 项目地址:[egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate)
 
 

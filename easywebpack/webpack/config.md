@@ -19,13 +19,20 @@ class WebpackBaseBuilder{
 ```js
 {
  baseDir: process.cwd(),            // 项目根目录
+ env: process.env.BUILD_ENV,        // 编译模式, 支持 `dev`, `test`, `prod`, 默认开发
+ egg: true,                         // egg框架特有, 如果为true, 会自动初始化egg规范配置
+ type: ['client', 'server']         // Webpack构建类型, 可以指只构建 client 或者 server, 或者全部, 默认全部
+                                       其中 Vue 和 React 为 'client' 和 'server', Weex 为 'weex' 和 'web'
  buildPath: 'public',               // webpack编译文件存放目录
  publicPath: '/public/',            // webpack内存编译访问路径
  entry:{                            // 前端后端渲染entry配置
    include: ['app/web/page']        // webpack entry 自动读取目录
    exclude: ['app/web/page/test']   // 过滤目录, 支持正则
+   loader: {                        // entry loader 模板, 根据 type 自动寻找模板
+     client: 'app/web/framework/entry/loader.js'
+   }
  },
- html:{                             // 前端生成Html页面entry配置
+ html:{                             // 生成Html页面entry配置
     include: ['app/web/test']       // webpack entry 自动读取目录
     exclude: ['app/web/html/test']  // 过滤目录, 支持正则
     template: 'app/web/view/layout.html', // 生成html模板
@@ -41,7 +48,14 @@ class WebpackBaseBuilder{
  },                         
  cdn: {                             // cdn 配置
   url: 'xxxx'
- },                           
+ }, 
+ create(){                          // 自定义扩展, 可以用 this
+    if(this.type ==='client'){      // 对浏览器模式进行扩展
+      // ...
+    }else if(this.type ==='server'){ // 对服务端配置进行扩展
+      // ...    
+    }
+ }                          
  manifest: true,                    // 生成 manifest
  buildConfig: true,                 // 生成 配置文件
  hot: false,                        // 热更新 
@@ -56,6 +70,9 @@ class WebpackBaseBuilder{
 
 可以直接通过 `config` 配置完成Webpack Builder构建, 也可以通过调用WebpackBuilder相关方法单独设置.
 
+- 如果以上配置再加上 `framework` 配置(支持 `vue`, `react`, `weex`), 就可以直接通过 `easywebpack-cli` 完成构建
+
+- 如果直接使用 `easywebpac-vue`,  `easywebpac-react`,  `easywebpac-weex` 进行配置编写, 以上配置可以通过 API 完成, 配置可以简化.
   
 ## 3. easywebpack 内置默认配置  
 

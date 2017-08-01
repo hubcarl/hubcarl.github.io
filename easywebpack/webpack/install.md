@@ -124,7 +124,9 @@ npm run build-dev
 npm run build-prod
 ```
 
-### 4. Configuration
+### 4. 解决方案
 
 
-[easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) and [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git)
+- [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) 
+- [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git) 
+- [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git)

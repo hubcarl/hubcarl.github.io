@@ -3,7 +3,7 @@ layout: webpack/vue
 description: "专注于技术,切不能沉迷于技术!"
 ---
 
-## 基于Egg+Vue+Webpack本地开发构建流程
+## 基于Egg+Vue+Webpack构建流程
 
 
 ##  1. 背景
@@ -87,7 +87,7 @@ app.vue.renderBundle = (name, context, options) => {
 - Webpack编译完成, Agent 发送消息给Worker,  Worker检测到编译完成, 自动打开浏览器, Egg服务正式可用
 
 
-#### 3.2.2 服务端渲染页面访问
+#### 3.2.2 本地开发服务端渲染页面访问
 
 ![image](/img/webpack/egg-webpack-vue-ssr.png)
 
@@ -135,5 +135,13 @@ app.vue.renderBundle = (name, context, options) => {
 - 最后, 模板渲染完成, 服务器输出HTML内容给浏览器.
 
 
+### 4. 发布模式构建流程和运行模式
 
+- Webpack通过本地构建或者ci直接构建好服务端和客户端渲染文件到磁盘
+
+- Egg render直接读取本地文件, 然后渲染成HTML
+
+- 根据manfifest.json 文件注入 jss/css资源依赖注入
+
+- 模板渲染完成, 服务器输出HTML内容给浏览器.
 

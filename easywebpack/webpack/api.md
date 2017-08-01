@@ -192,7 +192,7 @@ entry.exclude {Array|String} 排除的目录或者文件
 - Object: 生成, 同时与默认配置选项合并
 
 
-### addLoader(test, loader, option, ex, replace = true) 
+### addLoader(test, loader, option, ex, action = 'append') 
 
 > 添加Webpack loader, 支持覆盖
 
@@ -205,7 +205,7 @@ entry.exclude {Array|String} 排除的目录或者文件
 
 - ex 扩展信息, loader 进行merge操作, 支持 fn(Function)配置
 
-- replace 有相同的loader是否替换, 默认为替换, 替换规则为对test, loader 进行比较.
+- action 添加loader行为, 支持 'append', 'merge', 'replace', 默认为'append', 替换规则为对test, loader 进行比较.
 
 > 方式一: 直接按照方法参数loader配置
 

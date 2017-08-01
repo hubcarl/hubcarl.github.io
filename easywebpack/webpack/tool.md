@@ -4,6 +4,22 @@ description: "专注于技术,切不能沉迷于技术!"
 ---
 
 
+## Feature
+
+Webpack Build Tool, support features:
+
+- Webpack build server, file memory, hot update.
+
+- Webpack build file to disk.
+
+- Support webpack build result ui view.
+
+## Install
+
+```bash
+$ npm i webpack-tool --save-dev
+```
+
 ## Webpack Build and Server Tool
  
 ```js 
