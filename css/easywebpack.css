@@ -1624,10 +1624,14 @@ aside li {
   text-align: center;
   font-size: 50px;
 }
+.easy .b-version{
+  text-align: center;
+  font-size: 16px;
+}
 .easy .b-desc{
   text-align: center;
   font-size: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .menu-active{
