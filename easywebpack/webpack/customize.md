@@ -3,10 +3,10 @@ layout: webpack/webpack
 description: "专注于技术,切不能沉迷于技术!"
 ---
 
-## loader 配置
+## 1.配置loader
 
 
-### 新增loader
+#### 新增loader
 
 ```js
 {
@@ -19,7 +19,7 @@ description: "专注于技术,切不能沉迷于技术!"
 }
 ```
 
-### 禁用loader
+#### 禁用loader
 
 ```js
 {
@@ -29,13 +29,9 @@ description: "专注于技术,切不能沉迷于技术!"
 }
 ```
 
-### sass/less/stylus配置
-
-- 默认 sass/less/stylus 是开启的
-
 #### 禁用sass/less/stylus
 
-禁用后, 对应的 npm module 不会安装
+- 默认 sass/less/stylus 是开启的, 禁用后, 对应的 npm module 不会安装
 
 ```js
 {
@@ -65,12 +61,9 @@ loader options 属性都可以通过 `options` 来配置
 }
 ```
 
-### eslint 扩展
-
-- eslint默认是开启的
-
 #### 禁用eslint
 
+- eslint默认是开启的
 
 ```js
 {
@@ -79,7 +72,6 @@ loader options 属性都可以通过 `options` 来配置
  }
 }
 ```
-
 
 #### eslint 配置自动fix
 
@@ -96,11 +88,9 @@ loader options 属性都可以通过 `options` 来配置
 }
 ```
 
-### loader use 覆盖
+#### eslint 和 babel合并
 
 - loader.use 涉及循序问题, 如果配置了use, 会覆盖原有配置
-
-#### eslint 和 babel合并
 
 ```js
 {
@@ -121,7 +111,7 @@ loader options 属性都可以通过 `options` 来配置
 ```
 
 
-## plugin 配置
+## 2. 配置plugin
 
 - plugin 支持 根据环境 `dev`,`test`,`prod` 配置是否启用, 比如内置的热更新插件
 
@@ -137,7 +127,7 @@ exports.hot = {
 - 插件参数统一通过 `args` 配置
 
 
-### 添加 `env` 插件
+#### 添加 `env` 插件
 
 ```js
 {
@@ -153,7 +143,7 @@ exports.hot = {
 }
 ```
 
-### 禁用 `env` 插件
+#### 禁用 `env` 插件
 
 ```js
 {
@@ -163,7 +153,7 @@ exports.hot = {
 }
 ```
 
-### `imagemin-webpack-plugin` 禁用图片压缩
+#### 禁用图片压缩 `imagemin-webpack-plugin`
 
 图片压缩插件在某些机器上面安装不了, 这个时候可以禁用, npm install 的时候不会安装该插件
 
@@ -183,7 +173,7 @@ exports.hot = {
 }
 ````
 
-### 通过 `webpack.DefinePlugin` 添加常量
+#### 添加常量 `webpack.DefinePlugin`
 
 ```js
 {
@@ -199,7 +189,7 @@ exports.hot = {
 ```
 
 
-### 压缩插件 `webpack.optimize.UglifyJsPlugin` 添加配置信息
+#### 压缩插件 `webpack.optimize.UglifyJsPlugin` 添加配置信息
 
 ```js
 {
@@ -216,7 +206,7 @@ exports.hot = {
 ```
 
 
-### `webpack.optimize.CommonsChunkPlugin` 配置
+#### 公共代码配置 `webpack.optimize.CommonsChunkPlugin`
 
 ```js
 {
@@ -231,7 +221,7 @@ exports.hot = {
 ```
 
 
-## 扩展配置距离
+## 3.扩展配置举例
 
 
 - 下面是一份 Webpack + Vue 的构建配置.
