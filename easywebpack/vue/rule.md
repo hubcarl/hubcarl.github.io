@@ -10,7 +10,7 @@ description: "专注于技术,切不能沉迷于技术!"
 
 - Webpack构建服务端(Node) JSBundle运行文件, 构建的服务端渲染模板文件位置 `${app_root}/app/view`
 - Webpack构建浏览器JSBundle运行文件, 构建的前端资源(js/css/image)文件位置 `${app_root}/public` 
-- Webpack狗的 `manifest.json` 和 `buildConfig.js` 文件位置 `${app_root}/config` 目录
+- Webpack构建的 `manifest.json` 和 `buildConfig.js` 文件位置 `${app_root}/config` 目录
 - easywebpack-cli 构建配置文件 `webpack.config.js` 放到项目根目录`${app_root}/webpack.config.js`
 - Vue代码文件`${app_root}/app/web` 下面, 主要包括 `asset`, `component`, `framework`, `page`, `store`, `view` 等目录
 
