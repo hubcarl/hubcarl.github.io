@@ -56,11 +56,7 @@ npm start
 ```js
 `config/config.local.js`
 exports.webpack = {
-webpackConfigList: [
-require(path.join(app.baseDir, 'build/client')), // http://127.0.0.1:9001
-require(path.join(app.baseDir, 'build/server')), // http://127.0.0.1:9002
-require(path.join(app.baseDir, 'build/html'))    // http://127.0.0.1:9003
-]
+ webpackConfigList: EasyWebpack.getWebpackConfig()
 };
 ```
 
@@ -74,16 +70,13 @@ require(path.join(app.baseDir, 'build/html'))    // http://127.0.0.1:9003
 npm start
 
 // client 和 server 单独编译(不会在egg里面启动, 纯粹的webpack编译)
-npm run view
-
-// html单独编译(不会在egg里面启动, 纯粹的webpack编译)
-npm run html
+easywebpack build prod
 
 // 编译文件到磁盘打包使用(发布测试环境)
-npm run build-dev
+easywebpack build dev
 
 // 编译文件到磁盘打包使用(发布正式环境)
-npm run build-prod
+easywebpack build prod
 
 ```
 

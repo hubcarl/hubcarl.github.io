@@ -38,12 +38,6 @@ module.exports = {
     include: 'app/web/page',
     exclude: ['app/web/page/test', 'app/web/page/html']
   },
-  html: {
-    template: 'app/web/view/layout.html',
-    buildDir: 'html',
-    include: ['app/web/page/html'],
-    exclude: []
-  },
   logger: {
     enable: false,
     all: false,
@@ -74,13 +68,6 @@ const WebpackBaseBuilder = WebpackBuilder => class extends WebpackBuilder {
     this.setAlias('framework', 'app/web/framework');
     this.setAlias('store', 'app/web/store');
     this.setAlias('app', 'app/web/framework/vue/app.js');
-    this.setStyleLoaderOption({
-      sass: {
-        options: {
-          includePaths: [path.join(this.config.baseDir, 'app/web/asset/style')],
-        }
-      }
-    });
   }
 };
 module.exports = WebpackBaseBuilder;
@@ -118,7 +105,6 @@ const WebpackWebBaseBuilder = require('../base');
 class WebpackWebClientBaseBuilder extends WebpackWebBaseBuilder(WebpackBaseBuilder(VueWebpack.WebpackClientBuilder)) {
   constructor(config) {
     super(config);
-    this.setDefine({ isBrowser: true });
     this.addEntry('vendor', ['vue', 'axios']);
     this.addPack('pack/inline', 'app/web/framework/inject/pack-inline.js');
   }
@@ -137,8 +123,6 @@ const WebpackClientBaseBuilder = require('./base');
 class ClientDevBuilder extends WebpackClientBaseBuilder {
   constructor(config) {
     super(config);
-    this.setProxy(true);
-    this.setDefine({ PROD: false });
     this.addEntry('vendor', ['vconsole']);
   }
 }
@@ -196,11 +180,7 @@ const WebpackWebBaseBuilder = require('../base');
 class WebpackWebServerBaseBuilder extends WebpackWebBaseBuilder(WebpackBaseBuilder(VueWebpack.WebpackServerBuilder)) {
   constructor(config) {
     super(config);
-    this.setPrefix('');
-    this.setBuildPath('app/view');
-    this.setPublicPath('client', false);
     this.setMiniImage(false);
-    this.setDefine({ isBrowser: false });
   }
 }
 module.exports = WebpackWebServerBaseBuilder;
@@ -277,11 +257,12 @@ const webpackConfig = [clientConfig, serverConfig];
 
 if(process.env.NODE_SERVER){
   // 编译和运行
-  easyWebpack.server(webpackConfig);
+  easyWebpack.server(webpackConfig, {}, () =>{
+
+  });
 }else{
-  // 编译
-  easyWebpack.build(webpackConfig, () => {
-    console.log('build success');
+  easyWebpack.build(webpackConfig, {}, () =>{
+
   });
 }
 

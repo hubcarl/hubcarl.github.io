@@ -32,7 +32,6 @@ const WebpackServerBuilder = EasyWebpack.WebpackServerBuilder;
 const webpack = EasyWebpack.webpack;
 const merge = EasyWebpack.merge;
 const Utils = EasyWebpack.Utils;
-const Loader = EasyWebpack.Loader;
 ```
 
 #### 2.3 Webpack Building
@@ -44,13 +43,15 @@ const WebpackTool = EasyWebpack.WebpackTool;
 
 // webpack build file to dist
 const build = EasyWebpack.build;
-build([clientConfig, serverConfig], () => {
+build([clientConfig, serverConfig], (),  () => {
   console.log('wepback vue build finished');
 });
 
 // webpack building memory and start build reuslt ui navigation
 const server = EasyWebpack.server;
-server([clientConfig, serverConfig]);
+server([clientConfig, serverConfig], (),  () => {
+  console.log('wepback vue build finished');
+});
 ```
 
 ### 3. 扩展实现
@@ -111,9 +112,9 @@ EasyWebpack.build([clientConfig, serverConfig], () => {
 ```bash
 {
   "scripts": {
-      "build-dev": "NODE_ENV=development node build",
-      "build-prod": "NODE_ENV=production node build"
-   }
+    "build-dev": "NODE_ENV=development node build",
+    "build-prod": "NODE_ENV=production node build"
+  }
 }
 ```
 

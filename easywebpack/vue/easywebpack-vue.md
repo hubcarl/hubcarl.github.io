@@ -16,11 +16,6 @@ const WebpackBaseBuilder = WebpackBuilder => class extends WebpackBuilder {
   constructor(config) {
     super(config);
     this.setExtensions('.vue');
-    this.setStyleLoaderName('vue-style-loader');
-    this.addLoader(/\.vue$/, 'vue-loader', () => ({
-      options: EasyWebpack.Loader.getStyleLoaderOption(this.getStyleConfig())
-    }));
-    this.addLoader(/\.html$/, 'vue-html-loader');
   }
 };
 module.exports = WebpackBaseBuilder;
@@ -58,7 +53,6 @@ class WebpackServerBuilder extends WebpackBaseBuilder(EasyWebpack.WebpackServerB
   constructor(config) {
     super(config);
     this.setAlias('vue', 'vue/dist/vue.runtime.common.js', false);
-    this.addPlugin(webpack.DefinePlugin, { 'process.env.VUE_ENV': '"server"' });
   }
 }
 module.exports = WebpackServerBuilder;

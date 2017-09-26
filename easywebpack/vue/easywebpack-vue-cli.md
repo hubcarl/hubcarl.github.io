@@ -29,16 +29,9 @@ const path = require('path');
 module.exports = {
   egg: true,
   framework: 'vue', // 指定用easywebpack-vue 解决方案, 请在项目中安装该依赖
-  commonsChunk: ['vendor'],
   entry: {
     include: 'app/web/page',
     exclude: ['app/web/page/html']
-  },
-  html: {
-    include: 'app/web/page/html',
-    template: 'app/web/view/layout.html',
-    buildDir: 'html',
-    options: {}
   },
   alias: {
     asset: 'app/web/asset',
@@ -47,13 +40,17 @@ module.exports = {
     framework: 'app/web/framework',
     store: 'app/web/store'
   },
-  packs: {
-    'pack/inline': ['app/web/framework/inject/pack-inline.js']
+  create() { // 公共配置扩展
+
   },
-  create() {
-    if (this.type === 'client') {
-      this.addEntry('vendor', ['vue', 'axios']);
-    }
+  onClient(){ // client api配置扩展
+     this.addEntry('vendor', ['vue', 'axios']);
+  },
+  onServer(){ // server api配置扩展
+
+  },
+  done(){ // 编译完成回调
+
   }
 };
 

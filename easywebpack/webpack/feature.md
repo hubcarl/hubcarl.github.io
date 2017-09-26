@@ -5,6 +5,8 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ## 特性支持
 
+![image](/img/webpack/easywebpack-fn.png)
+
 - 采用 ES6 class extends 继承方式实现, 内置基础配置, 简化配置
 
 - 单页面和多页面构建支持, 自动根据目录遍历
@@ -27,7 +29,11 @@ description: "专注于技术,切不能沉迷于技术!"
 
 - 支持 Webpack 单独启动 Server 构建和UI编译导航 
 
-- 支持根据 `.jsx` 或者 `.vue` 文件自动构建 Webpack entry 
+- 支持根据 `.jsx` 或者 `.vue` 文件自动构建 Webpack entry
+
+- 支持 eslint, postcss
+
+- 支持 loader 和  plugin npm module 动态安装
 
 ## 解决方案支持
 
@@ -37,8 +43,5 @@ description: "专注于技术,切不能沉迷于技术!"
 - 已实现基于 Egg + Vue 服务端和客户端渲染项目骨架,支持单页面和多页面
 - 已实现基于 Egg + React 服务端和客户端渲染项目骨架,支持单页面和多页面
 - 已实现基于 Weex Native 端和 Web 端构建解决方案渲染项目骨架
-- 已实现 `easywebpack-cli` 构建工具
+- 已实现 `easywebpack-cli` 构建工具支持初始化构建模板和项目初始化
 
-## 计划支持
-
-- `easywebpack-cli` 构建工具支持初始化构建模板和项目初始化
