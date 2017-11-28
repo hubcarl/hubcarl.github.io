@@ -1,9 +1,9 @@
 ---
-layout: webpack/vue
+layout: webpack/html
 description: "专注于技术,切不能沉迷于技术!"
 ---
 
-## 基于 `easywebpack-cli` 模式构建Vue前端渲染项目
+## 基于 `easywebpack-cli` 模式构建 HTML 纯静态页面项目
 
 ### 一. 全局安装 `easywebpack-cli` 插件
 
@@ -21,20 +21,15 @@ npm i easywebpack-cli  -g
 ```js
 const path = require('path');
 module.exports = {
-  type:'client',  // 只构建前端渲染模式, 如果要构建Node运行文件, 这里不用配置
-  framework: 'vue', // 指定用easywebpack-vue 解决方案, 请在项目中安装该依赖
+  framework: 'html', // 指定用easywebpack-html 解决方案, 请在项目中安装该依赖
   entry: {
-    include: 'page',
-    exclude: ['page/test']
+    include: 'page'
   },
   alias: {
     asset: 'asset',
     component: 'component',
     framework: 'framework',
     store: 'store'
-  },
-  create() { // 公共配置扩展
-     this.addEntry('vendor', ['vue', 'axios']);
   },
   done(){ // 编译完成回调
 
@@ -48,37 +43,37 @@ module.exports = {
 ### 三. 单独获取配置
 
 ```js
-const VueEasyWebpack = require('easywebpack-vue');
-const webpackConfig = VueEasyWebpack.getWebpackConfig();
+const EasyWebpack = require('easywebpack-html');
+const webpackConfig = EasyWebpack.getWebpackConfig();
 ```
 
 ### 四. 编译文件
 
 ```bash
-easywebpack build dev
+easy build dev
 
-easywebpack build test
+easy build test
 
-easywebpack build prod
+easy build prod
 ```
 
 ### 五. 直接运行
 
 ```bash
-easywebpack server dev
+easy server dev
 
-easywebpack server test
+easy server test
 
-easywebpack server prod
+easy server prod
 ```
 
 
 运行完成自动打开编译结果页面 :  http://127.0.0.1:8888/debug
 
-![image](/img/webpack/easywebpack-build-nav.png)
+![image](/img/webpack/html-build-nav.png)
 
 
-### 六. 前端项目初始化
+### 六. 直接 `easywebpack-cli` 项目初始化
 
 - 全局安装 `easywebpack-cli` 插件
 
@@ -86,3 +81,9 @@ easywebpack server prod
 npm i easywebpack-cli  -g
 ```
 - 请通过 `easywebpack init` 命令初始化骨架项目, 根据提示选择对应的项目类型即可.
+
+
+
+### 七. Github 骨架项目
+
+[easywebpack-multiple-html-boilerplate](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate)

@@ -28,24 +28,12 @@ npm i easywebpack-vue --save-dev
 ```js
 const BUILD_ENV = process.env.BUILD_ENV;
 const path = require('path');
-const baseDir = path.join(__dirname, '..');
 
 module.exports = {
-  baseDir,
   env: BUILD_ENV,
-  commonsChunk: ['vendor'],
   entry: {
     include: 'app/web/page',
-    exclude: ['app/web/page/test', 'app/web/page/html']
-  },
-  logger: {
-    enable: false,
-    all: false,
-    keyword: false,
-    config: true,
-    option: false,
-    loader: false,
-    plugin: false
+    exclude: ['app/web/page/test']
   }
 };
 
@@ -106,7 +94,6 @@ class WebpackWebClientBaseBuilder extends WebpackWebBaseBuilder(WebpackBaseBuild
   constructor(config) {
     super(config);
     this.addEntry('vendor', ['vue', 'axios']);
-    this.addPack('pack/inline', 'app/web/framework/inject/pack-inline.js');
   }
 }
 module.exports = WebpackWebClientBaseBuilder;

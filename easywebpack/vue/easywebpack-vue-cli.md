@@ -27,7 +27,6 @@ npm i easywebpack-cli  -g
 
 const path = require('path');
 module.exports = {
-  egg: true,
   framework: 'vue', // 指定用easywebpack-vue 解决方案, 请在项目中安装该依赖
   entry: {
     include: 'app/web/page',

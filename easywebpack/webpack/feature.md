@@ -35,8 +35,14 @@ description: "专注于技术,切不能沉迷于技术!"
 
 - 支持 loader 和  plugin npm module 动态安装
 
-## 解决方案支持
+## easywebpack 解决方案
 
+- [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) Vue 前端和服务端构建解决方案 
+- [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git) React 前端和服务端构建解决方案
+- [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git) Weex Native 端和Web端构建解决方案
+- [easywebpack-html](https://github.com/hubcarl/easywebpack-html.git) 纯静态 HTML 页面构建解决方案, 支持 nunjucks 模板 
+
+- 已实现纯静态HTML页面构建解决方案 `easywebpack-html`
 - 已实现 Vue 前端和服务端构建解决方案 `easywebpack-vue`
 - 已实现 React 前端和服务端构建解决方案 `easywebpack-react`
 - 已实现 Weex Native 端和Web端构建解决方案 `easywebpack-weex`
@@ -45,3 +51,4 @@ description: "专注于技术,切不能沉迷于技术!"
 - 已实现基于 Weex Native 端和 Web 端构建解决方案渲染项目骨架
 - 已实现 `easywebpack-cli` 构建工具支持初始化构建模板和项目初始化
 
+## 基于 easywebpack 构建的工程化项目解决方案

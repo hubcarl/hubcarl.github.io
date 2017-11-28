@@ -4,171 +4,114 @@ description: "专注于技术,切不能沉迷于技术!"
 ---
 
 
-## 内置配置 plugin
+## config.plugins 配置
+
 
 ```js
-'use strict';
-const path = require('path');
-const WebpackTool = require('webpack-tool');
-const webpack = WebpackTool.webpack;
-const chalk = require('chalk');
-const utils = require('../utils/utils');
-
-exports.npm = {
-  name: 'npm-install-webpack-plugin',
-  args: {
-    dev: true
+// ${app_root}/webpack.config.js
+module.exports = {
+  ......
+  plugins:{
+   
   }
-};
-
-exports.module = {
-  enable: true,
-  name: webpack.optimize.ModuleConcatenationPlugin
-};
-
-exports.error = {
-  enable: true,
-  name: webpack.NoEmitOnErrorsPlugin
-};
-
-exports.provide = {
-  enable: true,
-  name: webpack.ProvidePlugin,
-  args: {}
-};
-
-exports.define = {
-  enable: true,
-  name: webpack.DefinePlugin,
-  args: {
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
-  }
-};
-
-exports.commonsChunk = {
-  enable: true,
-  type: 'client',
-  name: webpack.optimize.CommonsChunkPlugin,
-  action: 'merge',
-  args() {
-    const packKeys = Object.keys(this.packs || {});
-    const chunks = Object.keys(this.options.entry || {}).filter(entry => {
-      return !packKeys.includes(entry);
-    });
-    return { names: 'vendor', chunks };
-  }
-};
-
-exports.uglifyJs = {
-  enable: true,
-  env: ['prod'],
-  name: webpack.optimize.UglifyJsPlugin,
-  args: {
-    compress: {
-      warnings: false,
-      dead_code: true,
-      drop_console: true,
-      drop_debugger: true
-    }
-  }
-};
-
-exports.hot = {
-  enable: true,
-  type: 'client',
-  env: ['dev'],
-  name: webpack.HotModuleReplacementPlugin
-};
-
-exports.manifest = {
-  enable: true,
-  type: 'client',
-  name: 'webpack-manifest-plugin',
-  args() {
-    const filename = this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
-    const absFilename = this.utils.normalizePath(filename, this.config.baseDir);
-    let relativeFileName = path.relative(this.buildPath, absFilename);
-    return { fileName: relativeFileName };
-  }
-};
-
-exports.buildfile = {
-  enable: true,
-  type: 'client',
-  name: require('./plugin/build-config-webpack-plugin'),
-  args() {
-    return {
-      baseDir: this.config.baseDir,
-      host: utils.getHost(this.config.port),
-      proxy: this.config.proxy,
-      commonsChunk: this.getCommonsChunk(),
-      buildPath: this.buildPath,
-      publicPath: this.publicPath
-    };
-  }
-};
-
-exports.progress = {
-  enable: true,
-  name: 'progress-bar-webpack-plugin',
-  args: {
-    width: 100,
-    format: `webpack build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
-    clear: false
-  }
-};
-
-exports.imagemini = {
-  enable: true,
-  env: ['prod'],
-  type: 'client',
-  name: 'imagemin-webpack-plugin',
-  entry: 'default'
-};
-
-exports.directoryname = {
-  enable: true,
-  name: 'directory-named-webpack-plugin'
-};
-
-exports.extract = {
-  type: 'client',
-  name: 'extract-text-webpack-plugin',
-  enable() {
-    return this.config.cssExtract;
-  },
-  args() {
-    return { filename: this.config.cssName };
-  }
-};
-
-exports.modulereplacement = {
-  enable: true,
-  type: 'server',
-  env: ['test', 'prod'],
-  name: webpack.NormalModuleReplacementPlugin,
-  args: [/\.(css|less|scss|sass)$/, require.resolve('node-noop')]
-};
-
-exports.ignore = {
-  enable: true,
-  type: 'server',
-  env: ['test', 'prod'],
-  name: webpack.IgnorePlugin,
-  args: /\.(css|less|scss|sass)$/
-};
-
-exports.html = {
-  enable: true,
-  type: 'client',
-  name: 'html-webpack-plugin',
-  args: {
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true
-    }
-  }
-};
+}
 ```
+
+`key:value` 形式, 其中 `key` 为别名, 可以自由定义, easywebpack和对应解决方案内置了一些别名plugin. 
+
+
+比如我要添加一个全新且easywebpack没有内置的 `webpack-visualizer-plugin` 插件, 可以这样配置如下:
+
+```js
+{
+  plugins:{
+    visualizer:{
+      env: ['dev'], //  开发环境启用
+      name: webpack-visualizer-plugin,
+      args: {
+       filename: './visualizer.html'
+      }
+    }
+  }
+}
+```
+
+或
+
+```js
+var Visualizer = require('webpack-visualizer-plugin');
+
+{
+  plugins:{
+    visualizer:{
+      env: ['dev'], //  开发环境启用
+      name: new Visualizer({ filename: './visualizer.html'})
+    }
+  }
+}
+```
+
+
+**修改已经内置 `easywebpack` 的压缩插件 uglifyJs 配置信息**
+
+自定义已经内置 `easywebpack` plugin 插件的参数信息, 统一通过 `args` 配置 
+
+```js
+{
+  plugins:{
+    uglifyJs: {
+      args: {
+        compress: {
+          warnings: false,
+          dead_code: true,
+          drop_console: true,
+          drop_debugger: true
+        }
+      }
+    }
+  }
+}
+```
+
+**禁用 uglifyJs 配置**
+
+```js
+{
+  plugins:{
+    uglifyJs: false
+  }
+}
+```
+
+**config.plugins** 配置相属性介绍
+
+
+- **env**: 见 `config.env` 说明, 可选, 默认全部
+
+- **type**: 见 `config.type` 说明, 可选, 默认全部
+
+- **enable**: {Boolean/Function} 是否启用, 可选, 默认可用
+
+- **name**: {String/Object} 插件名称, 支持字符串或Object
+
+- **args**: {Object/Function} 插件参数
+
+
+## 内置plugin
+
+| plugin                                     | 别名            |  默认是否开启/开启环境  | 
+| :--------                                  | :-----:        | :----:        | 
+| npm-install-webpack-plugin                 | npm            |  否           |
+| webpack.NamedModulesPlugin                 | nameModule     |  是/dev       |
+| webpack.HashedModuleIdsPlugin              | hashModule     |  是/test,prod  |
+| webpack.optimize.ModuleConcatenationPlugin | module         |  是           |
+| webpack.NoEmitOnErrorsPlugin               | error          |  是           |
+| webpack.HotModuleReplacementPlugin         | hot            |  是/dev           |
+| webpack-manifest-plugin                    | manifest       |  是           |
+| progress-bar-webpack-plugin                | progress       |  是/dev       |
+| directory-named-webpack-plugin             | directoryname  |  是           |
+| extract-text-webpack-plugin                | extract        |  是           |
+| webpack.optimize.CommonsChunkPlugin        | commonsChunk   |  是           | 
+| html-webpack-plugin                        | html           |  是           |
+| webpack.optimize.UglifyJsPlugin            | uglifyJs       |  是/prod      |
+| imagemin-webpack-plugin                    | imagemin       |  是/prod      | 

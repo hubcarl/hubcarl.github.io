@@ -1,50 +1,57 @@
 ---
-layout: webpack/webpack
+layout: webpack/webpack 
 description: "专注于技术,切不能沉迷于技术!"
 ---
 
-## 背景
+## easywebpack 介绍
 
-随着越来越多的项目采用vue, react, weex进行业务开发, 在前端构建方面大多数是用webpack进行构建。但存在以下问题：
+首先, 使用 easywebpack 之前, 你需要了解一下 easywebpack 提供的能力:
 
-- 各个项目都是自己从零编写webpack配置，存在很多定制性的配置，无法复用，大多都是复制拷贝。
-- webpack配置项多，当需要满足开发环境，测试环境，压缩，cdn，单页面，多页面， 热更新, 客户端渲染，服务器渲染等特性时，配置非常复杂。
-
-在前端工程构建方面迫切需要一套基于webpack的通用且可扩展性强的前端工程化解决方案.
+- easywebpack 是对 Webpack 配置进行封装简化, 是 Webpack 的上层框架, 有自己的一套简单的配置规则, 让开发者从复杂的各种具体 loader, plugin 中解脱出来.
+- easywebpack 本身不提供任何前端框架的构建能力, 需要你基于 easywebpack 扩展出对应前端框架的构建解决方案, 目前已扩展出 Vue/React/Weex/HTML解决方案, 你可以直接使用这些解决方案.
 
 
-## 我们要解决什么问题
+## easywebpack 基础能力
 
-针对背景里面提到的一些问题, 基于webpack + egg项目的工程化, 当初想到和后面实践中遇到问题, 主要有如下问题需要解决:
+easywebpack 在 Webpack 的基础上, 主要做了以下三件事情:
 
-- Vue服务端渲染性能如何?
-
-- webpack 客户端(browser)运行模式打包支持
-
-- webpack 服务端(node)运行模式打包支持
-
-- 如何实现服务端和客户端代码修改webpack热更新功能
-
-- webpack打包配置太复杂(客户端,服务端), 如何简化和多项目复用
-
-- 开发, 测试, 正式等多环境支持, css/js/image的压缩和hash, cdn等功能如何配置, 页面依赖的css和js如何加载
-
-- 如何快速扩展出基于vue, react前端框架服务端和客户端渲染的解决方案
+- 内置与构建框架无关的基础配置, 包括通用基础配置, 通用 loader, 通用 plugin. 详情请见 [内置loader](/easywebpack/webpack/loader/) 和 [内置plugin](/easywebpack/webpack/plugin/)   
+- 内置热更新, image/javascript/css压缩, sass, less, stylus, postcss, eslint, babel等基础能力, 通过开关即可开启和禁用
+- 内置开发, 测试, 正式三种环境, 简化开发者配置
 
 
-## Webpack工程化设计
+![image](/img/webpack/easywebpack-fn.png)
 
-我们知道webpack是一个前端打包构建工具, 功能强大, 意味的配置也会复杂. 我们可以通过针对vue, react等前端框架,采用不同的配置构建不同的解决方案.
-虽然这样能实现, 但持续维护的成本大, 多项目使用时就只能采用拷贝的方式, 另外还有一些优化和打包技巧都需要各自处理.
 
-基于以上的一些问题和想法, 我希望基于webpack的前端工程方案大概是这个样子:
+## easywebpack 构建解决方案
 
-- webpack太复杂, 项目可重复性和维护性低, 是不是可以把基础的配置固化, 然后基于基础的配置扩展出具体的解决方案(vue/react等打包方案).
+![image](/img/webpack/WebpackBuilder.png)
 
-- webpack配置支持多环境配置, 根据环境很方便的设置是否开启source-map, hash, 压缩等特性.
+- [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) Vue 前端和服务端构建解决方案 
+- [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git) React 前端和服务端构建解决方案
+- [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git) Weex Native 端和Web端构建解决方案
+- [easywebpack-html](https://github.com/hubcarl/easywebpack-html.git) 纯静态 HTML/Nunjucks 页面构建解决方案
 
-- webpack配置的普通做法是写配置, 是不是可以采用面向对象的方式来编写配置.
 
-- 能够基于基础配置很简单的扩展出基于vue, react 服务端渲染的解决方案
 
-- 针对egg + webpack内存编译和热更新功能与框架无关, 可以抽离出来, 做成通用的插件
+## 基于 easywebpack 构建的项目骨架
+
+>**项目骨架, 你可以通过 [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli) 命令行工具进行初始化和构建.**
+
+- [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) 基于 Egg + Vue + Webpack 服务端和客户端渲染项目骨架
+
+- [egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate) Egg + React + Webpack  服务端和客户端渲染项目骨架
+
+- [easywebpack-weex-boilerplate](https://github.com/hubcarl/easywebpack-weex-boilerplate) 基于 Weex Native 端和 Web 端构建解决方案渲染项目骨架
+
+- [easywebpack-multiple-html-boilerplate](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate)  纯静态 Webpack + HTML + 页面构建项目骨架
+
+- [easywebpack-vue-client-render-boilerplate](https://github.com/hubcarl/easywebpack-cli-template/tree/master/boilerplate/vue) 基于 Vue + Webpack 前端渲染的项目骨架
+
+- [easywebpack-react-client-render-boilerplate](https://github.com/hubcarl/easywebpack-cli-template/tree/master/boilerplate/react) 基于 React + Webpack 前端渲染的项目骨架
+
+
+## easywebpack 工程化整体方案
+
+
+![image](/img/webpack/Webpack.png)
