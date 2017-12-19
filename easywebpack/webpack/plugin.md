@@ -115,3 +115,5 @@ var Visualizer = require('webpack-visualizer-plugin');
 | html-webpack-plugin                        | html           |  是           |
 | webpack.optimize.UglifyJsPlugin            | uglifyJs       |  是/prod      |
 | imagemin-webpack-plugin                    | imagemin       |  是/prod      | 
+| webpack-bundle-analyzer                    | analyzer       |  否      | 
+| stats-webpack-plugin                       | stats          |  否      | 

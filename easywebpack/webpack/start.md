@@ -9,11 +9,11 @@ description: "专注于技术,切不能沉迷于技术!"
 我们可以使用基于 [easywebpack](https://github.com/hubcarl/easywebpack) 前端工程化解决方案构建的脚手架
 [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli) 初始化各种项目, 目前支持如下骨架项目:
 
-- [easywebpack-multiple-html-boilerplate](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate)  纯静态 Webpack + HTML + 页面构建项目骨架
+- [multiple-html-boilerplate](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate)  纯静态 Webpack + HTML + 页面构建项目骨架
 
-- [easywebpack-vue-client-render-boilerplate](https://github.com/hubcarl/easywebpack-cli-template/tree/master/boilerplate/vue) 基于 Vue + Webpack 前端渲染的项目骨架
+- [vue-client-render-boilerplate](https://github.com/hubcarl/easywebpack-cli-template/tree/master/boilerplate/vue) 基于 Vue + Webpack 前端渲染的项目骨架
 
-- [easywebpack-react-client-render-boilerplate](https://github.com/hubcarl/easywebpack-cli-template/tree/master/boilerplate/react) 基于 React + Webpack 前端渲染的项目骨架
+- [react-client-render-boilerplate](https://github.com/hubcarl/easywebpack-cli-template/tree/master/boilerplate/react) 基于 React + Webpack 前端渲染的项目骨架
 
 - [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) 基于 Egg + Vue + Webpack 服务端和客户端渲染项目骨架
 

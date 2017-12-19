@@ -7,9 +7,11 @@ description: "专注于技术,切不能沉迷于技术!"
 ## 配置文件: webpack.config.js
 
 **注意: 首先, 这所讲的 `webpack.config.js` 这份配置不是 Webpack 原生的配置文件, 这是专门给 `easywebpack-cli` 使用的配置文件.
-这份配置简化了 Webpack 原生配置, 隐藏众多 loader, plugin 等细节, 只提供5个左右的基本配置项, 其中 loader, plugin 通过开关开启就可以使用其功能.
-在构建时, `easywebpack-cli` 最终会这份简化的配置转换为 Webpack 原生配置.**
+这份配置简化了 Webpack 原生配置, 隐藏众多基础，loader, plugin 等细节, 只提供5个左右的基本配置项, 其中 loader, plugin 通过开关开启就可以使用其功能.在构建时, `easywebpack-cli` 最终会这份简化的配置转换为 Webpack 原生配置.**
 
+<div style="border: 1px solid #cecece; font-weight:bold; margin-bottom:20px;padding: 8px 8px">
+easywebpack >=3.5.0版本已兼容原生 Webpack 配置项，比如 entry, target, node, resolve, externals, module.noParse, module.alias, module.rules, devtool,performance等
+</div>
 
 目前这里我们仅仅讲解通过 `easywebpack-cli` 的配置编写和构建, 直接基于 `easywebpakc-vue`, `easywebpakc-react`, `easywebpakc-html` ,`easywebpakc-weex` 
 解决方案的配置请见解决方案对应章节介绍. 
