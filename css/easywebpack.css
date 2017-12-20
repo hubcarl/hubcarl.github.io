@@ -1642,3 +1642,9 @@ aside li {
 .mani-menu-active {
   color: #22ab28 !important;
 }
+
+.easy-msg-tip {
+  border: 1px solid #cecece;
+  padding: 8px;
+  font-weight: bolder;
+}

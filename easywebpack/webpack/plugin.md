@@ -6,16 +6,50 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ## config.plugins 配置
 
+**config.plugins** 非必须，支持 Object ｜ Array。 这里的plugins 是对 Webpack `plugins` 的简化和增强。建议用 **增强配置** 方式配置.
+
+- 兼容 Webpack 原生数组配置
+- [增强]支持通过别名对内置 plugin 插件的开启和禁用，以及参数配置
+- [增强]支持通过别名的方式添加 plugin 插件
+
+<div class ="easy-msg-tip">
+easywebpack 内置 plugin 插件别名映射请看页面底部 plugin 别名映射表格。
+</div>
+
+##### Webpack 原生数组配置举例
+
+```js
+// ${app_root}/webpack.config.js
+module.exports = {
+  ......
+  plugins:[
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    { 
+      label: 'nameModule', // 非必需
+      env: ['dev'] // 非必需
+      name: webpack.NamedModulesPlugin() // name 必须
+    }
+  ]
+}
+```
+
+##### Webpack plugins 增强配置举例
 
 ```js
 // ${app_root}/webpack.config.js
 module.exports = {
   ......
   plugins:{
-   
+    error: true,  //  webpack.NoEmitOnErrorsPlugin 已内置
+    hot: true,   //  webpack.HotModuleReplacementPlugin 已内置
+    nameModule: { // webpack.NamedModulesPlugin  已内置
+      env: ['dev']
+    }
   }
 }
 ```
+
 
 `key:value` 形式, 其中 `key` 为别名, 可以自由定义, easywebpack和对应解决方案内置了一些别名plugin. 
 

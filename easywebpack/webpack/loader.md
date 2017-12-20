@@ -6,13 +6,40 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ## config.loaders 配置
 
+**config.loaders** 非必须，支持 Object ｜ Array。 这里的loaders 是对 Webpack `module.rules` 的简化和增强。建议用 **增强配置** 方式配置.  
+
+- 兼容 Webpack 原生数组配置
+- [增强]支持通过别名对内置 loader 开启和禁用，以及参数配置
+- [增强]支持通过别名的方式添加 loader 插件
+
+<div class ="easy-msg-tip">
+easywebpack 内置 loader 插件别名映射请看页面底部 loader 别名映射表格。
+</div>
+
+##### Webpack loaders 原生数组配置举例
+
+```js
+// ${app_root}/webpack.config.js
+module.exports = {
+  ......
+  loaders:[
+    {
+      test: /\.html$/,
+      use: ['html-loader', 'html-swig-loader']
+    }
+  ]
+}
+```
+
+##### Webpack loaders 增强配置举例
 
 ```js
 // ${app_root}/webpack.config.js
 module.exports = {
   ......
   loaders:{
-   
+    less: true, // 开启less， 默认禁用
+    stylus: true // 开启stylus， 默认禁用
   }
 }
 ```
@@ -135,8 +162,8 @@ config.loader配置项除了支持的loader原生属性, 还扩展了 `env`, `ty
 | css-loader          | css           |  是           |禁用: loaders:{ css: false}                         |
 | sass-loader         | sass          |  是           |禁用: loaders:{ sass: false}<br/> 路径配置:<br/> loaders:{sass: {options: {includePaths: ["asset/css"]}} |
 | sass-loader         | scss          |  是           |禁用: loaders:{ scss: false}                        |
-| less-loader         | less          |  是           |禁用: loaders:{ less: false}                        |
-| stylus-loader       | stylus        |  是           |禁用: loaders:{ stylus: false}                         | 
+| less-loader         | less          |  否           |禁用: loaders:{ less: false}                        |
+| stylus-loader       | stylus        |  否           |禁用: loaders:{ stylus: false}                         | 
 | url-loader          | urlimage      |  是           |禁用: loaders:{ urlimage: false} <br/> 配置limit(默认1024):<br/> loaders:{urlimage: {options: {limit: 2048 }}  | 
 | url-loader          | urlfont       |  是           |禁用: loaders:{ urlfont: false} <br/> 配置limit(默认1024):<br/> loaders:{urlfont: {options: {limit: 2048 }}   | 
 

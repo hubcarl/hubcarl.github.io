@@ -14,7 +14,7 @@ description: "专注于技术,切不能沉迷于技术!"
 npm i easywebpack-cli  -g
 ```
 
-安装成功以后, 就可以在命令行中使用 `easywebpack` 命令, 比如 `easywebpack init`, `easywebpack build`, `easywebpack server`, `easywebpack print` 等
+安装成功以后, 就可以在命令行中使用 `easywebpack` or `easy` 命令, 比如 `easy init`, `easy build`, `easy server`, `easy print`, `easy clean`, `easy open` 等
 
 
 ### 运行

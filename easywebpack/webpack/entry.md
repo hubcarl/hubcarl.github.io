@@ -6,26 +6,43 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ## config.entry 配置
 
+ 
+**config.entry** : Webpack 构建入口文件配置
+
+这里的entry 对 Webpack 的 entry 进行了增强， 除了支持 webpack 原生 Object(key:value) 方式配置， 还对entry进行了增强。
+
+#### webpack entry 原生配置
+
 ```js
 // ${app_root}/webpack.config.js
 module.exports = {
   ......
   entry:{
-    include:[src]
+    home: path.join(__dirname, 'src/page/home/home.js')
+  }
+}
+```
+
+#### webpack entry 增强配置
+
+```js
+// ${app_root}/webpack.config.js
+module.exports = {
+  ......
+  entry:{
+    include:['src/page']
     exclude:[]
   }
 }
 ```
- 
-**config.entry** : Webpack 构建入口文件配置
 
-- **config.entry.include** : {String/Object/Array} 必选, 文件根目录可以不写
+- **config.entry.include** : {String/Object/Array/Regex} 必选, 文件根目录可以不写
 
      1.{Object} 支持标准的 Webpack entry 配置 Object类型(key : value)
 
      {String/Array} 支持根据目录自动创建 entry 配置. 值为String或者数组元素为String时,表示目录; 数组元素为Object时, 表示entry配置 
     
-- **config.entry.exclude**: {String/Array} 可选, 排除不需要构建的文件或目录,支持正则表达式.
+- **config.entry.exclude**: {String/Array/Regex} 可选, 排除不需要构建的文件或目录,支持正则表达式.
 
 - **config.entry.loader**:  {Object}, 可选, 为 entry 配置模板,  当配置后, 可以根据 `.vue` 和 `.jsx`文件自动创建 entry 文件, key为 `config.type` 枚举值. 
 
@@ -36,6 +53,7 @@ module.exports = {
 - **config.entry.html**: {Object} 可选, 当只有部分页面需要创建html时, 可以配置该参数, 参数节点与 `config.entry` 一致, 具体见举例 
 
  
+
 ## 配置举例
 
  
