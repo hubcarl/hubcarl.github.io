@@ -5,6 +5,32 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ## Egg + React + Webpack(easywebpack ^3.5.x) SSR 解决方案升级
 
+#### 升级要求：
+
+Node: ^6.0.0, 最好是Node 8.9.3 LST 版本 
+npm: ^5.0.0, 最好是最新版本 
+
+
+#### 3.5.0 特性
+
+- 兼容 webpack 原生节点配置
+- entry include 支持正则配置
+- 支持 css extract 热更新
+- 支持 webpack dll 配置和自动化构建， 无需手动先构建dll， 然后再构建页面
+- 简化 commonsChunk lib 配置， 无需在 onClient 调用 addEntry 设置
+- plugins 和 loaders 增加数组的配置的兼容，也就是支持原生配置
+- 去掉options节点配置，改为 webpack.config.js 支持原生 Webpack 配置
+- 支持多进程 Webpack 编译, 结合dll功能**编译速度显著提高**，初步测试编译时间减少2/3, 第三方组件越多和页面越多，越明显
+- manifest和buildfie合并为新的manifest， 无需 manifest 和 manifestDeps 兼容配置， 同时去掉 buildfile 配置，
+- 默认禁用 npm start 启动检查 webpack loader 和 plugin 是否安装的功能， 提高编译速度。
+- stylus 和 less loader 默认有开启改为禁用， 减少不必要的安装
+- 新增内置插件 webpack-bundle-analyzer 和 stats-webpack-plugin
+- node externals 改为 webpack-node-externals 插件实现
+- 压缩插件由webpack内置改为 uglifyjs-webpack-plugin 独立插件, 从而支持**多进程**编译
+- 解决 NODE_ENV=production 导致动态安装 npm 依赖失败
+- 修复 easywebpack 配置合并覆盖问题
+
+
 #### 升级依赖 
 - easywebpack-cli": ^1.3.0-rc.2            （devDependencies）
 - easywebpack-react:^3.3.0-rc.5              （devDependencies）
@@ -74,3 +100,7 @@ dll:['react', 'react-dom'] // 这里的公共库根据实际项目修改，这�
 
 **注意 commonsChunk 和 dll 二选一。**
 **修改完成以后， 请重新安装依赖，确认最低版本都是以上说明版本。**
+
+#### 示例
+
+Egg+React: https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/next
