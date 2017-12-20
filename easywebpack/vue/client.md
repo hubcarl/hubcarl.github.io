@@ -21,8 +21,8 @@ npm i easywebpack-cli  -g
 ```js
 const path = require('path');
 module.exports = {
-  type:'client',  // 只构建前端渲染模式, 如果要构建Node运行文件, 这里不用配置
-  framework: 'vue', // 指定用easywebpack-vue 解决方案, 请在项目中安装该依赖
+  type:'client',  // 只构建前端渲染模式, 如果要同时构建Node运行文件, 这里不用配置
+  framework: 'vue', // 指定用 easywebpack-vue 解决方案, 请在项目中安装该依赖
   entry: {
     include: 'page',
     exclude: ['page/test']
@@ -33,9 +33,7 @@ module.exports = {
     framework: 'framework',
     store: 'store'
   },
-  create() { // 公共配置扩展
-     this.addEntry('vendor', ['vue', 'axios']);
-  },
+  lib: ['vue/dist/vue.common.js', 'axios'], // commonsChunk 
   done(){ // 编译完成回调
 
   }

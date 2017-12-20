@@ -39,11 +39,12 @@ module.exports = {
     framework: 'app/web/framework',
     store: 'app/web/store'
   },
+  lib: ['vue/dist/vue.common.js', 'axios'], // commonsChunk 
   create() { // 公共配置扩展
 
   },
   onClient(){ // client api配置扩展
-     this.addEntry('vendor', ['vue', 'axios']);
+    
   },
   onServer(){ // server api配置扩展
 

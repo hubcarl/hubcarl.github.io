@@ -6,9 +6,13 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ## 开发调试
 
-## `easywebpack-cli` 使用
+- 当我们使用 `easywebpack` 时， 遇到构建问题时，我们可以通过 `easywebpack-cli` 的  `easy print` 命令检查一下生成的 webpack config 配置是否正确。
 
-### 运行
+- 默认读取项目根目录下的 `webpack.config.js` 配置, 你可以通过 `-f`  参数指定指定 cli 配置文件
+
+- easywebpack print 默认打印 dev 模式配置信息
+
+### 安装cli
 
 ```bash
 npm i easywebpack-cli  -g
@@ -17,92 +21,9 @@ npm i easywebpack-cli  -g
 安装成功以后, 就可以在命令行中使用 `easywebpack` or `easy` 命令, 比如 `easy init`, `easy build`, `easy server`, `easy print`, `easy clean`, `easy open` 等
 
 
-### 运行
+### 打印配置
 
-
-```bash
-easywebapck -h
-```
-
-Usage: easywebpack [command] [options]
-
-
-  Options:
-
-    -V, --version          output the version number
-    -f, --filename [path]  webpack config file name, default webpack.config.js
-    -w, --watch            webpack watch and hot-update
-    -m, --hash             webpack md5 hash js/css/image
-    -c, --compress         webpack compress js/css/image
-    -b, --build [option]   w(watch), m(hash) , c(compress), ex: wm/wc/mc/wmc
-    -h, --help             output usage information
-
-
-  Commands:
-  
-    init [options]         init webpack config or boilerplate for Vue/React/Weex
-    install                npm install
-    print  [env] [options] print webpack config, support print by env or config node key
-    build  [env]           webpack building
-    server [env]           webpack building and start server
-
-
-
-### 3.3. 命令介绍
-
-#### 3.3.1 配置模板和Boilerplate初始化
-
-- easywebpack init
-
-> step one:
-
-![image](/img/webpack/cli-init-step-one.png)
-
-> step two:
-
-![image](/img/webpack/cli-init-step-two.png)
-
-初始化模板项目源代码：[easywebpack-cli-template](https://github.com/hubcarl/easywebpack-cli-template.git)
-
-#### 3.3.2 编译举例
-
-- easywebpack build
-
-- easywebpack build -f build/webpack.config.js
-
-- easywebpack build -c
-
-- easywebpack build dev
-
-- easywebpack build test
-
-- easywebpack build prod
-
-- easywebpack build -b wmc 
-
-默认读取项目根目录下的 `webpack.config.js` 配置
-
-#### 3.3.3  编译和启动服务举例
-
-- easywebpack server
-
-- easywebpack server -f build/webpack.config.js
-
-- easywebpack server dev
-
-- easywebpack server test
-
-- easywebpack server prod
-
-- easywebpack server -b wmc 
-
-默认读取项目根目录下的 `webpack.config.js` 配置
-
-运行完成自动打开编译结果页面 :  http://127.0.0.1:8888/debug
-
-![image](/img/webpack/easywebpack-build-nav.png)
-
-#### 3.3.4 打印配置
+easywebpack print 打印 webpack 配置信息时通过 `lodash` 实现的，你可以使用 `lodash` 的相关语法打印配置信息。
 
 ```bash
 easywebpack print -h
@@ -118,20 +39,100 @@ easywebpack print -h
     -n, --node [key]  print webpack config info by config node key, example: [module/module.rules/plugins] and so on
     -h, --help        output usage information
 
-- easywebpack print -n module
 
-- easywebpack print dev -n entry
 
-- easywebpack print test -n module.rules
+####  查看 webpack 所有配置
 
-- easywebpack print prod -n module.rules[0]
+```bash
+easy print
+```
 
-- easywebpack print -n plugins
+####  查看 build/webpack.config.js 文件生产的 webpack配置
 
-- easywebpack print -n plugins[0]
+默认读取项目根目录下的 `webpack.config.js` 配置, 你可以通过 `-f`  参数指定指定 cli 配置文件
 
-- easywebpack print -n output
+```bash
+easy print -f build/webpack.config.js
+```
 
-- easywebpack print -n resolve
+#### 查看 webpack 配置 dll 配置
 
-默认读取项目根目录下的 `webpack.config.js` 配置
+```bash
+easy print --dll
+```
+
+#### 查看 webpack 浏览器构建模式配置
+
+通过 -t 参数指定构建类型，也就是对应 `config.type`
+
+```bash
+easy print -t client
+```
+or
+
+```bash
+easy print --web
+```
+
+#### 查看 webpack Node构建模式配置
+
+通过 -t 参数指定构建类型，也就是对应 `config.type`
+
+```bash
+easy print -t server
+```
+or
+
+```bash
+easy print --node
+```
+
+
+####  查看 webpack 配置 dll 配置
+
+```bash
+easy print --dll
+```
+
+#### 查看 webpack 配置 module 信息
+
+```bash
+easy print -n module
+```
+
+#### 查看 webpack 配置 entry 信息
+
+```bash
+easy print -n entry
+```
+
+#### 查看 webpack 配置发布 prod 模式 entry 信息
+
+```bash
+easy print prod -n entry
+```
+
+#### 查看 webpack 配置 module.rulues 信息
+
+```bash
+easy print -n module.rulues
+```
+
+#### 查看 webpack 配置 module.rulues 第三个loader信息
+
+```bash
+easy print -n module.rulues[2]
+```
+
+#### 查看 webpack 配置 plugins 信息
+
+```bash
+easy print -n plugins
+```
+
+#### 查看 webpack 配置 plugins 第三个 plugin 信息
+
+```bash
+easy print -n plugins[2]
+```
+

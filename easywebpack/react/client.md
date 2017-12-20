@@ -33,14 +33,8 @@ module.exports = {
     framework: 'framework',
     store: 'store'
   },
-  cssExtract: true,
+  lib: ['react', 'react-dom'], // commonsChunk 
   create() { // 公共配置扩展
-
-  },
-  onClient(){ // client api配置扩展
-     this.addEntry('vendor', ['vue', 'axios']);
-  },
-  onServer(){ // server api配置扩展
 
   },
   done(){ // 编译完成回调

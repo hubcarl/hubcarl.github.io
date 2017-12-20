@@ -48,8 +48,8 @@ module.exports = {
 
 **config.alias** : 非必需，也就是 Webpack的 `resolve.alias`，但这里有两点简化：
  
-－ 这里的 alias 会根据项目根目录自动转换为绝对路径，无需自己写项目的根目录。 
-－ 如果要为 node_modules 添加 alias,可以采用 require.resovle('react') 或者显示制定node_modules 'node_modules/react'
+- 这里的 alias 会根据项目根目录自动转换为绝对路径，无需自己写项目的根目录。 
+- 如果要为 node_modules 添加 alias,可以采用 require.resovle('react') 或者显示制定node_modules 'node_modules/react'
 
 ```js
 module.exports = {
@@ -152,3 +152,6 @@ module.exports = {
 这个时候，你需要自己手动安装缺失的插件。
 
 
+### 8. 更多配置
+
+[webpack.config.js配置项](/easywebpack/webpack/config)

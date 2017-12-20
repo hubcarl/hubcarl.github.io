@@ -26,7 +26,7 @@ module.exports = {
   framework: 'react',
   commonsChunk: ['vendor'],
   entry: {
-    include: 'app/web/page',
+    include: ['app/web/page',{ layout: 'app/web/framework/layout/layout.jsx?loader=false' }],
     exclude: ['app/web/page/test'],
     loader: {
       client: 'app/web/framework/entry/loader.js'
@@ -39,9 +39,7 @@ module.exports = {
     store: 'app/web/store'
   },
   create(){
-    if (this.type === 'server') {
-      this.addEntry('layout', path.join(this.config.baseDir, 'app/web/view/layout.jsx'));
-    }
+   
   }
 };
 
