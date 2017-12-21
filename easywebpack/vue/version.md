@@ -31,8 +31,8 @@ npm: ^5.0.0, 最好是最新版本
 - 修复 easywebpack 配置合并覆盖问题
 
 #### 升级依赖 
-- easywebpack-cli": ^1.3.0-rc.2            （devDependencies）
-- easywebpack-vue: ^3.3.0-rc.1              （devDependencies）
+- easywebpack-cli": ^3.5.0            （devDependencies）
+- easywebpack-vue: ^3.5.0              （devDependencies）
 - egg-webpack:^3.2.4                       （devDependencies）
 - egg-webpack-vue:^2.0.1                   （devDependencies）
 - uglifyjs-webpack-plugin: ^1.1.2          （devDependencies）
