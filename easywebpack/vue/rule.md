@@ -54,7 +54,7 @@ npm run build 或 easywebpack build prod
 1. 启动 Webpack 构建，文件落地磁盘
 2. 服务端构建的文件放到 `app/view` 目录
 3. 客户端构建的文件放到 `public` 目录
-4. 生成的 `buildConfig.json` 和 `manifest.json` 放到 `config` 目录
+4. 生成的 `manifest.json` 放到 `config` 目录
 5. 构建的文件都是gitignore的，部署时请注意把这些文件打包进去
 
 
