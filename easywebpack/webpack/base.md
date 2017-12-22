@@ -68,8 +68,8 @@ module.exports = {
 
 **使用条件：**
 
-- `easywebpack` ^3.5.0 版本开始支持,  默认提取的文件为 `runtime.js` 和 `common.js`
-- `easywebpack-cli` 需要 ^1.3.0
+- `easywebpack` ^3.5.1 版本开始支持,  默认提取的文件为 `runtime.js` 和 `common.js`
+- `easywebpack-cli` 需要 ^3.5.1
 
 **举例：**
 
@@ -85,8 +85,8 @@ module.exports = {
 
 **使用条件：**
 
-- `easywebpack` ^3.5.0 版本开始支持, 默认提取的文件为 `vendor.js`. 
-- `easywebpack-cli` 需要 ^1.3.0
+- `easywebpack` ^3.5.1 版本开始支持, 默认提取的文件为 `vendor.js`. 
+- `easywebpack-cli` 需要 ^3.5.1
 
 **举例：**
 

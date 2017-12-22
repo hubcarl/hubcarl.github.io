@@ -16,6 +16,21 @@ description: "专注于技术,切不能沉迷于技术!"
 easywebpack 内置 plugin 插件别名映射请看页面底部 plugin 别名映射表格。
 </div>
 
+##### 内置 plugin 扩展参数统一通过 args 节点配置
+
+```js
+// ${app_root}/webpack.config.js
+module.exports = {
+  plugins:{
+     ${plugin别名}:{
+      args:{
+        // 具体plugin参数
+      }
+    }
+  }
+}
+```
+
 ##### Webpack 原生数组配置举例
 
 ```js

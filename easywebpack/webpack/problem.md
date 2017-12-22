@@ -31,8 +31,43 @@ exports.webpack = {
 
 `egg-webpack` 启动打开浏览器的取端口逻辑: `this.config.webpack.appPort || process.env.PORT || 7001`
 
+### 3. Egg + Vue/React 修改静态资源 publicPath 路径
 
-### 3. 多项目开发时, 端口占用问题
+在 Egg + Vue/React 解决方案中, Webpack publicPath 使用的是默认 `publicPath: '/public/'` 配置。
+
+
+如果要修复默认的publicPath，比如要修改 `/static/`，需要修改两个地方：
+
+
+#### 首先版本要求
+
+- easywebpack: ^3.5.1
+- egg-webpack: ^3.2.5
+
+#### 配置修改
+
+- Webpack `webpack.config.js` 配置添加 `publicPath` 配置覆盖默认配置
+
+```js
+// ${app_root}/webpack.config.js
+ module.exports = {
+    .....
+    publicPath: '/public/' 
+  };
+```
+
+- Egg 配置 `config.default.js` 添加静态资源
+
+```js
+// ${app_root}/config/config.local.js
+ exports.static = {
+    prefix: '/static/',
+    dir: path.join(app.baseDir, 'public')
+  };
+```
+
+
+### 4. 多项目开发时, 端口占用问题
 
 在 Egg + Webpack 项目开发过程中, 会用到 7001, 9000, 9001 三个端口
 
