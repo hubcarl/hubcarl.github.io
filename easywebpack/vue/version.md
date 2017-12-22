@@ -31,7 +31,7 @@ npm: ^5.0.0, 最好是最新版本
 - 修复 easywebpack 配置合并覆盖问题
 
 #### 升级依赖 
-- easywebpack-cli": ^3.5.0            （devDependencies）
+- easywebpack-cli": ^3.5.1            （devDependencies）
 - easywebpack-vue: ^3.5.0              （devDependencies）
 - egg-webpack:^3.2.4                       （devDependencies）
 - egg-webpack-vue:^2.0.1                   （devDependencies）
@@ -96,6 +96,16 @@ dll:['vue/dist/vue.common.js', 'axios'] // 这里的公共库根据实际项目�
 ```
 
 你可以全局安装 `npm i easywebpack-cli -g` 文件， 然后通过 easy clean 清楚缓存的dll文件，通过 easy open 打开 `dll` 文件目录.
+
+**如果是 Egg + Vue + SSR , 还需要在 config.default.js 里面开启 静态目录访问**
+
+ ```js
+ //${app_root}/config/config.default.js
+ exports.static = {
+    prefix: '/public/',
+    dir: path.join(app.baseDir, 'public')
+ };
+ ```
 
 **注意 commonsChunk 和 dll 二选一。**
 
