@@ -17,7 +17,8 @@ easywebpack >=3.5.0版本已兼容原生 Webpack 配置项，比如 entry, targe
 解决方案的配置请见解决方案对应章节介绍. 
 
 
-**要使用 `easywebpack-cli` 进行项目构建和开发, 只需要简单的两步**
+**要使用 `easywebpack-cli` 进行项目构建和开发, 只需要简单的四步**
+
  
 - 全局安装 [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli)
 
@@ -43,12 +44,35 @@ module.exports = {
 }
 ```
 
+- 添加 `${app_root}/.babelrc` 文件
+
+```
+{
+  "presets": [["env",{ "modules": false }]],
+  "plugins": [
+    "transform-object-rest-spread",
+    "syntax-dynamic-import",
+    "transform-object-assign"
+  ],
+  "comments": false
+}
+```
+
+- 添加 `${app_root}/postcss.config.js` 文件
+
+```js
+'use strict';
+module.exports = {
+  plugins: [
+    require('autoprefixer')
+  ]
+};
+```
 
 **这份配置能够帮我们完成以下几件事情:**
 
 - framework: 'html' 表示 `easywebpack-cli` 使用 `easywebpack-html` 构建解决方案, 目前 framework 支持 `html`, `vue`, `react`, `weex` 四种.
 - 自动读取 src/page 目录的所有 js 文件作为 Webpack Entry 入口, template 为 构建 HTML 的模板(html-webpack-plugin)
-
 
 **这样一份简单的配置具备以下能力**
 
