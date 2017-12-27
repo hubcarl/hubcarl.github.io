@@ -8,7 +8,7 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ### 1. 初始化环境
 
-安装 Node LST 环境： https://nodejs.org/zh-cn
+安装 Node LST (8.x.x) 环境： https://nodejs.org/zh-cn
 
 ### 2. 初始化 egg 项目
 
