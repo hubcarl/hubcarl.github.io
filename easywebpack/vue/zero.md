@@ -359,7 +359,7 @@ npm run dev 做了如下三件事情
 
 - `${app_root}/package.json` 添加命令
 
-```json
+```
 {
   "scripts": {
     "build": "cross-env easywebpack build prod",

@@ -9,10 +9,11 @@ description: "专注于技术,切不能沉迷于技术!"
 ```js
 // ${app_root}/webpack.config.js
 module.exports = {
-  framework: 'html'  // framework 支持 `html`, `vue`, `react`, `weex`
+   // framework 支持 `html`, `vue`, `react`, `weex`
+  framework: 'html' 
   entry:{
-    //  src/page 目录下的 js 文件将作为 Webpack entry 入口
-    include: [src/page/**.js],
+    // src/page 目录下的 js 文件将作为 Webpack entry 入口
+    include: [/src\/page\/**.js/],
     template: 'view/layout.html' 
   },
   loaders:{
