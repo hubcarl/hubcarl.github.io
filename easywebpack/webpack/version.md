@@ -44,10 +44,11 @@ module.exports = {
 
 ### 支持本地开发域名代理转发
 
-> 前提：代理域名能够映射到本机ip地址, 该功能只在 Egg 应用构建本地开发使用
+**前提：**
 
-在Egg SSR 应用开发时，Egg应用的访问地址， 静态资源构建的地址， HMR 地址都是 ip, 不方便进行环境模拟测试，比如 cookie和 登陆场景。
-easywebapck 通过如下配置
+- 代理域名能够映射到本机ip地址的功能需要你自己在电脑上面配置。如果是实际的存在的域名，理论上面就不需要自己配置域名映射。
+
+- 该功能只在 Egg 应用构建本地开发使用。
 
 ```js
 // webpack.config.js
@@ -58,7 +59,7 @@ module.exports = {
 
 - 应用访问的地址是： 'http://app.debug.com'
 - HMR地址是：http://app.debug.com:9000/__webpack_hmr
-
+- 如何在本地通过 nginx 和 dnsmasq 在本地搭建域名服务：[nginx 和 dnsmasq 在本地搭建域名服务](/easywebpack/webpack/nginx)
 
  
 ### 支持 Webpack 配置扩展使用
