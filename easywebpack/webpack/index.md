@@ -9,7 +9,7 @@ description: "专注于技术,切不能沉迷于技术!"
 
 - easywebpack 是对 Webpack 配置进行封装简化, 是 Webpack 的上层框架, 有自己的一套简单的配置规则, 让开发者从复杂的各种具体 loader, plugin 中解脱出来.
 - easywebpack 本身不提供任何前端框架的构建能力, 需要你基于 easywebpack 扩展出对应前端框架的构建解决方案, 目前已扩展出 Vue/React/Weex/HTML解决方案, 你可以直接使用这些解决方案.
-- easywebpack ^3.5.0 版本开始，兼容 webpack 原生节点配置。
+- easywebpack ^3.5.0 版本开始，兼容 Webpack 原生节点配置。
 
 
 ## easywebpack 基础能力
@@ -21,10 +21,12 @@ easywebpack 在 Webpack 的基础上, 主要做了以下三件事情:
 - 内置开发, 测试, 正式三种环境, 简化开发者配置
 
 
-![image](/img/webpack/easywebpack-fn.png)
+![image](/img/webpack/easywebpack.png)
 
 
 ## easywebpack 构建解决方案
+
+![image](/img/webpack/easywebpack.solution.png)
 
 ![image](/img/webpack/WebpackBuilder.png)
 

@@ -3,7 +3,7 @@ layout: webpack/webpack
 description: "专注于技术,切不能沉迷于技术!"
 ---
 
-## easywebpack 内置环境变量
+## easywebpack 内置全局变量
 
 easywebpack 通过 `webpack.DefinePlugin` webpack 插件内置了如下全局环境变量, 方便业务使用。
 

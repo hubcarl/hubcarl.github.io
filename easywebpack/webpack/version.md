@@ -3,9 +3,125 @@ layout: webpack/webpack
 description: "专注于技术,切不能沉迷于技术!"
 ---
 
-easywebpack 版本发布说明
+# easywebpack 版本发布说明
 
-## 3.5.0
+## ^3.6.0
+
+- easywebpack-vue: ^3.6.0
+- easywebpack-react: ^3.6.0
+
+### 新增 typescript 构建支持
+
+支持通过 Webpack 构建 typescript 项目, 默认开启 tslint 检查
+
+#### 启用 typescript 编译
+
+```js
+// webpack.config.js
+module.exports = {
+  loaders:{
+    typescript: true
+  }
+}
+```
+
+#### 启用 tslint 
+
+自动修复功能，tslint 默认启用, 自动修复默认禁用，可以通过如下方式开启
+
+```js
+// webpack.config.js
+module.exports = {
+  loaders:{
+    tslint:{
+      options: {
+        fix: true
+      }
+    }
+  }
+}
+```
+
+### 支持本地开发域名代理转发
+
+> 前提：代理域名能够映射到本机ip地址, 该功能只在 Egg 应用构建本地开发使用
+
+在Egg SSR 应用开发时，Egg应用的访问地址， 静态资源构建的地址， HMR 地址都是 ip, 不方便进行环境模拟测试，比如 cookie和 登陆场景。
+easywebapck 通过如下配置
+
+```js
+// webpack.config.js
+module.exports = {
+  host: 'http://app.debug.com'
+}
+```
+
+- 应用访问的地址是： 'http://app.debug.com'
+- HMR地址是：http://app.debug.com:9000/__webpack_hmr
+
+
+ 
+### 支持 Webpack 配置扩展使用
+
+可以直接基于 `easywebpack` 以及解决方案进行原生 Webpack 编写
+
+#### 直接基于 easyewbpack 编写配置
+
+```js
+// webpack.config.js
+const easywebpack = require('easywebpack');
+const webpack = easywebpack.webpack;
+const merge = easywebpack.merge;
+const env = process.env.BUILD_ENV; 
+const baseWebpackConfig = easywebpack.getWebpackConfig({
+    env, // 根据环境变量生成对应配置，可以在 npm script 里面配置，支持dev, test, prod 模式
+    target : 'web', // target: web 表示只获取前端构建 Webpack 配置
+    entry:{
+        app: 'src/index.js'
+    }
+});
+// 拿到基础配置, 可以进行二次加工
+module.exports = merge(baseWebpackConfig, {
+   
+})
+```
+
+#### 命令行执行
+
+```bash
+webpack --config webpack.config.js
+```
+
+
+
+#### 直接基于解决方案编写配置
+
+```js
+// target: web 表示只获取前端构建 Webpack 配置
+const easywebpack = require('easywebpack-vue');
+const webpack = easywebpack.webpack;
+const merge = easywebpack.merge;
+const baseWebpackConfig = easywebpack.getWebpackConfig({
+    env, // 根据环境变量生成对应配置，可以在 npm script 里面配置，支持dev, test, prod 模式
+    target : 'web', // target: web 表示只获取前端构建 Webpack 配置
+    entry:{
+        app: 'src/index.js'
+    }
+});
+// 拿到基础配置, 可以进行二次加工
+module.exports = merge(baseWebpackConfig, {
+   
+})
+```
+
+#### 命令行执行
+
+```bash
+webpack --config webpack.config.js
+```
+
+
+## ^3.5.0
 
 #### 1. easywebpack-cli ^1.3.0
 

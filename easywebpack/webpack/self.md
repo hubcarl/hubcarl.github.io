@@ -49,9 +49,33 @@ const webpackConfig = new EasyWebpack.WebpackClientBuilder(config).create();
 
 - 内置方法
 
+默认是获取的配置是前端构建 Webpack 配置 和  Node 构建 Webpack 配置，总共两个配置
+
 ```js
 const EasyWebpack = require('easywebpack-vue');
 const webpackConfig = EasyWebpack.getWebpackConfig(config);
+```
+
+- 简化方式
+
+只获取前端一个 Webpack  构建配置
+
+```js
+// target: web 表示只获取前端构建 Webpack 配置
+const easywebpack = require('easywebpack-vue');
+const webpack = easywebpack.webpack;
+const merge = easywebpack.merge;
+const baseWebpackConfig = easywebpack.getWebpackConfig({
+    env, // 根据环境变量生成对应配置，可以在 npm script 里面配置，支持dev, test, prod 模式
+    target : 'web', // target: web 表示只获取前端构建 Webpack 配置
+    entry:{
+        app: 'src/index.js'
+    }
+});
+// 拿到基础配置, 可以进行二次加工
+module.exports = merge(baseWebpackConfig, {
+   
+})
 ```
 
 - builder方式
@@ -64,6 +88,7 @@ const webpackConfig = new EasyWebpack.WebpackClientBuilder(config).create();
 // Node端运行配置
 const webpackConfig = new EasyWebpack.WebpackServerBuilder(config).create();
 ```
+
 
 
 ### React 解决方案
@@ -71,13 +96,36 @@ const webpackConfig = new EasyWebpack.WebpackServerBuilder(config).create();
 
 - 内置方法
 
+默认是获取的配置是前端构建 Webpack 配置 和  Node 构建 Webpack 配置，总共两个配置
+
 ```js
 const EasyWebpack = require('easywebpack-react');
 const webpackConfigList = EasyWebpack.getWebpackConfig(config);
 ```
 
-- builder方式
+- 简化方式
 
+只获取前端一个 Webpack  构建配置
+
+```js
+// target: web 表示只获取前端构建 Webpack 配置
+const easywebpack = require('easywebpack-react');
+const webpack = easywebpack.webpack;
+const merge = easywebpack.merge;
+const baseWebpackConfig = easywebpack.getWebpackConfig({
+    env, // 根据环境变量生成对应配置，可以在 npm script 里面配置，支持dev, test, prod 模式
+    target : 'web', // target: web 表示只获取前端构建 Webpack 配置
+    entry:{
+        app: 'src/index.js'
+    }
+});
+// 拿到基础配置, 可以进行二次加工
+module.exports = merge(baseWebpackConfig, {
+   
+})
+```
+
+- builder方式
 
 ```js
 const EasyWebpack = require('easywebpack-react');
@@ -86,6 +134,7 @@ const webpackConfig = new EasyWebpack.WebpackClientBuilder(config).create();
 // Node端运行配置
 const webpackConfig = new EasyWebpack.WebpackServerBuilder(config).create();
 ```
+
 
 ### Weex 解决方案
 

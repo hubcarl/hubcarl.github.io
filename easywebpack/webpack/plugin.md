@@ -3,6 +3,30 @@ layout: webpack/webpack
 description: "专注于技术,切不能沉迷于技术!"
 ---
 
+# plugins 配置
+
+
+## 内置plugin
+
+| plugin                                     | 别名            |  默认是否开启/开启环境  | 
+| :--------                                  | :-----:        | :----:        | 
+| npm-install-webpack-plugin                 | npm            |  否           |
+| webpack.NamedModulesPlugin                 | nameModule     |  是/dev       |
+| webpack.HashedModuleIdsPlugin              | hashModule     |  是/test,prod  |
+| webpack.optimize.ModuleConcatenationPlugin | module         |  是           |
+| webpack.NoEmitOnErrorsPlugin               | error          |  是           |
+| webpack.HotModuleReplacementPlugin         | hot            |  是/dev           |
+| webpack-manifest-plugin                    | manifest       |  是           |
+| progress-bar-webpack-plugin                | progress       |  是/dev       |
+| directory-named-webpack-plugin             | directoryname  |  是           |
+| extract-text-webpack-plugin                | extract        |  是           |
+| webpack.optimize.CommonsChunkPlugin        | commonsChunk   |  是           | 
+| html-webpack-plugin                        | html           |  是           |
+| webpack.optimize.UglifyJsPlugin            | uglifyJs       |  是/prod      |
+| imagemin-webpack-plugin                    | imagemini      | 是/prod      | 
+| webpack-bundle-analyzer                    | analyzer       |  否      | 
+| stats-webpack-plugin                       | stats          |  否      | 
+
 
 ## config.plugins 配置
 
@@ -145,24 +169,3 @@ var Visualizer = require('webpack-visualizer-plugin');
 
 - **args**: {Object/Function} 插件参数
 
-
-## 内置plugin
-
-| plugin                                     | 别名            |  默认是否开启/开启环境  | 
-| :--------                                  | :-----:        | :----:        | 
-| npm-install-webpack-plugin                 | npm            |  否           |
-| webpack.NamedModulesPlugin                 | nameModule     |  是/dev       |
-| webpack.HashedModuleIdsPlugin              | hashModule     |  是/test,prod  |
-| webpack.optimize.ModuleConcatenationPlugin | module         |  是           |
-| webpack.NoEmitOnErrorsPlugin               | error          |  是           |
-| webpack.HotModuleReplacementPlugin         | hot            |  是/dev           |
-| webpack-manifest-plugin                    | manifest       |  是           |
-| progress-bar-webpack-plugin                | progress       |  是/dev       |
-| directory-named-webpack-plugin             | directoryname  |  是           |
-| extract-text-webpack-plugin                | extract        |  是           |
-| webpack.optimize.CommonsChunkPlugin        | commonsChunk   |  是           | 
-| html-webpack-plugin                        | html           |  是           |
-| webpack.optimize.UglifyJsPlugin            | uglifyJs       |  是/prod      |
-| imagemin-webpack-plugin                    | imagemini      | 是/prod      | 
-| webpack-bundle-analyzer                    | analyzer       |  否      | 
-| stats-webpack-plugin                       | stats          |  否      | 

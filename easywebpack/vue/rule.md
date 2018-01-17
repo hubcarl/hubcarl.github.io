@@ -63,6 +63,7 @@ npm run build 或 easywebpack build prod
 
 启动应用前， 请设置 `EGG_SERVER_ENV` 环境变量，测试环境设置 `test`， 正式环境设置 `prod`
 
+
 ```
 npm start
 ```

@@ -1,14 +1,14 @@
 ---
-title: webpack CommonsChunk 工程化实现
-layout: webpack/webpack
+layout: webpack/react
 description: "专注于技术,切不能沉迷于技术!"
 ---
+
 
 ## TypeScript 构建支持
 
 ### 版本要求 ^3.6.0
 
-- easywebpack-vue: ^3.6.0
+- easywebpack-react: ^3.6.0
 
 ### 新增 typescript 构建支持
 
@@ -44,4 +44,4 @@ module.exports = {
 
 #### 项目骨架
 
-[Egg + Vue + TypeScript + Webpack](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/typescript)
+[Egg + React + TypeScript + Webpack](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/typescript)

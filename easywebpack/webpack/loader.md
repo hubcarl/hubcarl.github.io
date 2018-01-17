@@ -3,6 +3,31 @@ layout: webpack/webpack
 description: "专注于技术,切不能沉迷于技术!"
 ---
 
+# loaders 配置
+
+## 内置配置loaders
+
+- easywebpack 内置了 `babel`, `eslint`, `css`, `sass`, `less`, `stylus`, `urlimage`, `urlfont` 等loader,
+- easywebpack-vue 内置了 `vue`, `vuehtml` 等loader,
+- easywebpack-react 内置了 `react-hot-loader` 等loader,
+- easywebpack-weex 内置了 `vue`, `weex` 等loader.
+- easywebpack-html 内置了 `html`, `nunjucks` 等loader.
+
+
+| loader              | 别名           |  默认是否开启  |  webpack.config.js配置举例   | 
+| :--------            | :-----:        | :----:      |       :----             |
+| babel-loader        | babel         |  是           |禁用: loaders:{ babel: false}      |
+| eslint-loader       | eslint        |  是           |禁用: loaders:{ eslint: false} <br /> 自动修复:<br/> loaders:{ eslint: {options: {fix: true}} |
+| tslint-loader       | tslint        |  否           |禁用: loaders:{ tslint: false} <br /> 自动修复:<br/> loaders:{ tslint: {options: {fix: true}  |
+| ts-loader           | typescript    |  否           |禁用: loaders:{ typescript: false} <br /> 禁用: loaders:{ typescript: true} |
+| css-loader          | css           |  是           |禁用: loaders:{ css: false}                         |
+| sass-loader         | sass          |  是           |禁用: loaders:{ sass: false}<br/> 路径配置:<br/> loaders:{sass: {options: {includePaths: ["asset/css"]}} |
+| sass-loader         | scss          |  是           |禁用: loaders:{ scss: false}                        |
+| less-loader         | less          |  否           |禁用: loaders:{ less: false}                        |
+| stylus-loader       | stylus        |  否           |禁用: loaders:{ stylus: false}                         | 
+| url-loader          | urlimage      |  是           |禁用: loaders:{ urlimage: false} <br/> 配置limit(默认1024):<br/> loaders:{urlimage: {options: {limit: 2048 }}  | 
+| url-loader          | urlfont       |  是           |禁用: loaders:{ urlfont: false} <br/> 配置limit(默认1024):<br/> loaders:{urlfont: {options: {limit: 2048 }}   | 
+
 
 ## config.loaders 配置
 
@@ -159,26 +184,4 @@ config.loader配置项除了支持的loader原生属性, 还扩展了 `env`, `ty
 - **postcss**: {Boolean} 可选, 特殊配置, 是否启用postcss, 只有css样式loader需要配置, 其他loader不需要配置
 
 - **use**: {Array/Function} 必须, 支持扩展的Function配置和原生Use配置, use属性是完全覆盖.
-
-
-## 内置配置loader
-
-- easywebpack 内置了 `babel`, `eslint`, `css`, `sass`, `less`, `stylus`, `urlimage`, `urlfont` 等loader,
-- easywebpack-vue 内置了 `vue`, `vuehtml` 等loader,
-- easywebpack-react 内置了 `react-hot-loader` 等loader,
-- easywebpack-weex 内置了 `vue`, `weex` 等loader.
-- easywebpack-html 内置了 `html`, `nunjucks` 等loader.
-
-
-| loader              | 别名           |  默认是否开启  |  webpack.config.js配置举例   | 
-| :--------            | :-----:        | :----:      |       :----             |
-| babel-loader        | babel         |  是           |禁用: loaders:{ babel: false}      |
-| eslint-loader       | eslint        |  是           |禁用: loaders:{ eslint: false} <br /> 自动修复:<br/> loaders:{ eslint: {options: {fix: true}} |
-| css-loader          | css           |  是           |禁用: loaders:{ css: false}                         |
-| sass-loader         | sass          |  是           |禁用: loaders:{ sass: false}<br/> 路径配置:<br/> loaders:{sass: {options: {includePaths: ["asset/css"]}} |
-| sass-loader         | scss          |  是           |禁用: loaders:{ scss: false}                        |
-| less-loader         | less          |  否           |禁用: loaders:{ less: false}                        |
-| stylus-loader       | stylus        |  否           |禁用: loaders:{ stylus: false}                         | 
-| url-loader          | urlimage      |  是           |禁用: loaders:{ urlimage: false} <br/> 配置limit(默认1024):<br/> loaders:{urlimage: {options: {limit: 2048 }}  | 
-| url-loader          | urlfont       |  是           |禁用: loaders:{ urlfont: false} <br/> 配置limit(默认1024):<br/> loaders:{urlfont: {options: {limit: 2048 }}   | 
 
