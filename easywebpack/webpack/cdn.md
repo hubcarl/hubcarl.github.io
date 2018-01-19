@@ -49,7 +49,7 @@ module.exports = {
 
 在 `npm run build` 打正式包的时候, 开启 UPLOAD_CDN 开关
 
-```json
+```js
  {
    "script" :{
       "build:dev": "cross-env easywebpack build dev",
@@ -63,7 +63,7 @@ module.exports = {
 
 这里无需配置 UPLOAD_CDN 参数， 请在 CI 系统配置 UPLOAD_CDN 环境变量
 
-```json
+```js
  {
    "script" :{
       "build:dev": "cross-env easywebpack build dev",

@@ -22,6 +22,7 @@ description: "专注于技术,切不能沉迷于技术!"
 - `vue` [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) 
 - `react` [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git)
 - `weex` [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git)
+- `html` [easywebpack-html](https://github.com/hubcarl/easywebpack-html.git)
 
 其中 `Vue` 和 `React` 支持客户端运行模式构建和服务端模式构建, `Weex` 支持Native模式和Web模式构建.
 

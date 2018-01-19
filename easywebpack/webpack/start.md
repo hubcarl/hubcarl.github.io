@@ -19,6 +19,11 @@ description: "专注于技术,切不能沉迷于技术!"
 
 - [egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate) Egg + React + Webpack  服务端和客户端渲染项目骨架
 
+
+- [egg-vue-typescript-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) 基于 Egg + Vue + TypesScript + Webpack 服务端和客户端渲染项目骨架
+
+- [egg-react-typescript-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate) Egg + React + TypesScript + Webpack  服务端和客户端渲染项目骨架
+
 - [easywebpack-weex-boilerplate](https://github.com/hubcarl/easywebpack-weex-boilerplate) 基于 Weex Native 端和 Web 端构建解决方案渲染项目骨架
 
 

@@ -9,8 +9,8 @@ description: "专注于技术,切不能沉迷于技术!"
 ### 1. `npm install` 安装后, `npm start` 启动失败
 
 在使用 `easywebpack` 体系构建时, 在首次 `npm start` 时, `easywebpack` 会检查开启的 loader, plugin 插件是否已经安装, 如果没有安装则自动安装.
-在这个过程会打印动态安装的 `npm` 模块, 如果安装失败则会导致启动失败, 这个时候你可以手动安装动态安装的 `npm` 模块, 同时把依赖写入 `package.json` 的 `devDependencies`中. 
-然后重新启动.
+在这个过程会打印动态安装的 `npm` 模块, 如果安装失败则会导致启动失败, 这个时候你可以手动安装动态安装的 `npm` 模块 或者通过 `easy install` 自动动态安装缺失的依赖, 同时把依赖写入 `package.json` 的 `devDependencies`中. 
+然后重新启动. 
 
 **这里采用动态安装是因为如果把所有插件都内置, 会导致安装很多无用的 `npm` 模块, 安装缓慢, 更严重的是有些 `loader`, `plugin` 如果出现问题, 则导致整个 `easywebpack` 体系不能用.**
 
@@ -103,7 +103,7 @@ exports.webpack = {
 
 ```js
 // ${app_root}/webpack.config.js
-exports.webpack = {
+module.exports = {
   port: 9100, 
   ......
 };
