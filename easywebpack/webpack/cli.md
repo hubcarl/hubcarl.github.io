@@ -132,7 +132,55 @@ Usage: easywebpack [command] [options]
 
 ![image](/img/webpack/easywebpack-build-nav.png)
 
-#### 3.3.4 打印配置
+#### 3.3.4 动态安装
+
+`easywebpack` 解决方案只内置了必须的几个常用 loader 和 plugin, 其他 loader (比如 less, stylus) 和 plugin (imagemini) 都是需要项目自己根据需要安装。
+如果你自己搭建项目，遇到依赖缺失错误，除了手动 npm install 安装以外, 可以使用 `easy install` 命令，安装所有缺失的依赖，默认是 `npm` 方式
+
+```bash
+easy install
+```
+
+通过 `mode` 参数指定 `cnpm` 方式安装依赖(前提是你全局安装了cnpm)
+
+```bash
+easy install --mode cnpm
+```
+
+#### 3.3.5 清除缓存
+
+```bash
+easy clean
+```
+
+#### 3.3.6 打开缓存目录
+
+```bash
+easy open
+```
+
+#### 3.3.7 杀进程(3.6.0)
+
+```bash
+easy kill 7001
+easy kill 7001,9000,9001
+```
+
+#### 3.3.8 构建大小分析(3.6.0)
+
+通过 `-s` 参数启动构建大小分析工具, 支持 `analyzer`(webpack-bundle-analyzer)  和 `stats`(stats-webpack-plugin) ,  默认用 `analyzer`插件。
+
+```bash
+easy build -s 
+```
+
+使用 `stats`(stats-webpack-plugin) 构建大小分析工具
+
+```bash
+easy build -s stats
+```
+
+#### 3.3.9 打印配置
 
 ```bash
 easywebpack print -h
