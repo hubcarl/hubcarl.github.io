@@ -36,10 +36,6 @@ description: "专注于技术,切不能沉迷于技术!"
 - [增强]支持通过别名对内置 plugin 插件的开启和禁用，以及参数配置
 - [增强]支持通过别名的方式添加 plugin 插件
 
-<div class ="easy-msg-tip">
-easywebpack 内置 plugin 插件别名映射请看页面底部 plugin 别名映射表格。
-</div>
-
 ##### 内置 plugin 扩展参数统一通过 args 节点配置
 
 ```js
