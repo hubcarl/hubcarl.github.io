@@ -83,8 +83,20 @@ module.exports= {
 在这个过程会打印动态安装的 `npm` 模块, 如果安装失败则会导致启动失败, 这个时候你可以手动安装动态安装的 `npm` 模块 或者通过 `easy install` 自动动态安装缺失的依赖, 同时把依赖写入 `package.json` 的 `devDependencies`中. 
 然后重新启动. 
 
-**这里采用动态安装是因为如果把所有插件都内置, 会导致安装很多无用的 `npm` 模块, 安装缓慢, 更严重的是有些 `loader`, `plugin` 如果出现问题, 则导致整个 `easywebpack` 体系不能用.**
 
+`easywebpack` 解决方案只内置了必须的几个常用 loader 和 plugin, 其他 loader (比如 less, stylus) 和 plugin (imagemini) 都是需要项目自己根据需要安装。如果你自己搭建项目，遇到依赖缺失错误，除了手动 npm install 安装以外, 可以使用 `easy install` 命令，安装所有缺失的依赖，默认是 `npm` 方式
+
+```bash
+easy install
+```
+
+通过 `mode` 参数指定 `cnpm` 方式安装依赖(前提是你全局安装了cnpm)
+
+```bash
+easy install --mode cnpm
+```
+
+**这里采用动态安装是因为如果把所有插件都内置, 会导致安装很多无用的 `npm` 模块, 安装缓慢, 更严重的是有些 `loader`, `plugin` 如果出现问题, 则导致整个 `easywebpack` 体系不能用.**
 
 
 ### 4. Egg + Vue/React 启动端口修改
@@ -144,3 +156,17 @@ module.exports = {
   ......
 };
 ```
+
+### 6. 骨架项目中前端使用 `async/await` 特性时, 报错：regeneratorRuntime is not defined。
+
+目前骨架前端是没有用 `async/await`，所以没有内置。有需要的自己可以在 .bablerc 文件加 `transform-runtime`，同时安装对应依赖到 `devDependencies` 中即可。
+
+```bash
+npm install babel-plugin-transform-runtime --save-dev
+```
+
+```js
+// ${app_root}/.bablerc
+{
+  'plugins':['transform-runtime']
+}
