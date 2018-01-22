@@ -10,7 +10,7 @@ easywebpack 3.5.0 新增自定义插件 webpack-manifest-resource-plugin(^2.0.2)
 
 - webpack-manifest-plugin
 
-```json
+```js
 // ${app_root}/config/manifest.json
 {
     "app/app.js": "/public/js/app/app.2cf6dfd1.js",
@@ -22,7 +22,7 @@ easywebpack 3.5.0 新增自定义插件 webpack-manifest-resource-plugin(^2.0.2)
 
 - webpack-manifest-resource-plugin
 
-```json
+```js
 // ${app_root}/config/manifest.json
 {
     "app/app.js": "/public/js/app/app.2cf6dfd1.js",
