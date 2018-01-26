@@ -6,7 +6,42 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ## 常见问题
 
-### 1. 引入 node_modules 下 vue 组件报找不到对应的 loader 错误
+### 1. 禁用 node-sass 安装
+
+目前 easywebpack 默认是 开启了 sass 功能，但安装 `node-sass` 时, 会出现安装不成功(二进制本地编译)的情况，这个时候可以按照如下方式禁用 node-sass
+
+- 确保代码引用里面没有用 sass 编写样式
+- 删除 `package.json` 里面的  `node-sass` 依赖
+- 禁用 webpack 引用 `node-sass` 编译
+
+```js
+// ${app_root}/webpack.config.js
+module.exports= {
+  loaders :{
+    sass: false
+  }
+};
+```
+
+
+### 2. 禁用图片压缩插件 imagemin-webpack-plugin 安装
+
+目前 easywebpack 默认是打正式包时开启了图片压缩功能，但在某些部分机器安装 `imagemin-webpack-plugin` 时, 会出现安装不成功的情况(二进制本地编译, 系统缺少某些本地库)，这个时候可以按照如下方式禁用 node-sass
+
+- 删除 `package.json` 里面的  `imagemin-webpack-plugin` 依赖
+- 禁用 webpack 引用 `imagemin-webpack-plugin` 编译
+
+```js
+// ${app_root}/webpack.config.js
+module.exports= {
+  plugins :{
+    imagemini: false
+  }
+};
+```
+
+
+### 3. 引入 node_modules 下 vue 组件报找不到对应的 loader 错误
 
 `easywebpack-vue` 默认的 `vue-loader` 配置排除了 `node_moudles` 目录, 主要目的是避免 `node_moudles` 被扫描，加快构建速度。如果你需要 引入 `node_moudles` 下 vue 组件, 请把对应的组件加入 `include` 配置 或者 用 `exclude` 覆盖默认配置，建议`include` 配置.
 
@@ -41,7 +76,7 @@ module.exports= {
 };
 ```
 
-### 2. Egg + Vue/React 修改静态资源 publicPath 路径
+### 4. Egg + Vue/React 修改静态资源 publicPath 路径
 
 在 Egg + Vue/React 解决方案中, Webpack publicPath 使用的是默认 `publicPath: '/public/'` 配置。
 
@@ -77,7 +112,7 @@ module.exports= {
 ```
 
 
-### 3. `npm install` 安装后, `npm start` 启动失败
+### 5. `npm install` 安装后, `npm start` 启动失败
 
 在使用 `easywebpack` 体系构建时, 在首次 `npm start` 时, `easywebpack` 会检查开启的 loader, plugin 插件是否已经安装, 如果没有安装则自动安装.
 在这个过程会打印动态安装的 `npm` 模块, 如果安装失败则会导致启动失败, 这个时候你可以手动安装动态安装的 `npm` 模块 或者通过 `easy install` 自动动态安装缺失的依赖, 同时把依赖写入 `package.json` 的 `devDependencies`中. 
@@ -99,7 +134,7 @@ easy install --mode cnpm
 **这里采用动态安装是因为如果把所有插件都内置, 会导致安装很多无用的 `npm` 模块, 安装缓慢, 更严重的是有些 `loader`, `plugin` 如果出现问题, 则导致整个 `easywebpack` 体系不能用.**
 
 
-### 4. Egg + Vue/React 启动端口修改
+### 6. Egg + Vue/React 启动端口修改
 
 Egg 应用本地开发时, npm start 默认启动打开浏览器的端口是 7001, 如果要修改自动打开的端口为6001, 可以在 `config/config.local.js` 中 添加 端口配置
 
@@ -115,7 +150,7 @@ exports.webpack = {
 `egg-webpack` 启动打开浏览器的取端口逻辑: `this.config.webpack.appPort || process.env.PORT || 7001`
 
 
-### 5. 多项目开发时, 端口占用问题
+### 7. 多项目开发时, 端口占用问题
 
 在 Egg + Webpack 项目开发过程中, 会用到 7001, 9000, 9001 三个端口
 
@@ -157,7 +192,7 @@ module.exports = {
 };
 ```
 
-### 6. 骨架项目中前端使用 `async/await` 特性时, 报错：regeneratorRuntime is not defined。
+### 8. 骨架项目中前端使用 `async/await` 特性时, 报错：regeneratorRuntime is not defined。
 
 目前骨架前端是没有用 `async/await`，所以没有内置。有需要的自己可以在 .bablerc 文件加 `transform-runtime`，同时安装对应依赖到 `devDependencies` 中即可。
 
@@ -170,4 +205,15 @@ npm install babel-plugin-transform-runtime --save-dev
 {
   'plugins':['transform-runtime']
 }
+```
+
+### 9. 本地开发时, 相同的图片名称存在覆盖问题
+
+因本地开发时,图片没有hash,如果存在相同的图片名称, 就会存在覆盖问题。目前可以通过开启本地开发图片 hash 临时解决。
+
+```js
+// ${app_root}/webpack.config.js
+module.exports= {
+  imageHash: true
+};
 ```
