@@ -23,20 +23,11 @@ const path = require('path');
 module.exports = {
   type:'client',  // 只构建前端渲染模式, 如果要构建Node运行文件, 这里不用配置
   framework: 'react', // 指定用easywebpack-react 解决方案, 请在项目中安装该依赖
-  entry: {
-    include: 'page',
-    exclude: ['page/test']
-  },
-  alias: {
-    asset: 'asset',
-    component: 'component',
-    framework: 'framework',
-    store: 'store'
-  },
+  entry: 'src/page', // 自动遍历 src/page 下面的所有 js 文件
+  template: 'src/view/layout.html', // html 模板
   lib: ['react', 'react-dom'], // commonsChunk 
-  create() { // 公共配置扩展
-
-  },
+  loaders:{},
+  plugins:{}
   done(){ // 编译完成回调
 
   }
@@ -56,21 +47,21 @@ const webpackConfig = EasyWebpack.getWebpackConfig();
 ### 四. 编译文件
 
 ```bash
-easywebpack build dev
+easy build dev
 
-easywebpack build test
+easy build test
 
-easywebpack build prod
+easy build prod
 ```
 
 ### 五. 直接运行
 
 ```bash
-easywebpack server dev
+easy server dev
 
-easywebpack server test
+easy server test
 
-easywebpack server prod
+easy server prod
 ```
 
 
@@ -86,4 +77,5 @@ easywebpack server prod
 ```bash
 npm i easywebpack-cli  -g
 ```
-- 请通过 `easywebpack init` 命令初始化骨架项目, 根据提示选择对应的项目类型即可.
+
+- 请通过 `easy init` 命令初始化骨架项目, 根据提示选择对应的项目类型即可.

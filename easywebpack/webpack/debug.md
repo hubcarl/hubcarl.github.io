@@ -20,6 +20,69 @@ npm i easywebpack-cli  -g
 
 安装成功以后, 就可以在命令行中使用 `easywebpack` or `easy` 命令, 比如 `easy init`, `easy build`, `easy server`, `easy print`, `easy clean`, `easy open` 等
 
+### 编译
+
+- 本地开发模式编译
+
+```bash
+easy build dev
+```
+
+- 测试环境模式编译
+
+```bash
+easy build test
+```
+
+- 线上正式编译
+
+```bash
+easy build prod
+```
+
+### 清理
+
+- 清理编译缓存文件，比如 DLL 缓存
+
+```bash
+easy clean
+```
+- 清理编译所有文件
+
+```bash
+easy clean all
+```
+
+- 清理自定义目录文件
+
+```bash
+easy clean ./dist
+```
+
+### 杀端口功能
+
+在本地开发时, 时不时遇到端口占用问题, 特别时 windows 平台, 杀进程很繁琐, 通过 `easy kill` 可以快速实现杀掉端口占用进程。
+
+```bash
+easy kill 7001
+easy kill 7001,9000,9001
+```
+
+### 构建大小分析
+
+在项目开发时， 当页面构建的文件太大, 我们可以直接通过 cli 提供功能进行构建大小分析
+
+- 通过 -s 参数启动构建大小分析工具, 支持 analyzer(webpack-bundle-analyzer) 和 stats(stats-webpack-plugin) , 默认用 analyzer插件。
+
+```bash
+easy build -s 
+```
+
+- 使用 stats(stats-webpack-plugin) 构建大小分析工具
+
+```bash
+easy build -s stats
+```
 
 ### 打印配置
 

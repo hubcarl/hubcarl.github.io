@@ -36,11 +36,8 @@ npm install -g easywebpack-cli
 // ${app_root}/webpack.config.js
 module.exports = {
   framework: 'html'
-  entry:{
-    //  src/page 目录下的 js 文件将作为 Webpack entry 入口
-    include: [src/page/**.js],
-    template: 'view/layout.html' 
-  }
+  entry: /src\/page\/**\.js/,
+  template: 'view/layout.html'  
 }
 ```
 
@@ -79,8 +76,8 @@ module.exports = {
 - 支持 `easy start` 方式启动 Webpack dev server
 - 支持 easy build dev/test/prod 三种环境构建
 - 支持纯静态 HTML Webpack构建
-- 支持es6, babel, postcss, eslint 能力
-- 支持开发期热更新能力,同时Webpack 构建文件不落地磁盘
+- 支持 es6, babel, sass, postcss, eslint 能力
+- 支持开发期热更新能力,同时 Webpack 构建文件不落地磁盘
 - 支持编译结果UI展示和访问
-- 支持 图片压缩,js压缩, css压缩, extract能力
+- 支持图片压缩, js压缩, css压缩, extract能力
 - 通过 `easy build prod` 即可构建发布模式

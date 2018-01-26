@@ -1,24 +1,27 @@
 ---
-layout: webpack/vue
+layout: webpack/html
 description: "专注于技术,切不能沉迷于技术!"
 ---
 
-## 基于 `easywebpack-vue` 自定义 Webpack 原生构建
-
+## 基于 Webpack 原始配置构建
 
 ### Webpack 原始配置编写
 
 ```js
 // webpack.config.js
-const easywebpack = require('easywebpack-vue');
+const easywebpack = require('easywebpack-html');
 const webpack = easywebpack.webpack;
 const merge = easywebpack.merge;
 const env = process.env.BUILD_ENV;
 const baseWebpackConfig = easywebpack.getWebpackConfig({
     env, // 根据环境变量生成对应配置，可以在 npm script 里面配置，支持dev, test, prod 模式
-    target : 'web', // target: web 表示只获取前端构建 Webpack 配置
-    entry:{
-        app: 'src/index.js'
+    entry: 'src/page',
+    template: 'src/view/layout.html', // html 模板
+    loaders: {
+      eslint: false // 举例
+    },
+    plugins:{
+      imagemini: false // 举例
     }
 });
 
@@ -42,15 +45,3 @@ module.exports = webpackConfig;
    }
  }
 ```
-
-### 功能说明
-
-这样一份简单的配置具备以下能力
-
-- 支持方式启动 Webpack dev server
-- 支持 dev, test, prod 三种环境构建
-- 支持es6, babel, postcss, eslint 能力
-- 支持开发期热更新能力,同时Webpack 构建文件不落地磁盘
-- 支持 图片压缩,js压缩, css压缩, extract能力
-
-

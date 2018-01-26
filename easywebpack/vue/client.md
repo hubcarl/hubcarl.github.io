@@ -11,7 +11,7 @@ description: "专注于技术,切不能沉迷于技术!"
 npm i easywebpack-cli  -g
 ```
 
-安装成功以后, 就可以在命令行中使用 `easywebpack` 命令, 比如 `easywebpack build`, `easywebpack server`, `easywebpack print` 等
+安装成功以后, 就可以在命令行中使用 `easy` 或 `easywebpack` 命令, 比如 `easy build`, `easy server`, `easy print` 等
 
 
 ### 二. 添加 `webpack.config.js` 配置
@@ -24,15 +24,10 @@ module.exports = {
   type:'client',  // 只构建前端渲染模式, 如果要同时构建Node运行文件, 这里不用配置
   framework: 'vue', // 指定用 easywebpack-vue 解决方案, 请在项目中安装该依赖
   entry: {
-    include: 'page',
-    exclude: ['page/test']
+    include: 'src/page', // 自动遍历 src/page 下面的所有 js 文件
+    exclude: ['src/page/test']
   },
-  alias: {
-    asset: 'asset',
-    component: 'component',
-    framework: 'framework',
-    store: 'store'
-  },
+  template: 'src/view/layout.html', // html 模板
   lib: ['vue/dist/vue.common.js', 'axios'], // commonsChunk 
   done(){ // 编译完成回调
 
@@ -53,21 +48,21 @@ const webpackConfig = VueEasyWebpack.getWebpackConfig();
 ### 四. 编译文件
 
 ```bash
-easywebpack build dev
+easy build dev
 
-easywebpack build test
+easy build test
 
-easywebpack build prod
+easy build prod
 ```
 
 ### 五. 直接运行
 
 ```bash
-easywebpack server dev
+easy server dev
 
-easywebpack server test
+easy server test
 
-easywebpack server prod
+easy server prod
 ```
 
 
@@ -83,4 +78,4 @@ easywebpack server prod
 ```bash
 npm i easywebpack-cli  -g
 ```
-- 请通过 `easywebpack init` 命令初始化骨架项目, 根据提示选择对应的项目类型即可.
+- 请通过 `easy init` 命令初始化骨架项目, 根据提示选择对应的项目类型即可.

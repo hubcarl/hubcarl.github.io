@@ -121,6 +121,31 @@ module.exports = merge(baseWebpackConfig, {
 webpack --config webpack.config.js
 ```
 
+### easywebpack-cli 新增杀端口功能
+
+在本地开发时, 时不时遇到端口占用问题, 特别时 windows 平台, 杀进程很繁琐, 通过 `easy kill` 可以快速实现杀掉端口占用进程。
+
+```bash
+easy kill 7001
+easy kill 7001,9000,9001
+```
+
+### easywebpack-cli 构建大小分析
+
+在项目开发时， 当页面构建的文件太大, 我们可以直接通过 cli 提供功能进行构建大小分析
+
+
+- 通过 -s 参数启动构建大小分析工具, 支持 analyzer(webpack-bundle-analyzer) 和 stats(stats-webpack-plugin) , 默认用 analyzer插件。
+
+```bash
+easy build -s 
+```
+
+- 使用 stats(stats-webpack-plugin) 构建大小分析工具
+
+```bash
+easy build -s stats
+```
 
 ## ^3.5.0
 

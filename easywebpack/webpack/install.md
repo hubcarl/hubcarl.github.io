@@ -32,6 +32,29 @@ const WebpackClientBuilder = EasyWebpack.WebpackClientBuilder;
 const WebpackServerBuilder = EasyWebpack.WebpackServerBuilder;
 ```
 
+```js
+const EasyWebpack = require('easywebpack-vue');
+const WebpackClientBuilder = EasyWebpack.WebpackClientBuilder;
+const WebpackServerBuilder = EasyWebpack.WebpackServerBuilder;
+```
+
+```js
+const EasyWebpack = require('easywebpack-react');
+const WebpackClientBuilder = EasyWebpack.WebpackClientBuilder;
+const WebpackServerBuilder = EasyWebpack.WebpackServerBuilder;
+```
+
+```js
+const EasyWebpack = require('easywebpack-weex');
+const WebpackWeexBuilder = EasyWebpack.WebpackWeexBuilder;
+const WebpackWebBuilder = EasyWebpack.WebpackWebBuilder;
+```
+
+```js
+const EasyWebpack = require('easywebpack-html');
+const WebpackClientBuilder = EasyWebpack.WebpackClientBuilder ;
+```
+
 #### 2.2 Webpack 辅助对象 webpack, merge, Utils
   
 

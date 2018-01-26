@@ -43,6 +43,8 @@ easywebpack 在 Webpack 的基础上, 主要做了以下三件事情:
 
 ## 基于 easywebpack 构建的项目骨架
 
+![image](/img/webpack/easywebpack.plugin.png)
+
 >**项目骨架, 你可以通过 [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli) 命令行工具进行初始化和构建.**
 
 - [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) 基于 Egg + Vue + Webpack 服务端和客户端渲染项目骨架

@@ -11,7 +11,7 @@ description: "专注于技术,切不能沉迷于技术!"
 npm i easywebpack-cli  -g
 ```
 
-安装成功以后, 就可以在命令行中使用 `easywebpack` 命令, 比如 `easywebpack build`, `easywebpack server`, `easywebpack print` 等
+安装成功以后, 就可以在命令行中使用 `easy` 命令, 比如 `easy build`, `easy server`, `easy print` 等
 
 
 ### 二. 添加 `webpack.config.js` 配置
@@ -22,14 +22,11 @@ npm i easywebpack-cli  -g
 const path = require('path');
 module.exports = {
   framework: 'html', // 指定用easywebpack-html 解决方案, 请在项目中安装该依赖
-  entry: {
-    include: 'page'
-  },
+  entry: 'src/page',
+  template: 'src/view/layout.html', // html 模板
   alias: {
     asset: 'asset',
-    component: 'component',
-    framework: 'framework',
-    store: 'store'
+    component: 'component'
   },
   done(){ // 编译完成回调
 

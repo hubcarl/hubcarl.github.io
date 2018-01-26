@@ -170,3 +170,4 @@ npm install babel-plugin-transform-runtime --save-dev
 {
   'plugins':['transform-runtime']
 }
+```
