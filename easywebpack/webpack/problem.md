@@ -26,7 +26,7 @@ module.exports= {
 
 ### 2. 禁用图片压缩插件 imagemin-webpack-plugin 安装
 
-目前 easywebpack 默认是打正式包时开启了图片压缩功能，但在某些部分机器安装 `imagemin-webpack-plugin` 时, 会出现安装不成功的情况(二进制本地编译, 系统缺少某些本地库)，这个时候可以按照如下方式禁用 node-sass
+目前 easywebpack 默认是打正式包时开启了图片压缩功能，但在某些部分机器安装 `imagemin-webpack-plugin` 时, 会出现安装不成功的情况(二进制本地编译, 系统缺少某些本地库)，这个时候可以按照如下方式禁用 `imagemin-webpack-plugin`
 
 - 删除 `package.json` 里面的  `imagemin-webpack-plugin` 依赖
 - 禁用 webpack 引用 `imagemin-webpack-plugin` 编译
