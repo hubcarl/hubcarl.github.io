@@ -31,7 +31,7 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ### 本地开发
 
-一般我们推进把 `easy build dev`, `easy build test`, `easy build prod` 配置到 项目的 `package.json` 的 script 中去, 然后通过 npm run [command] 的方式使用。
+一般我们推荐把 `easy build dev`, `easy build test`, `easy build prod` 配置到 项目的 `package.json` 的 script 中去, 然后通过 npm run [command] 的方式使用。
 
 - 通过 `npm run [command]` 方式使用 easy 命令时，不需要全局安装 `easywepback-cli` 命令行工具, 只需要把 `easywepback-cli` 安装到项目 `devDependencies` 即可。
 - 在命令行直接使用 `easy` 命令时，需要全局安装 `easywepback-cli` 命令行工具。如果不安装, 可以通过 npm5 支持的 `npx easy` 方式运行。
