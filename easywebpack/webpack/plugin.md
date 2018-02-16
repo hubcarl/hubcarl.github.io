@@ -26,6 +26,7 @@ description: "专注于技术,切不能沉迷于技术!"
 | imagemin-webpack-plugin                    | imagemini      | 是/prod      | 
 | webpack-bundle-analyzer                    | analyzer       |  否      | 
 | stats-webpack-plugin                       | stats          |  否      | 
+| service-worker-precache-webpack-plugin     | serviceworker  |  否      | 
 
 
 ## config.plugins 配置

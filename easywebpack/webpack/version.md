@@ -5,6 +5,15 @@ description: "专注于技术,切不能沉迷于技术!"
 
 # easywebpack 版本发布说明
 
+## ^3.7.0
+
+- easywebpack: ^3.7.0
+- service-worker-register: ^1.2.0
+- egg-serviceworker: ^1.0.0
+- service-worker-precache-webpack-plugin: ^1.2.0
+
+支持创建 service-worker.js 文件和 service worker 注册  
+
 ## ^3.6.0
 
 - easywebpack-vue: ^3.6.0
