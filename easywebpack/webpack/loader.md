@@ -5,6 +5,8 @@ description: "专注于技术,切不能沉迷于技术!"
 
 # loaders 配置
 
+`v3` 代表 easywebpack 3.x.x, `v4` 代表 easywebpack 4.x.x
+
 ## 内置配置loaders
 
 - easywebpack 内置了 `babel`, `eslint`, `css`, `sass`, `less`, `stylus`, `urlimage`, `urlfont` 等loader,
@@ -21,8 +23,8 @@ description: "专注于技术,切不能沉迷于技术!"
 | tslint-loader       | tslint        |  否           |禁用: loaders:{ tslint: false} <br /> 自动修复:<br/> loaders:{ tslint: {options: {fix: true}  |
 | ts-loader           | typescript    |  否           |禁用: loaders:{ typescript: false} <br /> 禁用: loaders:{ typescript: true} |
 | css-loader          | css           |  是           |禁用: loaders:{ css: false}                         |
-| sass-loader         | sass          |  是           |禁用: loaders:{ sass: false}<br/> 路径配置:<br/> loaders:{sass: {options: {includePaths: ["asset/css"]}} |
-| sass-loader         | scss          |  是           |禁用: loaders:{ scss: false}                        |
+| sass-loader         | sass          |  v3 是 v4 否       |禁用: loaders:{ sass: false}<br/> 路径配置:<br/> loaders:{sass: {options: {includePaths: ["asset/css"]}} |
+| sass-loader         | scss          |  v3 是 v4 否       |禁用: loaders:{ scss: false}                        |
 | less-loader         | less          |  否           |禁用: loaders:{ less: false}                        |
 | stylus-loader       | stylus        |  否           |禁用: loaders:{ stylus: false}                         | 
 | url-loader          | urlimage      |  是           |禁用: loaders:{ urlimage: false} <br/> 配置limit(默认1024):<br/> loaders:{urlimage: {options: {limit: 2048 }}  | 

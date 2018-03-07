@@ -7,7 +7,7 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ## ^4.0.0
 
-** Webpack 升级为 ^4.1.0 版本 **,  相关插件和解决方案使用 Webpack 4 版本说明
+**Webpack 升级为 ^4.1.0 版本**,  相关插件和解决方案使用 Webpack 4 版本说明
 
 ### 支持 Webpack 4 插件版本
 
@@ -33,9 +33,10 @@ description: "专注于技术,切不能沉迷于技术!"
 - easywebpack 设置 mode 配置
 - easywebpack runtime 和 splitChunk 支持
 - easywebpack-vue 内置 vue-loader 升级 14.1.1
+- easywebpack-vue 内置 { transformToRequire: { img: ['url', 'src'] } } 配置
 - easywebpack 内置 extract-text-webpack-plugin 升级 4.0.0-beta.0
 - 升级 webpack-hot-middleware 为最新版本
-- hack webapck node ssr build, 待 Webpack 发布 [6681](https://github.com/webpack/webpack/issues/6681)
+- hack webapck4 code node ssr build, 待 Webpack 发布 [6681](https://github.com/webpack/webpack/issues/6681)
 - webpack-tool 支持 koa-proxy 代理设置
 - easywebpack config 合并重构
 - easywebpack 移除历史兼容代码
@@ -49,6 +50,9 @@ description: "专注于技术,切不能沉迷于技术!"
 - egg-webpack: ^4.0.2
 - 项目 package.json 删除 easywebpack 内置 babel-core, babel-eslint, babel-loader, postcss-loader, progress-bar-webpack-plugin, webpack-manifest-resource-plugin 插件
 - [egg-vue-webpack-boilerplate 项目 webpack4 分支](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/webpack4)
+- hack webpack[NodeMainTemplatePlugin.js](https://github.com/hubcarl/egg-vue-webpack-boilerplate/blob/webpack4/script/webpack4/webpack/lib/node/NodeMainTemplatePlugin.js), 
+please see issue [6681](https://github.com/webpack/webpack/issues/6681), 同时需要在 `package.json` script 中加入：`"postinstall": "node ./script/postinstall.js"`
+- 如果 webpack.config.js 配置了 loaders.vue 的 transformToRequire 配置, 请去掉, 以内置
 
 #### Egg + React 项目
 
@@ -56,6 +60,7 @@ description: "专注于技术,切不能沉迷于技术!"
 - egg-webpack: ^4.0.2
 - 项目 package.json 删除 easywebpack 内置 babel-core, babel-eslint, babel-loader, postcss-loader, progress-bar-webpack-plugin, webpack-manifest-resource-plugin 插件
 - [egg-react-webpack-boilerplate 项目 webpack4 分支](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/webpack4)
+- Hack webpack4 code[NodeMainTemplatePlugin.js](https://github.com/hubcarl/egg-react-webpack-boilerplate/blob/webpack4/script/webpack4/webpack/lib/node/NodeMainTemplatePlugin.js), please see issue [6681](https://github.com/webpack/webpack/issues/6681), 同时需要在 `package.json` script 中加入：`"postinstall": "node ./script/postinstall.js"`
 
 ### 纯静态页面构建
 

@@ -8,7 +8,7 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ### 1. 禁用 node-sass 安装
 
-目前 easywebpack 默认是 开启了 sass 功能，但安装 `node-sass` 时, 会出现安装不成功(二进制本地编译)的情况，这个时候可以按照如下方式禁用 node-sass
+目前 easywebpack 3 默认是 开启了 sass 功能，但安装 `node-sass` 时, 会出现安装不成功(二进制本地编译)的情况，这个时候可以按照如下方式禁用 node-sass
 
 - 确保代码引用里面没有用 sass 编写样式
 - 删除 `package.json` 里面的  `node-sass` 依赖
@@ -23,6 +23,7 @@ module.exports= {
 };
 ```
 
+**easywebpack 4** 已默认禁用。
 
 ### 2. 禁用图片压缩插件 imagemin-webpack-plugin 安装
 

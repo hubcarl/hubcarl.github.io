@@ -45,6 +45,15 @@ const serviceWorkerRegister = require('service-worker-register');
 serviceWorkerRegister.register('service-worker.js');
 ```
 
+或
+
+```js
+// 或者异步加载
+import('service-worker-register').then(sw =>{
+  sw.default.register('service-worker.js');
+});
+```
+
 >注意：因开发环境构建的文件在内存中，sw-precache 获取不到文件列表，目前开发环境是不会注册的。
 
 
