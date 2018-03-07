@@ -5,6 +5,65 @@ description: "专注于技术,切不能沉迷于技术!"
 
 # easywebpack 版本发布说明
 
+## ^4.0.0
+
+** Webpack 升级为 ^4.1.0 版本 **,  相关插件和解决方案使用 Webpack 4 版本说明
+
+### 支持 Webpack 4 插件版本
+
+- easywebpack: ^4.0.0
+- easywebpack-cli: ^3.8.0
+- easywebpack-vue: ^4.0.0
+- easywebpack-react: ^4.0.0
+- easywebpack-html: ^4.0.0
+- easywebpack-js: ^4.0.0(待升级)
+- egg-webpack: ^4.0.2
+- webpack-tool: ^4.0.0
+- webpack-manifest-resource-plugin: ^4.0.0
+
+### 功能说明
+
+#### easywebpack 相关
+
+- webpack 3 升级为 webpack 4
+- easywebpack 内置 babel-core, babel-eslint, babel-loader, postcss-loader, progress-bar-webpack-plugin, webpack-manifest-resource-plugin, service-worker-precache-webpack-plugin 插件，项目无需安装
+- easywebpack sass-loader 默认开启改为禁用
+- easywebpack 内置 eslint-loader 升级 2.0.0
+- easywebpack 内置 file-loader 升级 1.1.10
+- easywebpack 设置 mode 配置
+- easywebpack runtime 和 splitChunk 支持
+- easywebpack-vue 内置 vue-loader 升级 14.1.1
+- easywebpack 内置 extract-text-webpack-plugin 升级 4.0.0-beta.0
+- 升级 webpack-hot-middleware 为最新版本
+- hack webapck node ssr build, 待 Webpack 发布 [6681](https://github.com/webpack/webpack/issues/6681)
+- webpack-tool 支持 koa-proxy 代理设置
+- easywebpack config 合并重构
+- easywebpack 移除历史兼容代码
+
+
+### 升级说明
+
+#### Egg + Vue 项目
+
+- easywebpack-vue: ^4.0.0
+- egg-webpack: ^4.0.2
+- 项目 package.json 删除 easywebpack 内置 babel-core, babel-eslint, babel-loader, postcss-loader, progress-bar-webpack-plugin, webpack-manifest-resource-plugin 插件
+- [egg-vue-webpack-boilerplate 项目 webpack4 分支](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/webpack4)
+
+#### Egg + React 项目
+
+- easywebpack-react: ^4.0.0
+- egg-webpack: ^4.0.2
+- 项目 package.json 删除 easywebpack 内置 babel-core, babel-eslint, babel-loader, postcss-loader, progress-bar-webpack-plugin, webpack-manifest-resource-plugin 插件
+- [egg-react-webpack-boilerplate 项目 webpack4 分支](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/webpack4)
+
+### 纯静态页面构建
+
+- easywebpack-html: ^4.0.0
+- 项目 package.json 删除 easywebpack 内置 babel-core, babel-eslint, babel-loader, postcss-loader, progress-bar-webpack-plugin, webpack-manifest-resource-plugin 插件
+- [multiple-html-boilerplate 项目 webpack4 分支](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate/tree/webpack4)
+
+
 ## ^3.7.0
 
 - easywebpack: ^3.7.0
