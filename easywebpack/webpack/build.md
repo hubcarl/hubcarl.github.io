@@ -12,7 +12,7 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ### 构建配置
 
-在 `easywebpack` 解决方案里面， 默认支持了通过 env () 参数支持了三套环境(`dev`, `test`, `prod`), 根据环境控制是否开启 Webpack 构建配置选项。
+在 `easywebpack` 解决方案里面， 默认支持了通过 env 参数支持了三套环境(`dev`, `test`, `prod`), 根据环境控制是否开启 Webpack 构建配置选项。
 
 **config.env** : 非必需, 目前支持 `dev`, `test`, `prod` 三种环境, 默认 `dev` 
 
