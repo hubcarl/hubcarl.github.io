@@ -47,12 +47,12 @@ serviceWorkerRegister.register('service-worker.js');
 
 ## egg + service worker
 
-`easywebpack` 默认生成的 `service-worker.js` 是在 `${app_root}/public/service-worker.js`这里. 这样 `service-worker.js` 访问路径是 http://127.0.0.1:7001/public/service-worker.js。
+`easywebpack` 默认生成的 `service-worker.js` 是在 `${app_root}/public/service-worker.js`这里. 这样 `service-worker.js` 访问路径是 http://127.0.0.1:7001/public/service-worker.js。但这样访问会存在一个问题：
 
-
-
+```
 将 service worker 文件注册为 `/public/service-worker.js`，那么，service worker 只能收到 /public/ 路径下的 `fetch` 事件（例如： /public/page1/, /public/page2/), 但我们的页面访问是没有
 /public/ 这一层路径的。正常情况下, `service-worker.js` 文件被放在这个域的根目录下，和网站同源。这个 service work 将会收到这个域下的所有 fetch 事件。
-  
+```
+ 
 这个问题可以通过 [egg-serviceworker](https://github.com/hubcarl/egg-serviceworker) 解决。
 通过 `egg-serviceworker` 插件, 我们可以这样访问 http://127.0.0.1:7001/service-worker.js  
