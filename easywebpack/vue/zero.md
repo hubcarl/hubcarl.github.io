@@ -134,7 +134,7 @@ module.exports = {
     exclude: ['app/web/page/[a-z]+/component'],
   },
   alias: {
-    ~: __dirname,
+    '~': __dirname,
     asset: 'app/web/asset',
     component: 'app/web/component',
     framework: 'app/web/framework',
