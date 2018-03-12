@@ -32,12 +32,14 @@ module.exports = app => {
 -  Node 编译 HTML之后会根据 `config/manifest.json` 文件把 css, js 资源依赖注入到 HTML
 - 当服务队渲染失败时, `egg-view-react-ssr` 默认开启进行客户端渲染模式。当线上流量过大时, 可以根据一定策略一部分用户服务端渲染, 一部分用户前端渲染, 减少服务端压力。
 - 本地开发默认禁用缓存, 线上运行模式默认开启缓存。
-- 如果是 SPA SSR 应用, 一般是在 React 里面提供组件的 fetch 方法由 Node 进行 fetch 数据调用, 然后把数据放入 store, 而不是在 Node 端进行获取, 具体见[egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate/blob/master/app/web/page/spa/ssr.jsx) 功能实现
+- 如果是 SPA SSR 应用, 一般是在 React 里面提供组件的 fetch 方法由 Node 进行 fetch 数据调用, 然后把数据放入 store, 而不是在 Node 端进行获取, 具体见[egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate/blob/master/app/web/page/spa/ssr.jsx) SPA-SSR 功能实现
 
 
 ### Egg + React 客户端浏览器渲染模式
 
 #### 调用 `egg-view-react-ssr` 的 `renderClient` 方法实现客户端浏览器渲染
+
+**renderClient 表示 Node 服务端端只渲染一个包含 HTML，header，body 的一个简单 HTML 页面骨架， 具体页面内容由 React 在浏览器进行渲染，你可以在浏览器右键源代码看看HTML代码就明白了**
 
 在使用上面, 客户端浏览器渲染模式只需要把 `render` 改成 `renderClient`。 正常情况下, 能进行 `render` 运行的, `renderClient`  方式也能正常运行。
 
@@ -77,3 +79,5 @@ export default class Layout extends Component {
   }
 }
 ```
+
+具体例子请见：[egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate) 运行后菜单 SPA-CSR 例子。 

@@ -16,7 +16,7 @@ description: "专注于技术,切不能沉迷于技术!"
 - easywebpack-vue: ^4.0.0
 - easywebpack-react: ^4.0.0
 - easywebpack-html: ^4.0.0
-- easywebpack-js: ^4.0.0(待升级)
+- easywebpack-js: ^4.0.0
 - egg-webpack: ^4.0.2
 - webpack-tool: ^4.0.0
 - webpack-manifest-resource-plugin: ^4.0.0
@@ -36,7 +36,7 @@ description: "专注于技术,切不能沉迷于技术!"
 - easywebpack-vue 内置 { transformToRequire: { img: ['url', 'src'] } } 配置
 - easywebpack 内置 extract-text-webpack-plugin 升级 4.0.0-beta.0
 - 升级 webpack-hot-middleware 为最新版本
-- hack webapck4 code node ssr build, 待 Webpack 发布 [6681](https://github.com/webpack/webpack/issues/6681)
+- ~~hack webapck4 code node ssr build, 待 Webpack 发布 [6681](https://github.com/webpack/webpack/issues/6681)~~
 - webpack-tool 支持 koa-proxy 代理设置
 - easywebpack config 合并重构
 - easywebpack 移除历史兼容代码
