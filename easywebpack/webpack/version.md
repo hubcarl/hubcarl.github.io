@@ -44,6 +44,22 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ### 升级说明
 
+- 安装 `easywebpack-cli` 最新版本进行升级
+
+```bash
+npm i easywebpack-cli -g 
+```
+
+- 升级依赖
+
+```bash
+easy upgrade
+```
+
+重新安装依赖后，运行即可。
+
+### 升级细节
+
 #### Egg + Vue 项目
 
 - easywebpack-vue: ^4.0.0
