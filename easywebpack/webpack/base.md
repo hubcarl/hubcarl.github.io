@@ -9,13 +9,13 @@ description: "专注于技术,切不能沉迷于技术!"
 ```js
 // ${app_root}/webpack.config.js
 module.exports = {
-   // framework 支持 `html`, `vue`, `react`, `weex`
+   // framework 支持 `js`,`html`, `vue`, `react`, `weex`
   framework: 'html' 
   entry:{
     // src/page 目录下的 js 文件将作为 Webpack entry 入口
     include: [/src\/page\/**.js/],
-    template: 'view/layout.html' 
   },
+  template: 'view/layout.html' 
   loaders:{
     // 默认可以不用配置, 添加或扩展请见配置loaders章节  
   },
@@ -28,7 +28,7 @@ module.exports = {
 }
 ```
 
-- framework: html 表示 `easywebpack-cli` 使用 `easywebpack-html` 构建解决方案, 目前 framework 支持 `html`, `vue`, `react`, `weex` 四种.
+- framework: html 表示 `easywebpack-cli` 使用 `easywebpack-html` 构建解决方案, 目前 framework 支持 `js`, `html`, `vue`, `react`, `weex` 四种.
 - entry 是必须配置, loaders, plugins, done 等非必须
 - 更多参数配置请见 [参数特性配置](/easywebpack/webpack/feature) 配置文档 
 

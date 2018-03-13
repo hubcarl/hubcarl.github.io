@@ -11,15 +11,15 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ### 支持 Webpack 4 插件版本
 
-- easywebpack: ^4.0.0
-- easywebpack-cli: ^3.8.0
-- easywebpack-vue: ^4.0.0
-- easywebpack-react: ^4.0.0
-- easywebpack-html: ^4.0.0
-- easywebpack-js: ^4.0.0
-- egg-webpack: ^4.0.2
-- webpack-tool: ^4.0.0
-- webpack-manifest-resource-plugin: ^4.0.0
+- easywebpack: ^4.x.x
+- easywebpack-cli: ^3.9.0
+- easywebpack-vue: ^4.x.x
+- easywebpack-react: ^4.x.x
+- easywebpack-html: ^4.x.x
+- easywebpack-js: ^4.x.x
+- egg-webpack: ^4.x.x
+- webpack-tool: ^4.x.x
+- webpack-manifest-resource-plugin: ^4.x.x
 
 ### 功能说明
 
@@ -62,27 +62,24 @@ easy upgrade
 
 #### Egg + Vue 项目
 
-- easywebpack-vue: ^4.0.0
-- egg-webpack: ^4.0.2
+- easywebpack-vue: ^4.x.x
+- egg-webpack: ^4.x.x
 - 项目 package.json 删除 easywebpack 内置 babel-core, babel-eslint, babel-loader, postcss-loader, progress-bar-webpack-plugin, webpack-manifest-resource-plugin 插件
-- [egg-vue-webpack-boilerplate 项目 webpack4 分支](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/webpack4)
-- hack webpack[NodeMainTemplatePlugin.js](https://github.com/hubcarl/egg-vue-webpack-boilerplate/blob/webpack4/script/webpack4/webpack/lib/node/NodeMainTemplatePlugin.js), 
-please see issue [6681](https://github.com/webpack/webpack/issues/6681), 同时需要在 `package.json` script 中加入：`"postinstall": "node ./script/postinstall.js"`
+- [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate)
 - 如果 webpack.config.js 配置了 loaders.vue 的 transformToRequire 配置, 请去掉, 以内置
 
 #### Egg + React 项目
 
-- easywebpack-react: ^4.0.0
-- egg-webpack: ^4.0.2
+- easywebpack-react: ^4.x.x
+- egg-webpack: ^4.x.x
 - 项目 package.json 删除 easywebpack 内置 babel-core, babel-eslint, babel-loader, postcss-loader, progress-bar-webpack-plugin, webpack-manifest-resource-plugin 插件
-- [egg-react-webpack-boilerplate 项目 webpack4 分支](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/webpack4)
-- Hack webpack4 code[NodeMainTemplatePlugin.js](https://github.com/hubcarl/egg-react-webpack-boilerplate/blob/webpack4/script/webpack4/webpack/lib/node/NodeMainTemplatePlugin.js), please see issue [6681](https://github.com/webpack/webpack/issues/6681), 同时需要在 `package.json` script 中加入：`"postinstall": "node ./script/postinstall.js"`
+- [egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate)
 
 ### 纯静态页面构建
 
-- easywebpack-html: ^4.0.0
+- easywebpack-html: ^4.x.x
 - 项目 package.json 删除 easywebpack 内置 babel-core, babel-eslint, babel-loader, postcss-loader, progress-bar-webpack-plugin, webpack-manifest-resource-plugin 插件
-- [multiple-html-boilerplate 项目 webpack4 分支](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate/tree/webpack4)
+- [multiple-html-boilerplate](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate)
 
 
 ## ^3.7.0
