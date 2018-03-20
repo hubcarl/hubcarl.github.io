@@ -37,8 +37,6 @@ module.exports = {
 
 ### 1. 配置devtool
 
-这个配置只会在 `env: dev` 生效
-
 ```js
 module.exports = {
   devtool:'source-map'
@@ -99,3 +97,26 @@ module.exports = {
 
 - 当配置了 `dll` 节点时， npm start 或者 easy build 构建时，会检查 dll 文件是否存在，不存在则会先构建dll文件，构建完成后再接着构建页面，一步完成。 
 - 当构建的工程较大或引入的第三方组件较多时，`dll` 方案相比  `commonsChunk` 时， 能明显的提高构建速度(通过一个实际项目测试发现，构建速度减少了2/3)。
+
+
+### 5. 本地开发启用图片hash
+
+因本地开发时,图片没有hash,如果存在相同的图片名称, 就会存在覆盖问题。目前可以通过开启本地开发图片 hash 临时解决。
+
+```js
+// ${app_root}/webpack.config.js
+module.exports= {
+  imageHash: true
+};
+```
+
+### 6. 启用 Webpack 编译缓存
+
+easywebpack 3 默认时禁用, easywebpack 4 版本默认开启。
+
+```js
+// ${app_root}/webpack.config.js
+module.exports= {
+  cache: true
+};
+```

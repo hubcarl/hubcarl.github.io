@@ -218,3 +218,12 @@ module.exports= {
   imageHash: true
 };
 ```
+
+### 10. 本地开发时, Chrome 偶尔出现 call 或 require 未定义等 JS 错误
+
+- 开发期间禁用 Chrome Network控制面板网络缓存, Disable cache 勾选上
+- 运行 npx easy clean all 或 easy clean all (cli)
+
+
+
+
