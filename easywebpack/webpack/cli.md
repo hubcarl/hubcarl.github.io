@@ -17,12 +17,13 @@ description: "专注于技术,切不能沉迷于技术!"
 - 支持命令行 Webpack 构建，包括Webpack配置信息打印(调试)和获取
 - 提供构建结果 UI 导航展现和访问。 
 
-目前支持如下三种框架构建，Angular 或其他框架支持也非常简单，有兴趣的可以找我沟通参与实现。
+目前支持如下四种框架构建，Angular 或其他框架支持也非常简单，有兴趣的可以找我沟通参与实现。
 
 - `vue` [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) 
 - `react` [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git)
 - `weex` [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git)
 - `html` [easywebpack-html](https://github.com/hubcarl/easywebpack-html.git)
+- `js` [easywebpack-js](https://github.com/hubcarl/easywebpack-js.git)
 
 其中 `Vue` 和 `React` 支持客户端运行模式构建和服务端模式构建, `Weex` 支持Native模式和Web模式构建.
 

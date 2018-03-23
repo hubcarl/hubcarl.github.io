@@ -28,6 +28,10 @@ module.exports = {
     asset: 'asset',
     component: 'component'
   },
+  proxy: {  // 接口代理转发, 通过 `koa-proxy` 实现
+    host:  'http://localhost:8888',   
+    match: /\/api/
+  },
   done(){ // 编译完成回调
 
   }

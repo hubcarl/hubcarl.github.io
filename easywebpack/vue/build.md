@@ -1,6 +1,6 @@
 ---
 title: 前端工程化脚手架easywebpack-cli
-layout: webpack/webpack
+layout: webpack/vue
 description: "专注于技术,切不能沉迷于技术!"
 ---
 
@@ -58,7 +58,7 @@ description: "专注于技术,切不能沉迷于技术!"
 #### 本地开发模式
 
 ```bash
-npm start 
+npm run dev 
 ```
 
 #### 本地模拟测试环境
@@ -102,4 +102,4 @@ npm run build
 
 #### 启动
 
-npm run start:prod
+npm run start

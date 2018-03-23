@@ -12,8 +12,15 @@ description: "专注于技术,切不能沉迷于技术!"
 - vue ssr 开发模式(dev)默认为 false， 发布模式（test or prod）为 true
 - react ssr 开发模式和发布模式都为 true
 
+### 2. css 热更新
 
-### 2. css module
+**config.hotCss** : 非必需，{boolean}. 是否热更新加载 css
+
+- vue ssr 本地开发时, css 是 js 内敛的， 无需开启; 如果采用 css 分离模式，请显示开启该配置。
+- react ssr 开发模式 css 时,  css 是分离出来的，默认开启。
+
+
+### 4. css module
 
 **config.cssModule** : 非必需，{boolean,object} 开启 css module 特效
 
@@ -35,7 +42,7 @@ module.exports = {
 }
 ```
 
-### 3. 开启 loader 和 plugin 插件自动检测功能
+### 5. 开启 loader 和 plugin 插件自动检测功能
 
 **config.install** : 非必需，默认配置如下。
 
@@ -58,7 +65,7 @@ module.exports = {
 这个时候，你需要自己手动安装缺失的插件。
 
 
-### 4. js单独打包
+### 6. js单独打包
 
 **config.packs**: 可选, {Object} key:value 形式, 其中 key 为生成的文件名, value为要打包的文件
 
@@ -74,7 +81,7 @@ module.exports = {
 
 这样 Webpack 构建的 `sdk.js` 文件是一个完整的 javascript 文件.
 
-### 5. 构建类型配置
+### 7. 构建类型配置
 
 **config.type** :  需要结合 `easywebpack-cli` 使用的, 目前支持 `client`, `server`, `web`, `weex`, 其中 `client` 和 `server` 配对使用, `web` 和 `weex` 配对使用.
 
@@ -92,7 +99,7 @@ module.exports = {
 - 只构建 Weex Web模式时, 配置 `type:web`
 
 
-### 6. 回调函数
+### 8. 回调函数
 
 **config.done**: {Function} 编译完成回调方法
 
@@ -104,6 +111,6 @@ module.exports = {
 - `easywebpack-weex` 提供 `onWeb` 和 `onWeex` 方法
 
 
-### 7. 更多配置
+### 9. 更多配置
 
 [webpack.config.js配置项](/easywebpack/webpack/config)

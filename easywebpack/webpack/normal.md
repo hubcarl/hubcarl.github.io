@@ -43,17 +43,6 @@ module.exports = {
 }
 ```
 
-目前只在开发环境启用, 你可以在 `onClient` 回调函数里面强制启用所有环境
-
-```js
-// ${app_root}/webpack.config.js
-module.exports = {
-  onClient(){
-    this.setDevTool('source-map', true);
-  }
-}
-```
-
 ## eslint 配置自动修复功能, 默认禁用
 
 ```js

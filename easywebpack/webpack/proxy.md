@@ -30,3 +30,20 @@ module.exports = {
 ### nginx 和 dnsmasq 配合使用
 
 如何在本地通过 nginx 和 dnsmasq 在本地搭建域名服务：[nginx 和 dnsmasq 在本地搭建域名服务](/easywebpack/webpack/nginx)
+
+
+## 接口代理
+
+easywebpack 4 版本支持了本地接口代理转发的功能, 主要解决本地开发跨域问题. 
+
+```js
+// webpack.config.js
+module.exports = {
+  proxy: {
+    host:  'http://localhost:8888',   
+    match: /\/api/
+  },
+}
+```
+
+proxy 的实现是通过 `koa-proxy` 实现的，具体配置可以参考 [koa-proxy](https://www.npmjs.com/package/koa-proxy) 的项目配置。

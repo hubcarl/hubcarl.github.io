@@ -30,14 +30,16 @@ module.exports = {
 
 ## 2. 前端框架配置
 
-**config.framework** : 需要结合 `easywebpack-cli` 使用的, 支持 `vue`,`react`, `weex`, `html` 四种配置,  cli 根据 framework 配置获取对应解决方案动态创建 Webpack 配置.
+**config.framework** : 需要结合 `easywebpack-cli` 使用的, 支持 `vue`,`react`, `weex`, `html`， `js` 五种配置,  cli 根据 framework 配置获取对应解决方案动态创建 Webpack 配置.
 
 >**使用条件**: 使用 `easywebpack-cli` 构建时, 才需要配置该参数.
 
 - html 解决方案 : easywebpack-html
-- Vue 解决方案 : easywebpack-vue
-- React 解决方案 : easywebpack-react
-- Weex 解决方案 : easywebpack-weex
+- vue 解决方案 : easywebpack-vue
+- react 解决方案 : easywebpack-react
+- weex 解决方案 : easywebpack-weex
+- js 解决方案 : easywebpack-js
+
 
 ## 3. 构建类型配置
 
@@ -93,12 +95,8 @@ module.exports = {
 
 >{Object} 对目录进行别名设置,  文件项目根目录可以不写
 
-## 8. options节点配置
 
-**config.options** : {Object} 可选 Webpack 原生配置, 当提供配置和API不满足要求时, 可以在这里配置 Webpack 所有原生配置. 
-
-
-## 9. loaders配置
+## 8. loaders配置
 
 **easywebpack内置loader**
 
@@ -211,7 +209,7 @@ config.loader配置项除了支持的loader原生属性, 还扩展了 `env`, `ty
 
 
 
-## 10. config.plugins 配置
+## 9. config.plugins 配置
 
 `key:value` 形式, 其中 `key` 为别名, 可以自由定义, easywebpack和对应解决方案内置了一些别名plugin. 
 
@@ -322,15 +320,15 @@ var Visualizer = require('webpack-visualizer-plugin');
 - directoryname: directory-named-webpack-plugin
 
 
-## 11. packs单独打包配置
+## 10. packs单独打包配置
 
 **config.packs**: 可选, {Object} `key:value` 形式, 其中 `key` 为生成的文件名, `value`为要打包的文件
 
-## 12. cdn配置
+## 11. cdn配置
 
 **config.cdn.url**: 可选, url为地址配置, 一般为线上环境使用.
 
-## 13. 常用简化配置
+## 12. 常用简化配置
 
 - devtool: {String} Webpack 原生 devtool配置, 无默认, 自己配置, 只在开发环境 dev 模式生效
 - hot:  {Boolean} 是否启用热更新, 无需配置, 框架处理
@@ -342,7 +340,7 @@ var Visualizer = require('webpack-visualizer-plugin');
 - cssModule: {Array} 指定那些文件使用css module, 无默认, 自己根据需要配置
 
 
-## 14. config 扩展方法
+## 13. config 扩展方法
 
 **config.done**: {Function} 编译完成回调方法
 
