@@ -38,7 +38,7 @@ easywebpack 在 Webpack 的基础上, 主要做了以下三件事情:
 - [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git) React 前端和服务端构建解决方案
 - [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git) Weex Native 端和Web端构建解决方案
 - [easywebpack-html](https://github.com/hubcarl/easywebpack-html.git) 纯静态 HTML/Nunjucks 页面构建解决方案
-
+- [easywebpack-js](https://github.com/hubcarl/easywebpack-js.git) javascript 构建解决方案
 
 
 ## 基于 easywebpack 构建的项目骨架
