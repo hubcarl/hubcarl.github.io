@@ -18,23 +18,27 @@ description: "专注于技术,切不能沉迷于技术!"
 npm i easywebpack-cli  -g
 ```
 
-安装成功以后, 就可以在命令行中使用 `easywebpack` or `easy` 命令, 比如 `easy init`, `easy build`, `easy server`, `easy print`, `easy clean`, `easy open` 等
+- 安装成功以后, 就可以在命令行中使用 `easywebpack` or `easy` 命令, 比如 `easy init`, `easy build`, `easy server`, `easy print`, `easy clean`, `easy open` 等. 如果是本地安装到项目依赖里面，可以使用 `npx easy` 运行本地命令。
+
+- `easy build [env]` 和 `easy print [env]` 的 env 支持 `dev`, `test`, `prod` 三种模式, 默认开发模式
+
+- 可以通过 `easy -h` 查看相关命令
 
 ### 编译
 
-- 本地开发模式编译
+- 本地开发模式编译(无hash,启用热更新)
 
 ```bash
 easy build dev
 ```
 
-- 测试环境模式编译
+- 测试环境模式编译(hash, 移除调试代码)
 
 ```bash
 easy build test
 ```
 
-- 线上正式编译
+- 线上发布编译(hash, 移除调试代码，压缩代码)
 
 ```bash
 easy build prod
@@ -72,13 +76,29 @@ easy kill 7001,9000,9001
 
 在项目开发时， 当页面构建的文件太大, 我们可以直接通过 cli 提供功能进行构建大小分析
 
-- 通过 -s 参数启动构建大小分析工具, 支持 analyzer(webpack-bundle-analyzer) 和 stats(stats-webpack-plugin) , 默认用 analyzer插件。
+#### 通过 -s 参数启动构建大小分析工具, 支持 analyzer(webpack-bundle-analyzer) 和 stats(stats-webpack-plugin) , 默认用 analyzer 插件。
+
+> 如果运行时, 提示安装缺少插件，请先安装依赖
+
+- 开发模式分析
 
 ```bash
 easy build -s 
 ```
 
-- 使用 stats(stats-webpack-plugin) 构建大小分析工具
+- 测试模式分析, 移除开发辅助代码
+
+```bash
+easy build test -s 
+```
+
+- 发布模式分析, 移除开发辅助代码, 压缩js/css/imagess以及hash
+
+```bash
+easy build prod -s 
+```
+
+#### 使用 stats(stats-webpack-plugin) 构建大小分析工具
 
 ```bash
 easy build -s stats
@@ -129,12 +149,12 @@ easy print --dll
 通过 -t 参数指定构建类型，也就是对应 `config.type`
 
 ```bash
-easy print -t client
+easy print prod -t client
 ```
 or
 
 ```bash
-easy print --web
+easy print prod --web
 ```
 
 #### 查看 webpack Node构建模式配置
@@ -142,12 +162,12 @@ easy print --web
 通过 -t 参数指定构建类型，也就是对应 `config.type`
 
 ```bash
-easy print -t server
+easy print prod -t server
 ```
 or
 
 ```bash
-easy print --node
+easy print prod --node
 ```
 
 
