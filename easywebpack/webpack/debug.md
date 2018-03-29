@@ -24,6 +24,7 @@ npm i easywebpack-cli  -g
 
 - 可以通过 `easy -h` 查看相关命令
 
+
 ### 编译
 
 - 本地开发模式编译(无hash,启用热更新)
@@ -98,11 +99,41 @@ easy build test -s
 easy build prod -s 
 ```
 
+![image](/img/webpack/webpack-bundle-analyzer.png)
+
+
 #### 使用 stats(stats-webpack-plugin) 构建大小分析工具
+
+> 如果运行时, 提示安装缺少插件，请先安装依赖
+
+- 开发模式分析
 
 ```bash
 easy build -s stats
 ```
+
+- 测试模式分析, 移除开发辅助代码
+
+```bash
+easy build test -s stats
+```
+
+- 发布模式分析, 移除开发辅助代码, 压缩js/css/imagess以及hash
+
+```bash
+easy build prod -s stats
+```
+
+**运行后, 会生成  `client_stats.json` 文件,  然后通过以下两个工具可以清晰分析出项目文件层次结构和项目文件依赖大小**
+
+- 打开 [webpack-chart](http://alexkuz.github.io/webpack-chart/) 然后上传 stat.json 文件，即可生成整体的项目文件层次结构图。
+点击任何一个区域，进入子目录文件分析，这个工具只能提供一个整体的文件依赖结构。
+
+![image](/img/webpack/stats-webpack-plugin.png)
+
+- 打开 [analyse](http://webpack.github.io/analyse/) 然后上传stat.json文件，即可生成整个项目文件个数(包括vue文件，js，css， image， chunk等)，文件大小，文件依赖关系统计，可以很方便找出筛选出大的js，image， css，然后进行针对性的优化，信息很全，对优化文件大小有很大帮助，唯一不方便的是统计结果不能排序
+
+![image](/img/webpack/stats-analyse.png)
 
 ### 打印配置
 
