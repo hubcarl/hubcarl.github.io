@@ -350,7 +350,7 @@ module.exports = {
 
 - 当 `prod` 模式时， 默认 devtool 只有 `source-map`, `hidden-source-map`, `nosources-source-map` 其中一种配置才会生效，否则则重置为 `source-map`.
 因为如果配置了 `eval`，会导致 js 文件不会被压缩混淆, 导致 js 文件很大.
-- 如果想强制 `prod` 模式使用使用指定 devtool 配置，可以用 `easy build prod --devtool eval` 传递 devtool，这种模式优先级最高。
+- 如果想强制 `prod` 模式使用指定 devtool 配置，可以用 `easy build prod --devtool eval` 传递 devtool，这种模式优先级最高。
 
 ## 14. 构建速度优化配置
 
