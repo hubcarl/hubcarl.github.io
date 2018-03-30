@@ -84,6 +84,11 @@ module.exports = {
 }
 ```
 
+- 当 `prod` 模式时， 默认 devtool 只有 `source-map`, `hidden-source-map`, `nosources-source-map` 其中一种配置才会生效，否则则重置为 `source-map`.
+因为如果配置了 `eval`，会导致 js 文件不会被压缩混淆, 导致 js 文件很大.
+- 如果想强制 `prod` 模式使用使用指定 devtool 配置，可以用 `easy build prod --devtool eval` (**easywebpack-cli >3.11.0**) 传递 devtool，这种模式优先级最高。
+
+
 #### 8. alias 别名配置
 
 **config.alias** :  {Object} **非必须**，也就是 Webpack的 `resolve.alias`，但这里有两点简化：
@@ -153,17 +158,33 @@ module.exports= {
 };
 ```
 
-#### 12. 启用 Webpack 编译缓存
+#### 12. 构建速度优化配置
 
-**config.cache**: {boolean}, **非必须**。 
+**config.cache**: {boolean}, **非必须**。 默认禁用， 
 
->**使用条件**:  easywebpack 3 默认时禁用, easywebpack 4 版本默认开启。
+>**使用条件**:  easywebpack3 且 easywebpack3 >3.8.7
 
 ```js
 // ${app_root}/webpack.config.js
 module.exports= {
   cache: true
 };
+```
+
+**config.cache**: {boolean}, **非必须**。 默认禁用
+
+>**使用条件**:  easywebpack > 4.2.4
+
+默认 `babel-loader` 和 `ts-loader` 没有启用 `thread-loader` 和 `cache-loader` 加速构建。 
+当构建的 `entry` 太少时, 开启后，反而构建速度会慢一些，只有当项目足够大以后或者构建速度太慢，才建议开启，然后对比决定是否要开启该配置。
+
+```js
+module.exports = {
+  compile:{
+    thread: true,
+    cache: true
+  }
+}
 ```
 
 #### 13. 域名代理

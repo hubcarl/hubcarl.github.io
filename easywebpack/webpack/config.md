@@ -330,17 +330,48 @@ var Visualizer = require('webpack-visualizer-plugin');
 
 ## 12. 常用简化配置
 
-- devtool: {String} Webpack 原生 devtool配置, 无默认, 自己配置, 只在开发环境 dev 模式生效
 - hot:  {Boolean} 是否启用热更新, 无需配置, 框架处理
-- hash: {Boolean} 是否hash, 无需配置, 框架处理
-- miniJs: {Boolean} 是否压缩js, 无需配置, 框架处理
-- miniCss: {Boolean} 是否压缩css, 无需配置, 框架处理
-- miniImage: {Boolean} 是否压缩image, 无需配置, 框架处理
+- hash: {Boolean} 是否 hash 所有, 无需配置, 框架处理
+- fileHash: {Boolean} 是否 hash js, 无需配置, 框架处理
+- imageHash: {Boolean} 是否 hash图片, 无需配置, 框架处理
+- cssHash: {Boolean} 是否 hash css, 无需配置, 框架处理
+- mediaHash: {Boolean} 是否 hash 多媒体文件, 无需配置, 框架处理
+- fontHash: {Boolean} 是否 hash  字体文件, 无需配置, 框架处理
 - cssExtract: {Boolean} 是否extract css, 无需配置, 框架处理
 - cssModule: {Array} 指定那些文件使用css module, 无默认, 自己根据需要配置
 
+## 13. devtool 配置
 
-## 13. config 扩展方法
+```js
+module.exports = {
+  devtool:'source-map'
+}
+```
+
+- 当 `prod` 模式时， 默认 devtool 只有 `source-map`, `hidden-source-map`, `nosources-source-map` 其中一种配置才会生效，否则则重置为 `source-map`.
+因为如果配置了 `eval`，会导致 js 文件不会被压缩混淆, 导致 js 文件很大.
+- 如果想强制 `prod` 模式使用使用指定 devtool 配置，可以用 `easy build prod --devtool eval` 传递 devtool，这种模式优先级最高。
+
+## 14. 构建速度优化配置
+
+默认 `babel-loader` 和 `ts-loader` 没有启用 `thread-loader` 和 `cache-loader` 加速构建。 
+当构建的 `entry` 太少时, 开启后，反而构建速度会慢一些，只有当项目足够大以后或者构建速度太慢，才建议开启，然后对比决定是否要开启该配置。
+
+```js
+module.exports = {
+  compile:{
+    thread: true,
+    cache: true
+  }
+}
+```
+
+- 当 `prod` 模式时， 默认 devtool 只有 `source-map`, `hidden-source-map`, `nosources-source-map` 其中一种配置才会生效，否则则重置为 `source-map`.
+因为如果配置了 `eval`，会导致 js 文件不会被压缩混淆, 导致 js 文件很大.
+- 如果想强制 `prod` 模式使用使用指定 devtool 配置，可以用 `easy build prod --devtool eval` 传递 devtool，这种模式优先级最高。
+
+
+## 15. config 扩展方法
 
 **config.done**: {Function} 编译完成回调方法
 
