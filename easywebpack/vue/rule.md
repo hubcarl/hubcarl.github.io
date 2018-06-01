@@ -32,9 +32,10 @@ npm install
 ### 2.1 本地运行
 
 ```
-npm start
+npm run dev
 ```
-npm start 做了如下三件事情
+
+npm run dev 做了如下三件事情
 
 * 启动 egg 应用
 * 启动 Webpack 构建, 文件不落地磁盘，构建的文件都在内存里面(只在本地启动, 发布模式是提前构建好文件到磁盘)
@@ -48,14 +49,14 @@ npm start 做了如下三件事情
 
 
 ```
-npm run build 或 easywebpack build prod
+npm run build 或 easy build prod
 ```
 
 1. 启动 Webpack 构建，文件落地磁盘
 2. 服务端构建的文件放到 `app/view` 目录
-3. 客户端构建的文件放到 `public` 目录
+3. 前端构建的文件放到 `public` 目录
 4. 生成的 `manifest.json` 放到 `config` 目录
-5. 构建的文件都是gitignore的，部署时请注意把这些文件打包进去
+5. 构建的文件都是 gitignore 的，部署时请注意把这些文件打包进去
 
 
 * 运行
@@ -417,7 +418,6 @@ exports.index = function* (ctx) {
 * [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate)基于easywebpack-vue和egg-view-vue(ssr)插件的工程骨架项目
 * [easywebpack](https://github.com/hubcarl/easywebpack) Webpack 构建工程化.
 * [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli)  Webpack 构建工程化脚手架.
-* [egg-view-vue](https://github.com/eggjs/egg-view-vue) vue ssr engine.
 * [egg-view-vue-ssr](https://github.com/hubcarl/egg-view-vue-ssr) vue ssr 解决方案.
 * [egg-webpack](https://github.com/hubcarl/egg-webpack) 本地开发热更新使用.
 * [egg-webpack-vue](https://github.com/hubcarl/egg-webpack-vue) 本地开发渲染内存读取辅助插件

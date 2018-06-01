@@ -72,3 +72,8 @@ module.exports = app => {
 #### 3.3 动态加载举例
 
 [app/web/page/dynamic/dynamic.vue](https://github.com/hubcarl/egg-vue-webpack-boilerplate/blob/master/app/web/page/dynamic/dynamic.vue)
+
+
+#### 3.4 ReferenceError: document is not defined
+
+[ReferenceError: document/window is not defined](https://zhuanlan.zhihu.com/p/36233639)

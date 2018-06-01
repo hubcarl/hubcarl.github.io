@@ -47,11 +47,11 @@ app.react.render = (name, locals, options) => {
 
 ![image](/img/webpack/egg-webpack-react-ssr.png)
 
-- 浏览器输入URL请求地址, 然后Egg接收到请求, 然后进入Controller
+- 浏览器输入URL请求地址, 然后 Egg 接收到请求, 然后进入 Controller
   
 - Node层获取数据后(Node通过http/rpc方式调用Java后端API数据接口), 进入模板render流程
   
-- 进入render流程后, 通过worker进程通过调用`app.messenger.sendToAgent` 发送文件名给Agent进程, 同时通过`app.messenger.on`启动监听监听agent发送过来的消
+- 进入render流程后, 通过worker进程通过调用 `app.messenger.sendToAgent` 发送文件名给Agent进程, 同时通过 `app.messenger.on` 启动监听监听agent发送过来的消
 
 - Agent进程获取到文件名后, 从Webpack编译内存里面获取文件内容, 然后Agent 通过 `agent.messenger.sendToApp` 把文件内容发送给Worker进程
 
@@ -94,13 +94,13 @@ app.react.render = (name, locals, options) => {
 
 - Webpack通过本地构建或者ci直接构建好服务端文件和客户端资源文件到磁盘
 
-- Egg render直接读取本地文件, 然后渲染成HTML
+- Egg render直接读取本地文件, 然后渲染成 HTML
 
-- 根据manfifest.json 文件注入 jss/css资源依赖注入
+- 根据 `manfifest.json` 文件注入 jss/css资源依赖注入
 
 - 模板渲染完成, 服务器输出HTML内容给浏览器.
 
-### 4. 关于egg框架中的Agent和Worker
+### 4. 关于 Egg 框架中的 Agent 和 Worker
 
 - 我们利用本地开发修改Node层代码修复重启时, 只会重启Worker进程, 不会重启Agent进程, 我们可以在Agent里面启动Webpack编译服务解决Webpack compiler实例问题.
 - 因为Egg App进程 和 Agent进程是两个进程, 当url访问时, 我们通过worker发送消息给agent进程, 获取服务端渲染的文件内容, 然后Agent再发送消息给Worker解决文件读取问题.

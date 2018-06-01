@@ -1,6 +1,6 @@
 ---
 title: 前端工程化脚手架easywebpack-cli
-layout: webpack/vue
+layout: webpack/react
 description: "专注于技术,切不能沉迷于技术!"
 ---
 
@@ -8,9 +8,9 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ### 新项目开发
 
-在 [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) 骨架项目中, 提供了一些demo, 如果要进行新项目开发，可以删除部分文件：
+在 [egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate) 骨架项目中, 提供了一些demo, 如果要进行新项目开发，可以删除部分文件：
 
-- app/web/page 是页面目录。下面的每个目录都是一个单独的页面，其中 app 目录是一个单页面服务端渲染例子，其他是简单的 Vue 服务端渲染例子， 这些文件都可以删除，删除后，你需要自己按照类似方式添加页面进行开发。 
+- app/web/page 是页面目录。下面的每个目录都是一个单独的页面，其中 spa 目录是一个单页面服务端渲染例子，其他是简单的 React 服务端渲染例子， 这些文件都可以删除，删除后，你需要自己按照类似方式添加页面进行开发。 
 
 - app/controller 是服务端页面处理逻辑入口，下面都是例子，可以删除， 然后自己根据业务添加对应的controller
 
@@ -24,10 +24,10 @@ description: "专注于技术,切不能沉迷于技术!"
 
 ### 纯净版本分支
 
-[egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) 项目单独提供了两个纯净版本分支用于实际项目开发
+[egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate) 项目单独提供了两个纯净版本分支用于实际项目开发
 
-- Egg + Vue + axios 多页面服务端渲染分支 [feature/green/multi](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/feature/green/multi)
-- Egg + Vue + Vue-Router + Vuex + Axios 单页面服务端渲染分支 [feature/green/spa](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/feature/green/spa)
+- Egg2 + React 多页面服务端渲染分支 [feature/green/multi](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/feature/green/multi)
+- Egg2 + React + React Router + Redux + React-Redux 单页面服务端渲染分支 [feature/green/spa](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/feature/green/spa)
 
 ### 本地开发
 
@@ -35,7 +35,6 @@ description: "专注于技术,切不能沉迷于技术!"
 
 - 通过 `npm run [command]` 方式使用 easy 命令时，不需要全局安装 `easywepback-cli` 命令行工具, 只需要把 `easywepback-cli` 安装到项目 `devDependencies` 即可。
 - 在命令行直接使用 `easy` 命令时，需要全局安装 `easywepback-cli` 命令行工具。如果不安装, 可以通过 npm5 支持的 `npx easy` 方式运行。
-
 
 ```js
 {
@@ -60,7 +59,9 @@ description: "专注于技术,切不能沉迷于技术!"
 ```bash
 npm run dev 
 ```
+
 使用 `egg-webpack` 插件进行前端资源构建, 这个插件只会在本地开发启用。
+
 
 #### 本地模拟测试环境
 
@@ -103,7 +104,6 @@ npm run build
 
 #### 启动
 
-npm run start
-
+npm start
 
 **切记：线上运行模式不要有 Webpack 构建的过程**

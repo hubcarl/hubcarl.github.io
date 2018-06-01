@@ -40,6 +40,25 @@ easywebpack 在 Webpack 的基础上, 主要做了以下三件事情:
 - [easywebpack-html](https://github.com/hubcarl/easywebpack-html.git) 纯静态 HTML/Nunjucks 页面构建解决方案
 - [easywebpack-js](https://github.com/hubcarl/easywebpack-js.git) javascript 构建解决方案
 
+## Egg MVVM 构建解决方案
+
+![image](/img/webpack/egg-mvvm-easywebpack.png)
+
+### Egg + Vue Server Side Render 插件
+
+- [egg-webpack](https://github.com/hubcarl/egg-webpack)
+- [egg-webpack-vue](https://github.com/hubcarl/egg-webpack-vue)
+- [egg-view-vue-ssr](https://github.com/hubcarl/egg-view-vue-ssr)
+- [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue) 
+
+
+### Egg + React Server Side Render 插件
+
+- [egg-webpack](https://github.com/hubcarl/egg-webpack)
+- [egg-webpack-react](https://github.com/hubcarl/egg-webpack-react)
+- [egg-view-react-ssr](https://github.com/hubcarl/egg-view-react-ssr)
+- [easywebpack-react](https://github.com/hubcarl/easywebpack-react) 
+
 
 ## 基于 easywebpack 构建的项目骨架
 
@@ -50,6 +69,10 @@ easywebpack 在 Webpack 的基础上, 主要做了以下三件事情:
 - [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) 基于 Egg + Vue + Webpack 服务端和客户端渲染项目骨架
 
 - [egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate) Egg + React + Webpack  服务端和客户端渲染项目骨架
+
+- [egg-vue-typescript-boilerplate](https://github.com/hubcarl/egg-vue-typescript-boilerplate) 基于 Egg + Vue + Webpack + TypeScript 服务端和客户端渲染项目骨架
+
+- [egg-react-typescript-boilerplate](https://github.com/hubcarl/egg-react-typescript-boilerplate) Egg + React + Webpack + TypeScript 服务端和客户端渲染项目骨架
 
 - [easywebpack-weex-boilerplate](https://github.com/hubcarl/easywebpack-weex-boilerplate) 基于 Weex Native 端和 Web 端构建解决方案渲染项目骨架
 

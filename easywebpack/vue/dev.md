@@ -62,7 +62,7 @@ app.use(hotMiddleware);
 
 ![image](/img/webpack/npm-start.png)
 
-- 首先执行`node index.js` 或者 `npm start` 启动 Egg应用
+- 首先执行`node index.js` 或者 `npm run dev` 启动 Egg应用
 
 - 在Egg Agent 里面启动koa服务, 同时在koa服务里面启动Webpack编译服务
 
@@ -95,7 +95,7 @@ app.vue.renderBundle = (name, context, options) => {
   
 - Node层获取数据后(Node通过http/rpc方式调用Java后端API数据接口), 进入模板render流程
   
-- 进入render流程后, 通过worker进程通过调用`app.messenger.sendToAgent` 发送文件名给Agent进程, 同时通过`app.messenger.on`启动监听监听agent发送过来的消
+- 进入render流程后, 通过worker进程通过调用 `app.messenger.sendToAgent` 发送文件名给Agent进程, 同时通过 `app.messenger.on` 启动监听监听agent发送过来的消
 
 - Agent进程获取到文件名后, 从Webpack编译内存里面获取文件内容, 然后Agent 通过 `agent.messenger.sendToApp` 把文件内容发送给Worker进程
 
@@ -137,11 +137,11 @@ app.vue.renderBundle = (name, context, options) => {
 
 ### 4. 发布模式构建流程和运行模式
 
-- Webpack通过本地构建或者ci直接构建好服务端和客户端渲染文件到磁盘
+- easywebpack 通过本地构建或者ci直接构建好服务端和客户端渲染文件到磁盘, 命令是 `easy build prod`
 
-- Egg render直接读取本地文件, 然后渲染成HTML
+- Egg render 直接读取本地文件, 然后渲染成HTML.
 
-- 根据manfifest.json 文件注入 jss/css资源依赖注入
+- 根据 `manfifest.json` 文件注入 jss/css 资源依赖注入.
 
 - 模板渲染完成, 服务器输出HTML内容给浏览器.
 

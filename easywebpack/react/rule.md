@@ -33,9 +33,9 @@ npm install
 ### 2.1 本地运行
 
 ```
-npm start
+npm run dev
 ```
-npm start 做了如下三件事情
+npm run dev 做了如下三件事情
 
 * 启动 egg 应用
 * 启动 Webpack 构建, 文件不落地磁盘，构建的文件都在内存里面(只在本地启动, 发布模式是提前构建好文件到磁盘)
@@ -108,8 +108,6 @@ entry: {
 * [遵循 egg 开发规范](https://eggjs.org/zh-cn/basics/structure.html)
 * React 项目代码放到 app/web 目录，页面入口目录为 page，该目录的 所有 .jsx 文件默认会作为 Webpack 的 entry 构建入口。建议每个页面目录的只保留一个.jsx 文件，jsx关联的组件可以放到widget 或者 component 目录。如果非要放到当前目前，请配置 `webpack.config.js` entry.exclude 排除 .jsx 文件。
 
-
-![63121d32-9401-46ab-96b8-4bb1899f10fd.png | center](https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/63121d32-9401-46ab-96b8-4bb1899f10fd.png "")
 
 
 ## 5. 项目开发
@@ -424,9 +422,8 @@ spa 单页面实现复杂，不能使用 entry.loader, 所以需要在 `webpack.
 ## 8. 项目和插件
 
 * [egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate)基于easywebpack-react和egg-view-react(ssr)插件的工程骨架项目
-* [easywebpack](https://github.com/hubcarl/easywebpack) Webpack 构建工程化.
+* [easywebpack-react](https://github.com/hubcarl/easywebpack-react) Webpack React 构建工程化方案.
 * [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli)  Webpack 构建工程化脚手架.
-* [egg-view-react](https://github.com/eggjs/egg-view-vue) react ssr engine.
 * [egg-view-react-ssr](https://github.com/hubcarl/egg-view-vue-ssr) react ssr 解决方案.
 * [egg-webpack](https://github.com/hubcarl/egg-webpack) 本地开发热更新使用.
 * [egg-webpack-react](https://github.com/hubcarl/egg-webpack-react) 本地开发渲染内存读取辅助插件

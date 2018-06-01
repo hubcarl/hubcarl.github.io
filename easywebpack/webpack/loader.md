@@ -31,6 +31,26 @@ description: "专注于技术,切不能沉迷于技术!"
 | url-loader          | urlfont       |  是           |禁用: loaders:{ urlfont: false} <br/> 配置limit(默认1024):<br/> loaders:{urlfont: {options: {limit: 2048 }}   | 
 
 
+## Webpack 与 easywebpack 配置对比
+
+### Webpack 配置
+
+```
+module: {
+  rules: [
+    { test: /\.tsx?$/, loader: "ts-loader" }
+  ]
+}
+```
+
+### easywebpack 配置
+
+```
+loaders:{
+  typescript: true
+}
+```
+
 ## config.loaders 配置
 
 **config.loaders** 非必须，支持 Object ｜ Array。 这里的loaders 是对 Webpack `module.rules` 的简化和增强。建议用 **增强配置** 方式配置.  
