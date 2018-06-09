@@ -36,7 +36,6 @@ p{
         <button type="button" class="btn btn-primary"><a target="_blank" href="{{ site.baseurl }}/easywebpack/webpack">使用文档</a></button>
         <button type="button" class="btn btn-primary"><a target="_blank" href="https://zhuanlan.zhihu.com/easywebpack">技术文章</a></button>
         <button type="button" class="btn btn-primary"><a target="_blank" href="https://github.com/hubcarl/easywebpack">GitHub</a></button>
-    </div>
+ </div>
 </div>
-
 

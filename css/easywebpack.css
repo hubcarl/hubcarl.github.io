@@ -1121,7 +1121,7 @@ p {
   z-index: 2;
   width: 100%;
   position: fixed;
-  top: 0;
+  top: 20;
 }
 .nav header {
   /*shift way to clear float because of the overflow hidden will hide the algolia*/
